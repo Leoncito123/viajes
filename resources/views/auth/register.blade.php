@@ -9,6 +9,27 @@
             <x-input-error :messages="$errors->get('name')" class="mt-2" />
         </div>
 
+        <!-- apellidos-->
+        <div>
+            <x-input-label for="last_name" :value="__('Apellidos')" />
+            <x-text-input id="last_name" class="block mt-1 w-full" type="text" name="last_name" :value="old('last_name')" required autofocus autocomplete="last_name" />
+            <x-input-error :messages="$errors->get('last_name')" class="mt-2" />
+        </div>
+
+        <!-- birthdate-->
+        <div>
+            <x-input-label for="birthdate" :value="__('Fechas de nacimiento')" />
+            <x-text-input id="birthdate" class="block mt-1 w-full" type="date" name="birthdate" :value="old('birthdate')" required autofocus autocomplete="birthdate" />
+            <x-input-error :messages="$errors->get('birthdate')" class="mt-2" />
+        </div>
+
+        <!-- phone-->
+        <div>
+            <x-input-label for="phone" :value="__('Telefono')" />
+            <x-text-input id="phone" class="block mt-1 w-full" type="text" name="phone" :value="old('phone')" required autofocus autocomplete="phone" />
+            <x-input-error :messages="$errors->get('phone')" class="mt-2" />
+        </div>
+
         <!-- Email Address -->
         <div class="mt-4">
             <x-input-label for="email" :value="__('Email')" />

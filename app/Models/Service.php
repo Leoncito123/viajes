@@ -12,4 +12,9 @@ class Service extends Model
     protected $fillable = [
         'name'
     ];
+
+    public function hotels()
+    {
+        return $this->belongsToMany(Hotel::class);
+    }
 }

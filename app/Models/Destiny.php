@@ -12,4 +12,9 @@ class Destiny extends Model
     protected $fillable = [
         'name'
     ];
+
+    public function flies()
+    {
+        return $this->hasMany(Fly::class);
+    }
 }

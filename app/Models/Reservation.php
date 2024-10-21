@@ -18,4 +18,24 @@ class Reservation extends Model
         'status_payment',
         'id_user_reservation'
     ];
+
+    public function users()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function rooms()
+    {
+        return $this->belongsToMany(Room::class);
+    }
+
+    public function passengers()
+    {
+        return $this->hasMany(Passenger::class);
+    }
+
+    public function userreservations()
+    {
+        return $this->hasMany(UserReservation::class);
+    }
 }

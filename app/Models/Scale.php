@@ -13,4 +13,9 @@ class Scale extends Model
         'name',
         'id_fly'
     ];
+
+    public function flies()
+    {
+        return $this->belongsTo(Fly::class);
+    }
 }

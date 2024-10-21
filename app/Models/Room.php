@@ -17,4 +17,9 @@ class Room extends Model
         'max_people',
         'id_hotel'
     ];
+
+    public function hotels()
+    {
+        return $this->belongsTo(Hotel::class);
+    }
 }

@@ -17,4 +17,15 @@ class UserReservation extends Model
         'phone',
         'id_gender'
     ];
+
+    public function reservations()
+    {
+        return $this->belongsTo(Reservation::class);
+    }
+
+    public function users()
+    {
+        return $this->belongsTo(User::class);
+    }
+
 }

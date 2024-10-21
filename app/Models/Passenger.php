@@ -17,4 +17,24 @@ class Passenger extends Model
         'id_gender',
         'id_age'
     ];
+
+    public function seats()
+    {
+        return $this->belongsTo(Seat::class);
+    }
+
+    public function clases()
+    {
+        return $this->belongsTo(Classe::class);
+    }
+
+    public function passengersfly()
+    {
+        return $this->hasMany(PassengerFly::class);
+    }
+
+    public function ages()
+    {
+        return $this->belongsTo(Age::class);
+    }
 }

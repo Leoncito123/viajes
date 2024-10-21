@@ -14,4 +14,10 @@ class Age extends Model
         'max_number',
         'min_number'
     ];
+
+    public function passengers()
+    {
+        return $this->hasMany(Passenger::class);
+    }
+
 }

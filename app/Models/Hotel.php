@@ -18,4 +18,29 @@ class Hotel extends Model
         'id_services',
         'id_destiny'
     ];
+
+    public function services()
+    {
+        return $this->hasMany(Service::class);
+    }
+
+    public function pictures()
+    {
+        return $this->hasMany(Picture::class);
+    }
+
+    public function destiny()
+    {
+        return $this->belongsTo(Destiny::class);
+    }
+
+    public function opinions()
+    {
+        return $this->hasMany(Opinion::class);
+    }
+
+    public function rooms()
+    {
+        return $this->hasMany(Room::class);
+    }
 }

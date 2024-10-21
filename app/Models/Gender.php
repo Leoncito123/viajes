@@ -12,4 +12,14 @@ class Gender extends Model
     protected $fillable = [
         'name'
     ];
+
+    public function passengers()
+    {
+        return $this->hasMany(Passenger::class);
+    }
+
+    public function users()
+    {
+        return $this->hasMany(User::class);
+    }
 }

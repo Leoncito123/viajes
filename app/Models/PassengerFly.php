@@ -13,4 +13,14 @@ class PassengerFly extends Model
         'id_passenger',
         'if_fly'
     ];
+
+    public function passengers()
+    {
+        return $this->belongsTo(Passenger::class);
+    }
+
+    public function flies()
+    {
+        return $this->belongsTo(Fly::class);
+    }
 }

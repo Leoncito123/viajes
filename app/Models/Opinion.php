@@ -14,4 +14,9 @@ class Opinion extends Model
         'id_hotel',
         'id_user'
     ];
+
+    public function hotels()
+    {
+        return $this->belongsTo(Hotel::class);
+    }
 }

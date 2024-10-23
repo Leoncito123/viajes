@@ -1,0 +1,9 @@
+.register-container {
+    background-image: url('*');
+    background-size: cover;
+    background-position: center;
+    padding: 20px;
+    /* Ajusta el padding según sea necesario */
+    border-radius: 10px;
+    /* Opcional: para bordes redondeados */
+}

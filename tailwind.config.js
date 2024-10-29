@@ -22,7 +22,12 @@ export default {
 
     plugins: [forms,
       require('flowbite/plugin')({
+        wysiwyg: true,
+        code: true,
+        table: true,
         datatables: true,
     }),
+
+      require('flowbite-typography')
     ],
 };

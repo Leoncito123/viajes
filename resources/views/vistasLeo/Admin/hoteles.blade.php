@@ -37,7 +37,7 @@
                     </th>
                     <th>
                         <span class="flex items-center">
-                            Descripción
+                            Fechas de check-in y check-out
                             <svg class="w-4 h-4 ms-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
                                 height="24" fill="none" viewBox="0 0 24 24">
                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -47,7 +47,17 @@
                     </th>
                     <th>
                         <span class="flex items-center">
-                            Calificación
+                            Número de habitaciones
+                            <svg class="w-4 h-4 ms-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
+                                height="24" fill="none" viewBox="0 0 24 24">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="m8 15 4 4 4-4m0-6-4-4-4 4" />
+                            </svg>
+                        </span>
+                    </th>
+                    <th>
+                        <span class="flex items-center">
+                            Número de adultos y niños
                             <svg class="w-4 h-4 ms-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
                                 height="24" fill="none" viewBox="0 0 24 24">
                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -75,105 +85,117 @@
                             </svg>
                         </span>
                     </th>
+                    <th>
+                        <span class="flex items-center">
+                            Distancia al centro
+                            <svg class="w-4 h-4 ms-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
+                                height="24" fill="none" viewBox="0 0 24 24">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="2" d="m8 15 4 4 4-4m0-6-4-4-4 4" />
+                            </svg>
+                        </span>
+                    </th>
+                    <th>
+                        <span class="flex items-center">
+                            Servicios
+                            <svg class="w-4 h-4 ms-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="2" d="m8 15 4 4 4-4m0-6-4-4-4 4" />
+                            </svg>
+                        </span>
+                    </th>
+                    <th>
+                        <span class="flex items-center">
+                            Calificación promedio de los usuarios
+                            <svg class="w-4 h-4 ms-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="2" d="m8 15 4 4 4-4m0-6-4-4-4 4" />
+                            </svg>
+                        </span>
+                    </th>
+                    <th>
+                        <span class="flex items-center">
+                            Disponibilidad
+                            <svg class="w-4 h-4 ms-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="2" d="m8 15 4 4 4-4m0-6-4-4-4 4" />
+                            </svg>
+                        </span>
+                    </th>
+                    <th>
+                        <span class="flex items-center">
+                            Fotos
+                            <svg class="w-4 h-4 ms-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="2" d="m8 15 4 4 4-4m0-6-4-4-4 4" />
+                            </svg>
+                        </span>
+                    </th>
+                    <th>
+                        <span class="flex items-center">
+                            Descripción
+                            <svg class="w-4 h-4 ms-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="2" d="m8 15 4 4 4-4m0-6-4-4-4 4" />
+                            </svg>
+                        </span>
+                    </th>
+                    <th>
+                        <span class="flex items-center">
+                            Politicas de cancelación
+                            <svg class="w-4 h-4 ms-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="2" d="m8 15 4 4 4-4m0-6-4-4-4 4" />
+                            </svg>
+                        </span>
+                    </th>
                     <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
-                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                    <td class="font-medium text-gray-900 whitespace-nowrap dark:text-white">Hotel Mousai</td>
+                <tr>
+                    <td>Hotel 1</td>
+                    <td>Ubicación 1</td>
+                    <td>Fecha de check-in y check-out 1</td>
+                    <td>Número de habitaciones 1</td>
+                    <td>Número de adultos y niños 1</td>
+                    <td>Categoria 1</td>
+                    <td>Precios 1</td>
+                    <td>Distancia al centro 1</td>
+                    <td>Servicios 1</td>
+                    <td>Calificación promedio de los usuarios 1</td>
+                    <td>Disponibilidad 1</td>
+                    <td>Fotos 1</td>
+                    <td>Descripción 1</td>
                     <td>
-                        <button class="px-2 py-1 text-xs text-white bg-green-500 rounded hover:bg-green-600">
-                            Puerto Vallarta
-                        </button>
+                        <a href="{{ route('admin.hoteles.politicas') }}"
+                            class="btn rounded-l text-white bg-orange-500 p-2">Politicas de
+                            Cancelación</a>
                     </td>
-                    <td>Hotel Adults Only con vista al mar</td>
-                    <td>9.4</td>
-                    <td>5 estrellas</td>
-                    <td>$599/noche</td>
                     <td>
-                        <button class="px-3 py-1 text-sm text-white bg-blue-500 rounded hover:bg-blue-600"
-                            onclick="openModal('Hotel Mousai')">Editar</button>
-                        <button class="px-3 py-1 text-sm text-white bg-red-500 rounded hover:bg-red-600"
-                            onclick="deleteModal()">Eliminar</button>
-                    </td>
-                </tr>
-
-                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                    <td class="font-medium text-gray-900 whitespace-nowrap dark:text-white">Grand Velas Riviera Maya</td>
-                    <td>
-                        <button class="px-2 py-1 text-xs text-white bg-green-500 rounded hover:bg-green-600"
-                            onclick="openLocationModal('Hotel Mousai', 'Puerto Vallarta')">
-                            Puerto Vallarta
-                        </button>
-                    </td>
-                    <td>Resort todo incluido frente al mar</td>
-                    <td>9.7</td>
-                    <td>5 estrellas</td>
-                    <td>$899/noche</td>
-                    <td>
-                        <button class="px-3 py-1 text-sm text-white bg-blue-500 rounded hover:bg-blue-600"
-                            onclick="openModal('Grand Velas Riviera Maya')">Editar</button>
-                        <button class="px-3 py-1 text-sm text-white bg-red-500 rounded hover:bg-red-600"
-                            onclick="deleteModal()">Eliminar</button>
-                    </td>
-                </tr>
-
-                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                    <td class="font-medium text-gray-900 whitespace-nowrap dark:text-white">Live Aqua Beach Resort</td>
-                    <td>
-                        <button class="px-2 py-1 text-xs text-white bg-green-500 rounded hover:bg-green-600">
-                            Cancún
-                        </button>
-                    </td>
-                    <td>Resort de lujo con spa</td>
-                    <td>9.2</td>
-                    <td>5 estrellas</td>
-                    <td>$749/noche</td>
-                    <td>
-                        <button class="px-3 py-1 text-sm text-white bg-blue-500 rounded hover:bg-blue-600"
-                            onclick="openModal('Live Aqua Beach Resort')">Editar</button>
-                        <button class="px-3 py-1 text-sm text-white bg-red-500 rounded hover:bg-red-600"
-                            onclick="deleteModal()">Eliminar</button>
-                    </td>
-                </tr>
-
-                <tr
-                    class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                    <td class="font-medium text-gray-900 whitespace-nowrap dark:text-white">Xcaret Arte</td>
-                    <td>
-                        <button class="px-2 py-1 text-xs text-white bg-green-500 rounded hover:bg-green-600">
-                            Riviera Maya
-                        </button>
-                    </td>
-                    <td>Hotel temático con parque acuático</td>
-                    <td>9.5</td>
-                    <td>5 estrellas</td>
-                    <td>$829/noche</td>
-                    <td>
-                        <button class="px-3 py-1 text-sm text-white bg-blue-500 rounded hover:bg-blue-600"
-                            onclick="openModal('Xcaret Arte')">Editar</button>
-                        <button class="px-3 py-1 text-sm text-white bg-red-500 rounded hover:bg-red-600"
-                            onclick="deleteModal()">Eliminar</button>
-                    </td>
-                </tr>
-
-                <tr
-                    class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                    <td class="font-medium text-gray-900 whitespace-nowrap dark:text-white">Banyan Tree Mayakoba</td>
-                    <td>
-                        <button class="px-2 py-1 text-xs text-white bg-green-500 rounded hover:bg-green-600">
-                            Riviera Maya
-                        </button>
-                    </td>
-                    <td>Resort de lujo con campo de golf</td>
-                    <td>9.6</td>
-                    <td>5 estrellas</td>
-                    <td>$999/noche</td>
-                    <td>
-                        <button class="px-3 py-1 text-sm text-white bg-blue-500 rounded hover:bg-blue-600"
-                            onclick="openModal('Banyan Tree Mayakoba')">Editar</button>
-                        <button class="px-3 py-1 text-sm text-white bg-red-500 rounded hover:bg-red-600"
-                            onclick="deleteModal()">Eliminar</button>
+                        <div class="flex items center">
+                            <button
+                                class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg shadow-md transition duration-200 ease-in-out transform hover:scale-105"
+                                onclick="openModal()">
+                                Editar
+                            </button>
+                            <button
+                                class="bg-red-600 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded-lg shadow-md transition duration-200 ease-in-out transform hover:scale-105"
+                                onclick="deleteModal()">
+                                Eliminar
+                            </button>
+                            <button
+                                class="bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded-lg shadow-md transition duration-200 ease-in-out transform hover:scale-105"
+                                onclick="openLocationModal()">
+                                Ver ubicación
+                            </button>
+                        </div>
                     </td>
                 </tr>
             </tbody>

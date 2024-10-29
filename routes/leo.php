@@ -11,6 +11,7 @@ Route::view('/admin', 'vistasLeo.Admin.index')->name('admin.index');
 Route::view('admin/gestionador', 'vistasLeo.Admin.gestionador')->name('admin.gestionador');
 Route::view('admin/hoteles', 'vistasLeo.Admin.hoteles')->name('admin.hoteles');
 Route::view('admin/viajes', 'vistasLeo.Admin.vuelos')->name('admin.viajes');
+Route::view('admin/hoteles/politicas', 'vistasLeo.Admin.politicasCancelacion')->name('admin.hoteles.politicas');
 
 
 require __DIR__ . '/auth.php';

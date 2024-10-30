@@ -4,14 +4,13 @@
             {{ __('Dashboard') }}
         </h2>
     </x-slot>
+    <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.js"></script>
 
     <div class="py-">
         <div class="max-w-8xl ">
             <div class="bg-white  dark:bg-gray-800 shadow-sm sm:rounded-lg">
                 <div class="p-6 w-full text-gray-900 dark:text-gray-100">
-                    <div>
-                        <a href="" class="p-2 bg-indigo-500 text-white rounded-lg">Gestión de Vuelos</a>
-                    </div>
+
                     <div class="mt-4">
                         <p class="text-2xl text-indigo-500 font-semibold">Mostrando Vuelos Con Destino: <span>California. Para el Día: 20/12/2024.</span></p>
                     </div>

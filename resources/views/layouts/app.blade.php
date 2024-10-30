@@ -11,23 +11,21 @@
          <link rel="preconnect" href="https://fonts.bunny.net">
          <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
+    <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.js"></script>
+
          <!-- Scripts -->
          @vite(['resources/css/app.css', 'resources/js/app.js'])
       </head>
       <body class="font-sans antialiased">
          <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
                @include('layouts.navigation')
-
-               <!-- Page Heading -->
-               @isset($header)
-                  <header class="bg-white border-b dark:border-gray-700 border-indigo-400 dark:bg-gray-800 shadow">
-                     <div class="max-w-10xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                           {{ $header }}
-                     </div>
-                  </header>
-               @endisset
-
-               <!-- Page Content -->
+                @isset($header)
+                    <header class="bg-white border-b dark:border-gray-700 border-indigo-400 dark:bg-gray-800 shadow">
+                        <div class="max-w-10xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+                            {{ $header }}
+                        </div>
+                    </header>
+                @endisset
                <main>
 
    <button data-drawer-target="default-sidebar" data-drawer-toggle="default-sidebar" aria-controls="default-sidebar" type="button" class="inline-flex items-center p-2 mt-2 ms-3 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600">
@@ -37,7 +35,7 @@
       </svg>
    </button>
 
-   <aside id="default-sidebar" class="fixed top-36 py-2 left-0 px-4 z-40 w-64  h-screen transition-transform -translate-x-full sm:translate-x-0" aria-label="Sidebar">
+   <aside id="default-sidebar" class="absolute top-36 py-2 left-0 px-4 z-40 w-64  h-5/6 transition-transform -translate-x-full sm:translate-x-0" aria-label="Sidebar">
       <div class="h-full px-3 py-4 overflow-y-auto rounded-lg bg-white border border-indigo-400 border-lg dark:bg-gray-800 dark:border-gray-700">
          <ul class="space-y-2 font-medium">
             <li>
@@ -87,7 +85,7 @@
    </aside>
 
    <div class="py-4  lg:mr-4 sm:ml-64">
-      <div class=" dark:border-gray-700 border border-indigo-400 border-lg rounded-lg bg-white p-6 flex items-center">
+      <div class=" dark:border-gray-700 border border-indigo-400 border-lg rounded-lg bg-white dark:bg-gray-800 p-6 flex items-center">
          <svg class="w-8 h-8 border-2 rounded-full p-1 border-indigo-500 text-indigo-600 font-semibold dark:text-white dark:border-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 13a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"/>
                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.8 13.938h-.011a7 7 0 1 0-11.464.144h-.016l.14.171c.1.127.2.251.3.371L12 21l5.13-6.248c.194-.209.374-.429.54-.659l.13-.155Z"/>

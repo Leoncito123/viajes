@@ -1,5 +1,5 @@
 .register-container {
-    background-image: url('/public/imagenesMich/backRegister.jpeg');
+    background-image: url("{{asset('imagenes/noticia.webp')}}");
     background-size: cover;
     background-position: center;
     padding: 20px;

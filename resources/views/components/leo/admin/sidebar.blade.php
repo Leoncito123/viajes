@@ -28,6 +28,21 @@
                     <span class="flex-1 ms-3 whitespace-nowrap">Hoteles</span>
                 </a>
             </li>
+            <li>
+                <a href="{{ route('admin.reportes') }}"
+                    class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                    <svg class="flex-shrink-0 w-5 h-5 text-indigo-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+                        aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 18">
+                        <path d="M9,1
+                             C11.5,2 13,5 12,8
+                             C11,11 9,13 6.5,12
+                             C4,11 2.5,8 3.5,5
+                             C4.5,2 6.5,1 9,1
+                             Z" fill="none" stroke="black" />
+                    </svg>
+                    <span class="flex-1 ms-3 whitespace-nowrap">Reportes</span>
+                </a>
+            </li>
         </ul>
     </div>
 </aside>

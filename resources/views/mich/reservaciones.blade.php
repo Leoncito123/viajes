@@ -89,7 +89,7 @@
                         </div>
                     </div>
 
-                    <button class="w-full px-4 py-2 mt-10 font-medium tracking-wide text-white capitalize transition-colors duration-200 transform bg-blue-500 rounded-md hover:bg-blue-600 focus:outline-none focus:bg-blue-600">
+                    <button id="cancelar" class="w-full px-4 py-2 mt-10 font-medium tracking-wide text-white capitalize transition-colors duration-200 transform bg-blue-500 rounded-md hover:bg-blue-600 focus:outline-none focus:bg-blue-600">
                         Cancelar
                     </button>
                 </div>
@@ -141,7 +141,7 @@
                         </div>
                     </div>
 
-                    <button class="w-full px-4 py-2 mt-10 font-medium tracking-wide text-white capitalize transition-colors duration-200 transform bg-blue-500 rounded-md hover:bg-blue-600 focus:outline-none focus:bg-blue-600">
+                    <button id="cancelar2" class="w-full px-4 py-2 mt-10 font-medium tracking-wide text-white capitalize transition-colors duration-200 transform bg-blue-500 rounded-md hover:bg-blue-600 focus:outline-none focus:bg-blue-600">
                         Cancelar
                     </button>
                 </div>
@@ -194,7 +194,7 @@
                         </div>
                     </div>
 
-                    <button class="w-full px-4 py-2 mt-10 font-medium tracking-wide text-white capitalize transition-colors duration-200 transform bg-blue-500 rounded-md hover:bg-blue-600 focus:outline-none focus:bg-blue-600">
+                    <button id="cancelar3" class="w-full px-4 py-2 mt-10 font-medium tracking-wide text-white capitalize transition-colors duration-200 transform bg-blue-500 rounded-md hover:bg-blue-600 focus:outline-none focus:bg-blue-600">
                         Cancelar
                     </button>
                 </div>
@@ -247,7 +247,7 @@
                         </div>
                     </div>
 
-                    <button class="w-full px-4 py-2 mt-10 font-medium tracking-wide text-white capitalize transition-colors duration-200 transform bg-blue-500 rounded-md hover:bg-blue-600 focus:outline-none focus:bg-blue-600">
+                    <button id="cancelar4" class="w-full px-4 py-2 mt-10 font-medium tracking-wide text-white capitalize transition-colors duration-200 transform bg-blue-500 rounded-md hover:bg-blue-600 focus:outline-none focus:bg-blue-600">
                         Cancelar
                     </button>
                 </div>
@@ -255,4 +255,44 @@
             </div>
         </div> <!--FIN DE LA SECCION DE VIAJES-->
     </section>
+
+    <script>
+        document.getElementById('cancelar').addEventListener('click', function() {
+            Swal.fire({
+                title: "Cancelar Reservación",
+                text: "¿Realmente quieres cancelar?",
+                icon: "warning",
+            });
+        });
+    </script>
+
+    <script>
+        document.getElementById('cancelar2').addEventListener('click', function() {
+            Swal.fire({
+                title: "Cancelar Reservación",
+                text: "¿Realmente quieres cancelar?",
+                icon: "warning",
+            });
+        });
+    </script>
+
+    <script>
+        document.getElementById('cancelar3').addEventListener('click', function() {
+            Swal.fire({
+                title: "Cancelar Reservación",
+                text: "¿Realmente quieres cancelar?",
+                icon: "warning",
+            });
+        });
+    </script>
+
+    <script>
+        document.getElementById('cancelar4').addEventListener('click', function() {
+            Swal.fire({
+                title: "Cancelar Reservación",
+                text: "¿Realmente quieres cancelar?",
+                icon: "warning",
+            });
+        });
+    </script>
 </x-app-layout>

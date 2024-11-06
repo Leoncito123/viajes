@@ -18,14 +18,22 @@ class controladorMich extends Controller
         return view('mich.usuarios');
     }
 
-    public function comentarios(request $request){
-        $comentario=$request->input('coment');
-        $nombre=$request->input('name');
-        $titulo=$request->input('titulo');
-        $hote=$request->input('hotel');
+    public function comentarios(Request $request)
+{
+    $request->validate([
+        'comment' => 'required|string|max:500',
+        'name' => 'required|string|max:100',
+        'titulo' => 'required|string|max:100',
+        'hotel' => 'required|string|max:100',
+    ]);
 
-        session()->flash('titulo', 'Se registro con exito tu:'.$comentario);
+    $comentario = $request->input('comment');
+    $nombre = $request->input('name');
+    $titulo = $request->input('titulo');
+    $hotel = $request->input('hotel');
 
-        return view('mich.usuarios');
-    }
+    session()->flash('exito', 'Se registró con éxito tu comentario');
+
+    return view('mich.usuarios');
+}
 }

@@ -1,7 +1,19 @@
 <x-app-layout>
-    <!-- component -->
+<!--Alerta de registro de comentario-->
+    @session('exito')
+    <script>
+        Swal.fire({
+        title: "¡Gracias por tu Comentario!",
+        text: '{{$value}}',
+        icon: "success"
+        });
+    </script>
+    @endsession
+    <!-- Fin alerta -->
+    
+    <!-- INICIA FORMULARIO COMENTARIO -->
     <div class="bg-blue-400 p-6 rounded shadow-md">
-        <form class="w-11/12 max-w-4xl mx-auto p-6" action="/mich/comentarios" method="POST">
+        <form class="w-11/12 max-w-4xl mx-auto p-6" action="/comentarios" method="POST">
             @csrf
             <h1 class="text-4xl mb-4 tracking-wider font-light text-black dark:text-gray-200">Deja un comentario</h1>
             <p class="text-black mb-4">Cuéntanos de cómo fue tu experiencia, nos interesa saber.</p>
@@ -16,6 +28,7 @@
                         placeholder="Escribe tu comentario...*"
                         rows="5"
                     ></textarea>
+                    <small class="text-danger fst-italic">{{$errors->first('comment')}}</small>
                 </div>
 
                 <div class="mb-4">
@@ -26,6 +39,7 @@
                         class="w-full px-3 py-2 bg-white text-black rounded-sm border border-white focus:outline-none"
                         placeholder="Lugar..."
                     />
+                    <small class="text-danger fst-italic">{{$errors->first('name')}}</small>
                 </div>
                 <div class="mb-4">
                     <input
@@ -35,6 +49,7 @@
                         class="w-full px-3 py-2 bg-white text-black rounded-sm border border-white focus:outline-none"
                         placeholder="Título*"
                     />
+                    <small class="text-danger fst-italic">{{$errors->first('titulo')}}</small>
                 </div>
                 <div class="mb-4">
                     <input
@@ -44,6 +59,7 @@
                         class="w-full px-3 py-2 bg-white text-black rounded-sm border border-white focus:outline-none"
                         placeholder="hotel*"
                     />
+                    <small class="text-danger fst-italic">{{$errors->first('hotel')}}</small>
                 </div>
             </div>
             <div class="flex justify-end">
@@ -56,6 +72,7 @@
             </div>
         </form>
     </div>
+
 
     <!-- Componente para cartas de testimonios dentro del fondo azul -->
     <div class="bg-blue-400 p-8 mt-8">

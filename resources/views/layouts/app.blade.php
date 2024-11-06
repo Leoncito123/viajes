@@ -142,4 +142,14 @@
          }
       </script>
 
+          @if(session('welcome'))
+    <script>
+        Swal.fire({
+            title: "¡Bienvenido!",
+            text: '{{ session('welcome') }}',
+            icon: "success"
+        });
+    </script>
+@endif
+
    </html>

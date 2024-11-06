@@ -3,9 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/prueba', function () {
-    return "Hola mundo";
-});
+Route::view('admin/reportes', 'vistasLeo.Admin.reportes')->name('admin.reportes');
 
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

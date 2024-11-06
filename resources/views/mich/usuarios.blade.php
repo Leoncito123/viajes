@@ -82,12 +82,12 @@
                 <!-- Carta 1 -->
                 <div class="relative flex-col bg-clip-border rounded-xl bg-white text-gray-900 shadow-lg grid gap-2 sm:grid-cols-2">
                     <div class="relative bg-clip-border rounded-xl overflow-hidden">
-                        <img src="https://bucket.material-tailwind.com/magic-ai/06b38f84f9669f766048c469ce861b81880378273a11ae9badaedfc32868ef44.jpg" alt="Revolutionizing Our Production Process" class="object-cover w-full h-full" />
+                        <img src="{{asset('imagenesMich/cometarioCancun.jpg')}}" alt="Revolutionizing Our Production Process" class="object-cover w-full h-full" />
                     </div>
                     <div class="p-6 px-2 sm:pr-6 sm:pl-4">
                         <p class="text-sm font-semibold mb-4">Cancún</p>
-                        <a href="#" class="text-xl font-semibold text-blue-gray-900 hover:text-gray-700 mb-2">Revolutionizing Our Production Process</a>
-                        <p class="text-base text-gray-500 mb-8">Learn how our recent investment in new technology has revolutionized our production process, leading to improved efficiency and product quality.</p>
+                        <a href="#" class="text-xl font-semibold text-blue-gray-900 hover:text-gray-700 mb-2">Increible experiencia</a>
+                        <p class="text-base text-gray-500 mb-8">Todo estuvo increible, el sitio fue de mucha ayuda para poder buscar entre las diferentes opciones que ofertan, muy funcional y practica.</p>
                         <div class="flex items-center gap-4">
                             <img src="https://bucket.material-tailwind.com/magic-ai/6b1c5941d417a2a32baee89c2f3d1975d7d4fb81e486ed43dc1082ac54b0658b.jpg" class="rounded-full w-12 h-12" />
                             <div>
@@ -108,12 +108,12 @@
                 <!-- Carta 2 -->
                 <div class="relative flex-col bg-clip-border rounded-xl bg-white text-gray-900 shadow-lg grid gap-2 sm:grid-cols-2">
                     <div class="relative bg-clip-border rounded-xl overflow-hidden">
-                        <img src="https://bucket.material-tailwind.com/magic-ai/e7aa235a7bc5f504db1c66e27ece08f8118b1da6b21c013500391afcd572cf7d.jpg" alt="Expanding Our Service Network" class="object-cover w-full h-full" />
+                        <img src="{{asset('imagenesMich/madridComentarios.jpg')}}" alt="Expanding Our Service Network" class="object-cover w-full h-full" />
                     </div>
                     <div class="p-6 px-2 sm:pr-6 sm:pl-4">
                         <p class="text-sm font-semibold mb-4">Madrid</p>
-                        <a href="#" class="text-xl font-semibold text-blue-gray-900 hover:text-gray-700 mb-2">Expanding Our Service Network</a>
-                        <p class="text-base text-gray-500 mb-8">Discover how our expansion investment has allowed us to enhance our service network, providing better support and customer experience.</p>
+                        <a href="#" class="text-xl font-semibold text-blue-gray-900 hover:text-gray-700 mb-2">Lo recomiendo</a>
+                        <p class="text-base text-gray-500 mb-8">Todo estuvo increible, el sitio fue de mucha ayuda para poder buscar entre las diferentes opciones que ofertan, muy funcional y practica.</p>
                         <div class="flex items-center gap-4">
                             <img src="https://bucket.material-tailwind.com/magic-ai/16d71aaeda38d7aea4412875984357949ff12e7f2c502bb20c4c1bcf6c661607.jpg" class="rounded-full w-12 h-12" />
                             <div>
@@ -134,12 +134,12 @@
                 <!-- Carta 3 -->
                 <div class="relative flex-col bg-clip-border rounded-xl bg-white text-gray-900 shadow-lg grid gap-2 sm:grid-cols-2">
                     <div class="relative bg-clip-border rounded-xl overflow-hidden">
-                        <img src="https://bucket.material-tailwind.com/magic-ai/dc74a867f21afc734166a6d37c08beaba4ff040664ba8ccce918e054264ad68d.jpg" alt="Sustainable Practices for a Greener Future" class="object-cover w-full h-full" />
+                        <img src="{{asset('imagenesMich/cometarioOaxaca.webp')}}" alt="Sustainable Practices for a Greener Future" class="object-cover w-full h-full" />
                     </div>
                     <div class="p-6 px-2 sm:pr-6 sm:pl-4">
                         <p class="text-sm font-semibold mb-4">Oaxaca</p>
-                        <a href="#" class="text-xl font-semibold text-blue-gray-900 hover:text-gray-700 mb-2">Sustainable Practices for a Greener Future</a>
-                        <p class="text-base text-gray-500 mb-8">Find out how our investment in sustainable practices is driving us towards a greener future, showcasing our commitment to environmental responsibility.</p>
+                        <a href="#" class="text-xl font-semibold text-blue-gray-900 hover:text-gray-700 mb-2">Todo muy bien</a>
+                        <p class="text-base text-gray-500 mb-8">Todo estuvo increible, el sitio fue de mucha ayuda para poder buscar entre las diferentes opciones que ofertan, muy funcional y practica.</p>
                         <div class="flex items-center gap-4">
                             <img src="https://bucket.material-tailwind.com/magic-ai/2fadd7f00b6d08fc9dcacef52af357ec1213c0415ab97ace57ae0f17c7f6c2c8.jpg" class="rounded-full w-12 h-12" />
                             <div>
@@ -159,12 +159,12 @@
 
                 <div class="relative flex-col bg-clip-border rounded-xl bg-white text-gray-900 shadow-lg grid gap-2 sm:grid-cols-2">
                     <div class="relative bg-clip-border rounded-xl overflow-hidden">
-                        <img src="https://bucket.material-tailwind.com/magic-ai/dc74a867f21afc734166a6d37c08beaba4ff040664ba8ccce918e054264ad68d.jpg" alt="Sustainable Practices for a Greener Future" class="object-cover w-full h-full" />
+                        <img src="{{asset('imagenesMich/cdmxComentario.jpg')}}" alt="Sustainable Practices for a Greener Future" class="object-cover w-full h-full" />
                     </div>
                     <div class="p-6 px-2 sm:pr-6 sm:pl-4">
                         <p class="text-sm font-semibold mb-4">CDMX</p>
-                        <a href="#" class="text-xl font-semibold text-blue-gray-900 hover:text-gray-700 mb-2">Sustainable Practices for a Greener Future</a>
-                        <p class="text-base text-gray-500 mb-8">Find out how our investment in sustainable practices is driving us towards a greener future, showcasing our commitment to environmental responsibility.</p>
+                        <a href="#" class="text-xl font-semibold text-blue-gray-900 hover:text-gray-700 mb-2">Gran experiencia</a>
+                        <p class="text-base text-gray-500 mb-8">Todo estuvo increible, el sitio fue de mucha ayuda para poder buscar entre las diferentes opciones que ofertan, muy funcional y practica.</p>
                         <div class="flex items-center gap-4">
                             <img src="https://bucket.material-tailwind.com/magic-ai/2fadd7f00b6d08fc9dcacef52af357ec1213c0415ab97ace57ae0f17c7f6c2c8.jpg" class="rounded-full w-12 h-12" />
                             <div>

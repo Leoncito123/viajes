@@ -18,39 +18,45 @@
 
     
 
-    <body class="bg-white dark:bg-gray-900">
+<body class="bg-white dark:bg-gray-900">
 <div class="max-w-8xl px-6">
-            <header class="items-center gap-2 py-10  ">
-                        @if (Route::has('login'))
-                            <nav class="-mx-3 flex flex-1 justify-end">
-                                @auth
-                                    <a
-                                        href="{{ url('/dashboard') }}"
-                                        class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
-                                    >
-                                        Dashboard
-                                    </a>
-                                @else
-                                    <a
-                                        href="{{ route('login') }}"
-                                        class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
-                                    >
-                                        Log in
-                                    </a>
+    <header class="flex items-center justify-between py-10">
+        <div class="flex-1"></div> <!-- centra la imagen del logo -->
+        <img src="{{ asset('imagenesMich/logo.png') }}" alt="Logo" class="h-24 w-auto mx-auto" />
 
-                                    @if (Route::has('register'))
-                                        <a
-                                            href="{{ route('register') }}"
-                                            class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
-                                        >
-                                            Register
-                                        </a>
-                                    @endif
-                                @endauth
-                            </nav>
+        <div class="flex-1 flex justify-end">
+            @if (Route::has('login'))
+                <nav class="flex gap-5">
+                    @auth
+                        <a
+                            href="{{ url('/dashboard') }}"
+                            class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
+                        >
+                            Dashboard
+                        </a>
+                    @else
+                        <a
+                            href="{{ route('login') }}"
+                            class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
+                        >
+                            Log in
+                        </a>
+
+                        @if (Route::has('register'))
+                            <a
+                                href="{{ route('register') }}"
+                                class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
+                            >
+                                Register
+                            </a>
                         @endif
-                    </header>
+                    @endauth
+                </nav>
+            @endif
+        </div>
+    </header>
 </div>
+
 
                         
     <section class="bg-white dark:bg-gray-900">

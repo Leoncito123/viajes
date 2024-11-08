@@ -7,6 +7,24 @@
 
     <div class="py-">
         <div class="max-w-8xl ">
+            @if (session('nuevoVuelo'))
+                <script>
+                    Swal.fire({
+                        title: "Registo Completado!",
+                        text: "¡El vuelo a sido registrado!",
+                        icon: "success"
+                    });
+                </script>
+            @endif
+            @if (session('costo'))
+                <script>
+                    Swal.fire({
+                        title: "¡Costo Asignado!",
+                        text: "¡Se ha asignado el costo al vuelo!",
+                        icon: "success"
+                    });
+                </script>
+            @endif
             <div class="bg-white  dark:bg-gray-800 shadow-sm sm:rounded-lg">
                 <div class=" py-4  w-full text-gray-900 dark:text-gray-100">
                     <div class="px-4">
@@ -33,38 +51,39 @@
                                                     <div class="p-4 border-b-2 border-indigo-500">
                                                        <p class="font-semibold text-xl"> Crear Vuelo</p>
                                                     </div>
-                                                    <form action="" class="p-4 w-full">
+                                                    <form action="{{route('vuelo.store')}}" method="POST" class="p-4 w-full">
+                                                        @csrf
                                                         <div class="mb-4">
-                                                            <label for="" class="text-md">Avion</label>
-                                                            <select name="" class="w-full rounded-lg border-indigo-500" id="">
-                                                                <option value="">Avion 1</option>
-                                                                <option value="">Avion 2</option>
-                                                                <option value="">Avion 3</option>
+                                                            <label for="avion" class="text-md">Avion</label>
+                                                            <select name="avion" id="avion" class="w-full rounded-lg border-indigo-500" id="">
+                                                                <option value="1">Avion 1</option>
+                                                                <option value="2">Avion 2</option>
+                                                                <option value="3">Avion 3</option>
                                                             </select>
                                                         </div>
                                                        <div class="mb-4">
-                                                            <label for="" class="text-md">Destino</label>
-                                                            <select name="" class="w-full rounded-lg border-indigo-500" id="">
-                                                                <option value=""></option>
-                                                                <option value=""></option>
-                                                                <option value=""></option>
+                                                            <label for="destino" class="text-md">Destino</label>
+                                                            <select name="destino" id="destino" class="w-full rounded-lg border-indigo-500" id="">
+                                                                <option value="1">Monterrey</option>
+                                                                <option value="2">Guadalajara</option>
+                                                                <option value="3">CD. de México</option>
                                                             </select>
                                                        </div>
                                                         <div class="mb-4">
-                                                            <label for="" class="text-md">Fecha de salida</label>
-                                                            <input type="text" class="w-full rounded-lg border-indigo-500">
+                                                            <label for="salida" class="text-md">Fecha de salida</label>
+                                                            <input type="text" name="salida" id="salida" class="w-full rounded-lg border-indigo-500">
                                                         </div>
                                                         <div class="mb-4">
-                                                            <label for="" class="text-md">Fecha de Llegada</label>
-                                                            <input type="text" class="w-full rounded-lg border-indigo-500">
+                                                            <label for="llegada" class="text-md">Fecha de Llegada</label>
+                                                            <input type="text" name="llegada" id="llegada" class="w-full rounded-lg border-indigo-500">
                                                         </div>
                                                         <div class="mb-4">
-                                                            <label for="" class="text-md">Numero de Vuelo</label>
-                                                            <input type="text" class="w-full rounded-lg border-indigo-500">
+                                                            <label for="NumVuelo" class="text-md">Numero de Vuelo</label>
+                                                            <input type="text" name="NumVuelo" id="NumVuelo" class="w-full rounded-lg border-indigo-500">
                                                         </div>
                                                         <div class="mb-4">
-                                                            <label for="" class="text-md">Duración del Vuelo</label>
-                                                            <input type="text" class="w-full rounded-lg border-indigo-500">
+                                                            <label for="tiempoVuelo" class="text-md">Duración del Vuelo</label>
+                                                            <input type="text" name="tiempoVuelo" id="tiempoVuelo" class="w-full rounded-lg border-indigo-500">
                                                         </div>
                                                         <div>
                                                             <button type="submit" class="p-2 bg-indigo-500 dark:bg-blue-500 text-white rounded-lg">Crear Vuelo</button>

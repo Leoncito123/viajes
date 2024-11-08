@@ -1,7 +1,7 @@
 @extends('vistasLeo.Admin.index')
 @section('content')
 <!-- component -->
-<section class="py-24 px-4 lg:px-16"> 
+<section class="py-24 px-4 lg:px-16">
     <div class="container mx-auto px-[12px] md:px-24 xl:px-12 max-w-[1300px] nanum2">
         <h1 class="text-center text-5xl pb-12" style="color: white;">Administrador Turista sin Mapas</h1>
         <div class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-x-4 gap-y-28 lg:gap-y-16">

@@ -4,9 +4,20 @@
             {{ __('Dashboard') }}
         </h2>
     </x-slot>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <div class="py-">
         <div class="max-w-8xl h-full">
+            @if (session('pagado'))
+                <script>
+                    Swal.fire({
+                        title: "¡Pago Completado!",
+                        text: "¡Tu pago ha sido completado con éxito!",
+                        icon: "success"
+                    });
+                </script>
+            @endif
+
             <div class="bg-white h-full dark:bg-gray-800 shadow-sm sm:rounded-lg">
                 <div class="p-6 w-full text-gray-900 dark:text-gray-100">
                     <div class="grid md:grid-cols-2">
@@ -29,8 +40,8 @@
                         </div>
                         <div class="h-full">
                             <div class="container mx-auto ">
-                                <form action="#" class="max-w-xl lg:px-16 lg:py-12 px-8 py-8 mx-auto p-8 rounded-lg shadow-lg dark:text-white border border-indigo-500">
-
+                                <form action="{{route('payment')}}" method="POST" class="max-w-xl lg:px-16 lg:py-12 px-8 py-8 mx-auto p-8 rounded-lg shadow-lg dark:text-white border border-indigo-500">
+                                    @csrf
                                     <h3 class="text-xl font-semibold text-indigo-500 mb-4">
                                         Metodo de Pago
                                     </h3>
@@ -40,7 +51,8 @@
                                             <label for="cardName" class="block text-sm font-medium text-gray-700 dark:text-white">
                                                 Nombre en Tarjeta
                                             </label>
-                                            <input type="text" id="cardName" placeholder="Ingresa Nombre de la Tarjeta" required class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-red-500 focus:border-red-500">
+                                            <input type="text" id="cardName" name="cardName" placeholder="Ingresa Nombre de la Tarjeta"  class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-red-500 focus:border-red-500">
+                                        <small>{{$errors->first('cardName')}}</small>
                                         </div>
                                     </div>
                                     <div>
@@ -48,17 +60,20 @@
                                             <label for="cardNumber" class="block text-sm font-medium text-gray-700 dark:text-white">
                                                 Número de Tarjeta
                                             </label>
-                                            <input type="text" id="cardNumber" placeholder="Ingresa Número de Tarjeta" required class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-red-500 focus:border-red-500">
+                                            <input type="text" id="cardNumber" name="cardNumber" placeholder="Ingresa Número de Tarjeta"  class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-red-500 focus:border-red-500">
+                                        <small>{{$errors->first('cardNumber')}}</small>
                                         </div>
                                         <div class="">
                                             <label for="expMonth" class="block text-sm font-medium text-gray-700 dark:text-white">Fecha de Expiración</label>
                                         </div>
                                         <div class="grid md:grid-cols-2 gap-6">
                                                 <div class=" mr-2">
-                                                    <input type="text" id="expMonth" placeholder="MM" required class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-red-500 focus:border-red-500">
+                                                    <input type="text" id="expMonth" name="expMonth" placeholder="MM"  class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-red-500 focus:border-red-500">
+                                                    <small>{{$errors->first('expMonth')}}</small>
                                                 </div>
                                                 <div class=" ml-2">
-                                                    <input type="text" id="expYear"  placeholder="YYYY" required class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-red-500 focus:border-red-500">
+                                                    <input type="text" id="expYear" name="expYear"  placeholder="YYYY"  class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-red-500 focus:border-red-500">
+                                                <small>{{$errors->first('expYear')}}</small>
                                                 </div>
                                         </div>
                                     </div>
@@ -66,7 +81,8 @@
                                         <label for="cvv" class="block text-sm font-medium text-gray-700 dark:text-white">
                                             CVV:
                                         </label>
-                                        <input type="text" id="cvv" placeholder="CVV" required class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-red-500 focus:border-red-500">
+                                        <input type="text" id="cvv" name="cvv" placeholder="CVV"  class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-red-500 focus:border-red-500">
+                                        <small>{{$errors->first('cvv')}}</small>
                                     </div>
                                     <button type="submit" class="bg-indigo-500 text-white p-2 rounded-lg mt-2 w-full "> Proceder al pago</button>
                                     <div class="py2 lg:py-20">

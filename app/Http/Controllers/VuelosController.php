@@ -23,9 +23,23 @@ class VuelosController extends Controller
 
     public function reservationStore(Request $request)
     {
+        $reservation = $request->validate([
+            'name'=>'required',
+            'last_name'=>'required',
+            'phone'=>'required',
+            'id_gender'=>'required',
+            'id_seat'=>'required',
+            'id_class'=>'required',
+            'id_class'=>'required',
+            'id_ages'=>'required',
+        ]);
+
         $user = $request;
 
+        session()->flash('reservacion', 'Reservación con Éxito'. $user);
+
         return view('vuelos.detail', compact('user'));
+
     }
 
     public function reservationShop(Request $request)

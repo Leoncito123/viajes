@@ -171,14 +171,17 @@
                                         <div class="mb-6">
                                             <label for="name">Nombre(s)</label>
                                             <input type="text" id="name" name="name" class="w-full  rounded-full text-black border-indigo-500">
+                                            <small>{{$errors->first('name')}}</small>
                                         </div>
                                         <div class="mb-6">
                                             <label for="last_name">Apellidos</label>
                                             <input type="text" id="last_name" name="last_name" class="w-full  rounded-full text-black border-indigo-500">
+                                            <small>{{$errors->first('last_name')}}</small>
                                         </div>
                                         <div class="mb-6">
                                             <label for="phone">Numero de Telefono</label>
                                             <input type="text" id="phone" name="phone" class="w-full  rounded-full text-black border-indigo-500">
+                                            <small>{{$errors->first('phone')}}</small>
                                         </div>
                                         <div class="grid md:grid-cols-2 gap-8 mb-6">
                                             <div class="mb-">
@@ -188,6 +191,7 @@
                                                     <option value="1">Masculino</option>
                                                     <option value="2">Femenino</option>
                                                 </select>
+                                                <small>{{$errors->first('id_gender')}}</small>
                                             </div>
                                             <div class="mb-">
                                                 <label for="id_seat">Asiento</label>
@@ -209,6 +213,7 @@
                                                     <option value="26">26</option>
                                                     <option value="27">27</option>
                                                 </select>
+                                                <small>{{$errors->first('id_seat')}}</small>
                                             </div>
                                             <div class="mb-">
                                                 <label for="id_class">Clase</label>
@@ -219,6 +224,7 @@
                                                     <option value="2">Clase 2</option>
                                                     <option value="3">Clase 3</option>
                                                 </select>
+                                                <small>{{$errors->first('id_class')}}</small>
                                             </div>
 
                                             <div class="mb-">
@@ -230,6 +236,7 @@
                                                     <option value="2">Adulto</option>
                                                     <option value="3">Tercera Edad</option>
                                                 </select>
+                                                <small>{{$errors->first('id_ages')}}</small>
                                             </div>
                                         </div>
                                         <div class="border w-full rounded-full hover:bg-indigo-600 mt-8 border-indigo-400 bg-indigo-500 dark:bg-blue-600 dark:border-gray-200">

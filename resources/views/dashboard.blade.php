@@ -25,23 +25,23 @@
                 $("#sButton1").removeClass("bg-purple-800");
                 $("#sButton2").addClass("bg-purple-800");
             cont=1;
-            
+
             break;
             }
             case 1:
             {
-            
+
                 $("#slider-2").fadeOut(400);
                 $("#slider-1").delay(400).fadeIn(400);
                 $("#sButton2").removeClass("bg-purple-800");
                 $("#sButton1").addClass("bg-purple-800");
-            
+
             cont=0;
-            
+
             break;
             }
-            
-            
+
+
             }},8000);
 
     }
@@ -61,9 +61,9 @@
         $("#sButton1").addClass("bg-purple-800");
         reinitLoop(4000);
         cont=0
-        
+
         }
-        
+
         function sliderButton2(){
         $("#slider-1").fadeOut(400);
         $("#slider-2").delay(400).fadeIn(400);
@@ -71,24 +71,24 @@
         $("#sButton2").addClass("bg-purple-800");
         reinitLoop(4000);
         cont=1
-        
+
         }
 
         $(window).ready(function(){
             $("#slider-2").hide();
             $("#sButton1").addClass("bg-purple-800");
-            
+
 
             loopSlider();
-        
-            
-        
-        
-        
-        
+
+
+
+
+
+
         });
 
-    
+
     </script>
     </head>
 
@@ -101,19 +101,19 @@
             <p class="text-3xl font-bold">Vuela con nosotros</p>
             <p class="text-2xl mb-10 leading-none">Conoce nuestras diferentes opciones.</p>
             <a href="/volar" class="bg-purple-800 py-4 px-8 text-white font-bold uppercase text-xs rounded hover:bg-gray-200 hover:text-gray-800">Buscar</a>
-            </div>  
+            </div>
         </div> <!-- container -->
         <br>
         </div>
 
         <div id="slider-2" class="container mx-auto">
             <div class="bg-cover bg-top  h-auto text-white py-24 px-10 object-fill" style="background-image: url({{asset('imagenesMich/hotelesCarrusel.jpg')}})">
-        
+
     <p class="font-bold text-sm uppercase">Hoteles</p>
             <p class="text-3xl font-bold">Hospedate con nosotros</p>
             <p class="text-2xl mb-10 leading-none">Busca entre nuestras diferentes opciones.</p>
             <a href="/hoteles" class="bg-purple-800 py-4 px-8 text-white font-bold uppercase text-xs rounded hover:bg-gray-200 hover:text-gray-800">Buscar</a>
-            
+
         </div> <!-- container -->
         <br>
         </div>
@@ -128,9 +128,9 @@
 <!--TERMINA CARRUSEL -->
 <br>
 <!-- inicia las cartas de los hoteles -->
-    <div class="py-">  
-    <div class="flex gap-4">
-        
+    <div class="py-">
+    <div class="grid md:grid-cols-4 gap-4">
+
 <div class="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
     <a href="#">
         <img class="p-8 rounded-t-lg" src="{{asset('imagenesMich/hotel3.webp')}}" alt="product image" />
@@ -139,7 +139,7 @@
         <a href="#">
             <h5 class="text-xl font-semibold tracking-tight text-gray-900 dark:text-white">Emporio Cancun</h5>
         </a>
-        <div class="flex items-center mt-2.5 mb-5">
+        <div class="grid md:grid-cols-4 gap-4 items-center mt-2.5 mb-5">
             <div class="flex items-center space-x-1 rtl:space-x-reverse">
                 <svg class="w-4 h-4 text-yellow-300" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
                     <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
@@ -222,7 +222,7 @@
             <span class="bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800 ms-3">4.5</span>
         </div>
     </div>
-</div> 
+</div>
 
 <div class="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
     <a href="#">
@@ -253,7 +253,7 @@
             <span class="bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800 ms-3">4.5</span>
         </div>
     </div>
-</div> 
+</div>
     </div> <!-- Terminan las cartas de los hoteles  -->
 
 <!-- Inician la parte para testimonios usuarios  -->
@@ -298,9 +298,9 @@
 				</h3>
 				<div id="accordion-flush-body-1" class="" aria-labelledby="accordion-flush-heading-1">
 					<div class="py-5 border-b border-gray-200 dark:border-gray-700">
-						<p class="mb-2 text-gray-500 dark:text-gray-400">Si necesitas cancelar tu reserva de vuelo o estadía, revisa los términos 
-                            específicos aplicables a cada servicio en la confirmación de tu compra. 
-                            Ofrecemos opciones de reembolso y cambios sujetos a las políticas de la aerolínea o el hotel seleccionado. 
+						<p class="mb-2 text-gray-500 dark:text-gray-400">Si necesitas cancelar tu reserva de vuelo o estadía, revisa los términos
+                            específicos aplicables a cada servicio en la confirmación de tu compra.
+                            Ofrecemos opciones de reembolso y cambios sujetos a las políticas de la aerolínea o el hotel seleccionado.
                             Te recomendamos realizar la cancelación con antelación para obtener mejores condiciones.</p>
 					</div>
 				</div>
@@ -312,8 +312,8 @@
 				</h3>
 				<div id="accordion-flush-body-2" class="hidden" aria-labelledby="accordion-flush-heading-2">
 					<div class="py-5 border-b border-gray-200 dark:border-gray-700">
-						<p class="mb-2 text-gray-500 dark:text-gray-400">Aceptamos diversas formas de pago para tu comodidad, incluidas tarjetas de crédito y 
-                            débito,transferencias bancarias y métodos digitales seguros. Al finalizar tu compra, elige la opción que más se adapte a ti. 
+						<p class="mb-2 text-gray-500 dark:text-gray-400">Aceptamos diversas formas de pago para tu comodidad, incluidas tarjetas de crédito y
+                            débito,transferencias bancarias y métodos digitales seguros. Al finalizar tu compra, elige la opción que más se adapte a ti.
                             Todos los pagos se procesan con altos estándares de seguridad para proteger tu información.</p>
 					</div>
 				</div>
@@ -325,9 +325,9 @@
 				</h3>
 				<div id="accordion-flush-body-3" class="hidden" aria-labelledby="accordion-flush-heading-3">
 					<div class="py-5 border-b border-gray-200 dark:border-gray-700">
-						<p class="mb-2 text-gray-500 dark:text-gray-400">Si no has recibido tu confirmación de compra en las primeras 24 horas, 
-                            verifica tu bandeja de spam o promociones. Si aún no encuentras el correo, 
-                            contáctanos a través de nuestro servicio de atención al cliente con el comprobante de pago y 
+						<p class="mb-2 text-gray-500 dark:text-gray-400">Si no has recibido tu confirmación de compra en las primeras 24 horas,
+                            verifica tu bandeja de spam o promociones. Si aún no encuentras el correo,
+                            contáctanos a través de nuestro servicio de atención al cliente con el comprobante de pago y
                             te ayudaremos a resolverlo lo antes posible.</p>
 					</div>
 				</div>
@@ -340,8 +340,8 @@
 				<div id="accordion-flush-body-4" class="hidden" aria-labelledby="accordion-flush-heading-4">
 					<div class="py-5 border-b border-gray-200 dark:border-gray-700">
 						<p class="mb-2 text-gray-500 dark:text-gray-400">Para emergencias durante tu viaje, como cambios
-                            urgentes en el vuelo o problemas con la reserva de tu estadía, puedes comunicarte con nuestro equipo de 
-                            soporte 24/7. También te recomendamos contactar directamente con la aerolínea o el hotel para resolver 
+                            urgentes en el vuelo o problemas con la reserva de tu estadía, puedes comunicarte con nuestro equipo de
+                            soporte 24/7. También te recomendamos contactar directamente con la aerolínea o el hotel para resolver
                             cualquier situación en el lugar.</p>
 					</div>
 				</div>

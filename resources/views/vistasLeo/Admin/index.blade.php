@@ -76,7 +76,7 @@
                 <div class=" dark:border-gray-700 border border-indigo-400 border-lg rounded-lg">
                     {{-- <x-leo.admin.sidebar /> --}}
                     @yield('content')
-                    <div>
+                    {{-- <div>
                         <div class="py-">
                             <div class="max-w-8xl ">
                                 @if (session('nuevoVuelo'))
@@ -306,7 +306,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
 

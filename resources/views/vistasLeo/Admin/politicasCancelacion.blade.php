@@ -1,14 +1,24 @@
 @extends('vistasLeo.Admin.index')
 
 @section('content')
+    <script src="https://cdn.jsdelivr.net/npm/simple-datatables@9.0.3"></script>
     <div class="max-w-6xl mx-auto p-6">
         <div class="bg-white rounded-lg shadow-lg overflow-hidden">
             <!-- Encabezado -->
             <div class="border-b border-gray-200 bg-gray-50 p-4">
                 <h2 class="text-lg font-semibold text-gray-800">Editor de Contenido</h2>
             </div>
+            @if ($errors->any())
+                <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+                    <strong class="font-bold">¡Ups!</strong>
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li><span class="block sm:inline">{{ $error }}</span></li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
 
-            <!-- Contenedor principal -->
             <div class="p-6">
                 <!-- Barra de herramientas -->
                 <div class="bg-white border border-gray-200 rounded-lg shadow-sm mb-4">
@@ -105,35 +115,44 @@
                 </div>
 
                 <!-- Contenedor del Editor y Vista Previa -->
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                    <!-- Editor -->
-                    <div class="relative">
-                        <div class="absolute inset-0 bg-gray-50 rounded-lg"></div>
-                        <div id="editor" contenteditable="true"
-                            class="relative bg-white border border-gray-200 rounded-lg shadow-sm p-4 min-h-[400px] max-h-[600px] overflow-y-auto focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                <form id="content-form" action="{{ route('admin.hoteles.politicas.store', $id) }}" method="POST"
+                    onsubmit="saveContent()">
+                    @csrf
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                        <!-- Editor -->
+                        <div class="relative">
+                            <div class="absolute inset-0 bg-gray-50 rounded-lg"></div>
+                            <div id="editor" contenteditable="true"
+                                class="relative bg-white border border-gray-200 rounded-lg shadow-sm p-4 min-h-[400px] max-h-[600px] overflow-y-auto focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                                {!! $politicas !!}
+                            </div>
+                        </div>
+
+                        <!-- Vista Previa -->
+                        <div class="relative hidden lg:block">
+                            <div class="absolute inset-0 bg-gray-50 rounded-lg"></div>
+                            <div id="preview"
+                                class="relative bg-white border border-gray-200 rounded-lg shadow-sm p-4 min-h-[400px] max-h-[600px] overflow-y-auto">
+                            </div>
                         </div>
                     </div>
 
-                    <!-- Vista Previa -->
-                    <div class="relative hidden lg:block">
-                        <div class="absolute inset-0 bg-gray-50 rounded-lg"></div>
-                        <div id="preview"
-                            class="relative bg-white border border-gray-200 rounded-lg shadow-sm p-4 min-h-[400px] max-h-[600px] overflow-y-auto">
-                        </div>
+                    <!-- Botones de control -->
+                    <div class="flex justify-end space-x-4 mt-6">
+                        <button type="button" onclick="togglePreview()"
+                            class="preview-btn px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-500">
+                            <span class="preview-text">Ver Vista Previa</span>
+                        </button>
+                        <button type="submit"
+                            class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            Guardar Cambios
+                        </button>
+                        <a href="{{ route('admin.hoteles') }}" class="btn bg-gray-500 text-white px-4 py-2 rounded-lg ">
+                            Cancelar
+                        </a>
                     </div>
-                </div>
-
-                <!-- Botones de control -->
-                <div class="flex justify-end space-x-4 mt-6">
-                    <button onclick="togglePreview()"
-                        class="preview-btn px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-500">
-                        <span class="preview-text">Ver Vista Previa</span>
-                    </button>
-                    <button onclick="saveContent()"
-                        class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
-                        Guardar Cambios
-                    </button>
-                </div>
+                    <input type="hidden" name="cancellation_policies" id="content">
+                </form>
             </div>
         </div>
     </div>
@@ -233,8 +252,8 @@
         }
 
         function saveContent() {
-            // Aquí puedes implementar la lógica para guardar el contenido
-            alert('Contenido guardado con éxito!');
+            const editorContent = document.getElementById('editor').innerHTML;
+            document.getElementById('content').value = editorContent;
         }
 
         // Inicializar

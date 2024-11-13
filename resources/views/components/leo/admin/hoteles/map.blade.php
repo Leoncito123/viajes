@@ -25,10 +25,11 @@
                             <span class="sr-only">Close modal</span>
                         </button>
                     </div>
-                    <iframe id="hotelMap" width="100%" height="100%" style="border:0;" loading="lazy"
-                        allowfullscreen
-                        src="https://www.openstreetmap.org/export/embed.html?bbox=-105.2720,20.6500,-105.2320,20.6900&layer=mapnik&marker=20.6700,-105.2520">
-                    </iframe>
+                    <div class=" h-2/3">
+                        <iframe id="hotelMap" width="100%" height="100%" style="border:0;" loading="lazy"
+                            allowfullscreen src="">
+                        </iframe>
+                    </div>
                 </div>
             </div>
         </div>
@@ -38,8 +39,12 @@
 <!-- JavaScript para el modal -->
 <script>
     const locationModal = document.getElementById('locationModal');
+    const hotelMap = document.getElementById('hotelMap');
 
-    function openLocationModal() {
+    function openLocationModal(latitude, longitude) {
+        const src =
+            `https://www.openstreetmap.org/export/embed.html?bbox=${longitude-0.02},${latitude-0.02},${longitude+0.02},${latitude+0.02}&layer=mapnik&marker=${latitude},${longitude}`;
+        hotelMap.src = src;
         locationModal.classList.remove('hidden');
     }
 

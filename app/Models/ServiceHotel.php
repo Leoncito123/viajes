@@ -5,13 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Destiny extends Model
+class ServiceHotel extends Model
 {
   use HasFactory;
 
-  protected $fillable = [
-    'name',
-    'longitude',
-    'latitude',
-  ];
+  protected $table = 'services_hotels';
+
+  protected $fillable = ['id_services', 'id_hotels'];
 }

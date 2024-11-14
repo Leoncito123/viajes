@@ -5,11 +5,14 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\controladorMich;
 
 //rutas con controlador
+
 Route::get('/mich/reservaciones', [controladorMich::class, 'reservaciones'])->name('rutareservaciones');
-Route::get('/mich/inicioAdmin', [controladorMich::class, 'inicioAdmin'])->name('rutainicioAdmin');
 Route::get('/mich/usuarios', [controladorMich::class, 'usuarios'])->name('rutausuarios');
 Route::post('/comentarios', [controladorMich::class, 'comentarios'])->name('guardarcomentarios');
 
+Route::middleware(['auth', 'verified', 'role:admin'])->group(function () {
+    Route::get('/mich/inicioAdmin', [controladorMich::class, 'inicioAdmin'])->name('rutainicioAdmin');
+});
 
 //pruebas rutas sin controlador
 // Route::get('/mich/reservaciones', function () {

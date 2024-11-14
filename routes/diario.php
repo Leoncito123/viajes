@@ -27,6 +27,21 @@ Route::middleware('auth')->group(function () {
     //Routes PAY
     Route::get('/pay', [PayController::class, 'index'])->name('pay');
     Route::post('/payment', [PayController::class, 'pay'])->name('payment');
+
+    //Rutas Aerolineas
+    Route::post('/aerolinea/store', [AdminVuelosController::class, 'storeAirlane'])->name('airline.store');
+
+    //Rutas Clases
+    Route::post('/clase/store', [AdminVuelosController::class, 'storeClass'])->name('class.store');
+
+    //Rutas Ages
+    Route::post('/ages/store', [AdminVuelosController::class, 'storeAge'])->name('ages.store');
+
+    //Rutas Aviones
+    Route::post('/airplane/store', [AdminVuelosController::class, 'aiplaneStore'])->name('airplane.store');
+
+    //Rutas asientos
+    Route::post('/seats/store', [AdminVuelosController::class, 'seatStore'])->name('seats.store');
 });
 
 require __DIR__.'/auth.php';

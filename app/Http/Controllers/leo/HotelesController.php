@@ -94,11 +94,19 @@ class HotelesController extends Controller
   /**
    * Display the specified resource.
    */
-  public function show(string $id)
+  public function show()
   {
-    //
+    $hoteles = Hotel::with('destiny', 'pictures', 'rooms')->get();
+
+    return view('vistasLeo.Hoteles.index', compact('hoteles'));
   }
 
+  public function showHotel($id)
+  {
+    $hotel = Hotel::with('destiny', 'pictures', 'services', 'rooms.type_room', 'opinions')->find($id);
+
+    return view('vistasLeo.Hoteles.infohotel', compact('hotel'));
+  }
   /**
    * Show the form for editing the specified resource.
    */

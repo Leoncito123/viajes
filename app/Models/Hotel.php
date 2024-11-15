@@ -38,4 +38,9 @@ class Hotel extends Model
   {
     return $this->hasMany(Room::class, 'id_hotel');
   }
+
+  public function opinions()
+  {
+    return $this->hasMany(Opinion::class, 'id_hotel');
+  }
 }

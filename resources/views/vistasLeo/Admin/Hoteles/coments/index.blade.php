@@ -12,7 +12,7 @@
                     <article>
                         <div class="flex items-center mb-4">
                             <img class="w-10 h-10 me-4 rounded-full"
-                                src="{{ $comentario->user->profile_photo_path ? asset('storage/' . Auth::user()->profile_photo_path) : asset('img/perfil.jpg') }}"
+                                src="{{ $comentario->user->profile_photo_path ? asset('storage/' . $comentario->user->profile_photo_path) : asset('img/perfil.jpg') }}"
                                 alt="">
                             <div class="font-medium dark:text-white">
                                 <p>{{ $comentario->user->name }} {{ $comentario->user->last_name }}</p>

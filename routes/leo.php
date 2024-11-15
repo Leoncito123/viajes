@@ -11,12 +11,7 @@ use Illuminate\Support\Facades\Route;
 
 
 
-//Rutas de hoteles 
-Route::view('/hoteles', 'vistasLeo.Hoteles.index')->name('hoteles.index');
-
 //Rutas para las vistas de administrador
-
-//Rutas vistas de hoteles
 Route::middleware(['auth', 'verified', 'role:admin'])->group(function () {
   Route::get('admin/hoteles', [HotelesController::class, 'index'])->name('admin.hoteles'); //index
   Route::get('admin/hoteles/create', [HotelesController::class, 'create'])->name('admin.hoteles.create'); //create
@@ -48,6 +43,12 @@ Route::middleware(['auth', 'verified', 'role:admin'])->group(function () {
   Route::get('admin/hoteles', [HotelesController::class, 'index'])->name('admin.hoteles');
   Route::view('admin/viajes', 'vistasLeo.Admin.vuelos')->name('admin.viajes');
   Route::get('admin/hoteles/politicas/{id}', [HotelesController::class, 'politicas'])->name('admin.hoteles.politicas');
+});
+
+//Rutas para las vistas de usuario
+Route::middleware(['auth', 'verified'])->group(function () {
+  Route::get('/hoteles', [HotelesController::class, 'show'])->name('hoteles.index');
+  Route::get('/hoteles/{id}', [HotelesController::class, 'showHotel'])->name('hoteles.show');
 });
 
 

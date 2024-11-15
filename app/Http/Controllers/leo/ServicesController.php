@@ -23,6 +23,22 @@ class ServicesController extends Controller
     return redirect()->route('admin.hoteles')->with('success', 'Servicio creado correctamente');
   }
 
+  public function update(Request $request, $id)
+  {
+    $request->validate([
+      'name' => 'required',
+      'description' => 'required',
+    ]);
+
+    $service = Service::find($id);
+    Service::where('id', $id)->update([
+      'name' => $request->name,
+      'description' => $request->description,
+    ]);
+
+    return redirect()->route('admin.hoteles')->with('success', 'Servicio actualizado correctamente');
+  }
+
   public function delete($id)
   {
     $service = Service::find($id);

@@ -1,5 +1,5 @@
 <x-guest-layout>
-    <form method="POST" action="{{ route('register') }}">
+    <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
         @csrf
         <div class="register-container">
             <!-- Name -->
@@ -61,6 +61,19 @@
                     name="password_confirmation" autocomplete="new-password" />
 
                 <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
+            </div>
+
+            <!-- Confirm Password -->
+            <div class="mt-4">
+                <x-input-label for="photo_profile" :value="__('Foto de perfil')" />
+                <input
+                    class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+                    id="file_input" type="file" name="photo" accept="image/*"
+                    title="Solo se permiten archivos de imagen (jpg, png, gif)">
+                <p class="mt-1 text-sm text-gray-500">
+                    Formatos permitidos: JPG, PNG, GIF (máx. 2MB)
+                </p>
+                <x-input-error :messages="$errors->get('photo')" class="mt-2" />
             </div>
 
             <div class="flex items-center justify-end mt-4">

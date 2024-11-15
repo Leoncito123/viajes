@@ -14,6 +14,5 @@ class Type_room extends Model
     'description',
     'price',
     'max_people',
-    'status'
   ];
 }

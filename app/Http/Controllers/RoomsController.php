@@ -13,7 +13,8 @@ class RoomsController extends Controller
    */
   public function index($id)
   {
-    $rooms = Room::where('id_hotel', $id)->get();
+    $rooms = Room::where('id_hotel', $id)->with('type_room', 'hotel')->get();
+
     $types = Type_room::all();
     return view('vistasLeo.Admin.Hoteles.rooms.index', compact('rooms', 'types'));
   }
@@ -55,7 +56,17 @@ class RoomsController extends Controller
    */
   public function update(Request $request, string $id)
   {
-    //
+    $request->validate([
+      'roomId' => 'required',
+      'typeId' => 'required',
+    ]);
+
+    $room = Room::find($request->roomId);
+    $room->update([
+      'id_type_rooms' => $request->typeId,
+    ]);
+
+    return redirect()->back()->with('success', 'Room updated successfully');
   }
 
   /**

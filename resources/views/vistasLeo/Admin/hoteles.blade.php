@@ -124,7 +124,7 @@
 
                                 <td class="px-6 py-4">
                                     <div class="flex items-center space-x-2">
-                                        <a href="{{ route('admin.hoteles.edit') }}"
+                                        <a href="{{ route('admin.hoteles.edit', $hotel->id) }}"
                                             class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg shadow-md transition duration-200 ease-in-out transform hover:scale-105">
                                             Editar
                                         </a>
@@ -144,6 +144,14 @@
                                             onclick="openImagesModal({{ $hotel->id }})">
                                             Ver imágenes
                                         </button>
+                                        <a href="{{ route('admin.hoteles.rooms.reservation', $hotel->id) }}"
+                                            class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg shadow-md transition duration-200 ease-in-out transform hover:scale-105">
+                                            Ver reservaciones
+                                        </a>
+                                        <a href="{{ route('admin.hoteles.coments', $hotel->id) }}"
+                                            class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg shadow-md transition duration-200 ease-in-out transform hover:scale-105">
+                                            Ver comentarios
+                                        </a>
                                     </div>
                                 </td>
                             </tr>

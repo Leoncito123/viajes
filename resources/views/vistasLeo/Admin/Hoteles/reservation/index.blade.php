@@ -14,106 +14,124 @@
             });
         </script>
     @endif
-    <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div class="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-md overflow-x-auto">
-            <table class="min-w-full text-sm text-left text-gray-500 dark:text-gray-400">
-                <thead class="text-xs text-gray-700 uppercase bg-indigo-500 text-white dark:bg-gray-700 dark:text-gray-400">
-                    <tr>
-                        <th scope="col" class="px-6 py-3">
-                            Check-in
-                        </th>
-                        <th scope="col" class="px-6 py-3">
-                            Check-out
-                        </th>
-                        <th scope="col" class="px-6 py-3">
-                            Cantidad de adultos
-                        </th>
-                        <th scope="col" class="px-6 py-3">
-                            Cantidad de niños
-                        </th>
-                        <th scope="col" class="px-6 py-3">
-                            Estado de pago
-                        </th>
-                        <th scope="col" class="px-6 py-3">
-                            Usuario
-                        </th>
-                        <th scope="col" class="px-6 py-3">
-                            Habitación
-                        </th>
-                        <th scope="col" class="px-6 py-3 text-center">
-                            Acciones
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @if ($reservations->isEmpty())
-                        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                            <th scope="row" colspan="8"
-                                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white text-center">
-                                No hay reservaciones aún
-                            </th>
-                        </tr>
-                    @else
-                        @foreach ($reservations as $reservation)
-                            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                                <th scope="row"
-                                    class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                    {{ $reservation->check_in }}
-                                </th>
-                                <th scope="row"
-                                    class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                    {{ $reservation->check_out }}
-                                </th>
-                                <th scope="row"
-                                    class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                    {{ $reservation->cant_adults }}
-                                </th>
-                                <th scope="row"
-                                    class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                    {{ $reservation->cant_infants }}
-                                </th>
-                                <th scope="row"
-                                    class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                    @if ($reservation->status_payment == 0)
-                                        <span class="bg-red-500 text-white font-semibold py-1 px-2 rounded-full">
-                                            Pendiente
-                                        </span>
-                                    @else
-                                        <span class="bg-green-500 text-white font-semibold py-1 px-2 rounded-full">
-                                            Pagado
-                                        </span>
-                                    @endif
-                                </th>
-                                <th scope="row"
-                                    class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                    {{ $reservation->user->name }} {{ $reservation->user->last_names }}
-                                </th>
-                                <td class="px-6 py-4">
-                                    {{ $reservation->room->name }}
-                                </td>
-                            </tr>
-                            <div id="modal-images" class="hidden fixed z-10 inset-0 overflow-y-auto">
-                                <div class="flex items-center justify-center min-h-screen">
-                                    <div class="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-md w-full max-w-3xl">
-                                        <div class="flex justify-between items-center">
-                                            <h2 class="text-2xl font-bold text-gray-900 dark:text-white">Imágenes del Hotel
-                                            </h2>
-                                            <button onclick="closeImagesModal()"
-                                                class="text-gray-500 hover:text-gray-700 dark:hover:text-gray-300">
-                                                &times;
-                                            </button>
-                                        </div>
-                                        <div id="images-container"
-                                            class=" grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-
+    <div class="container  mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div class="max-w-md mx-auto">
+            <label for="default-search"
+                class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Buscador</label>
+            <div class="relative">
+                <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+                    <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                        fill="none" viewBox="0 0 20 20">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
+                    </svg>
+                </div>
+                <input type="text" id="searchReservation"
+                    class="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    placeholder="Buscar hotel" />
+            </div>
+        </div>
+        <div class="bg-white flex grid md:grid-cols-3 dark:bg-gray-800  py-3 p-4 rounded-lg shadow-md overflow-x-auto">
+            @if ($reservations->isEmpty())
+                <p class="text-center">No hay reservaciones</p>
+            @else
+                @foreach ($reservations as $reservation)
+                    <div
+                        class="reservation-container w-full max-w-md py-10 bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700">
+                        <div class="flex items-center justify-between mb-4">
+                            <h5 id="numberReservation" class="text-xl font-bold leading-none text-gray-900 dark:text-white">
+                                Numero de reservación : {{ $reservation->id }}</h5>
+                        </div>
+                        <div class="flow-root">
+                            <ul role="list" class="divide-y divide-gray-200 dark:divide-gray-700">
+                                <li class="py-3 sm:py-4">
+                                    <div class="flex items-center">
+                                        <div class="flex-1 min-w-0 ms-4">
+                                            <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+                                                Habitacion : {{ $reservation->room->name }}
+                                            </p>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-                        @endforeach
-                    @endif
-                </tbody>
-            </table>
+                                </li>
+                                <li class="py-3 sm:py-4">
+                                    <div class="flex items-center">
+                                        <div class="flex-1 min-w-0 ms-4">
+                                            <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+                                                Nombre del residente : {{ $reservation->user->name }}
+                                            </p>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="py-3 sm:py-4">
+                                    <div class="flex items-center">
+                                        <div class="flex-1 min-w-0 ms-4">
+                                            <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+                                                Fecha de Check-in : {{ $reservation->check_in }}
+                                            </p>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="py-3 sm:py-4">
+                                    <div class="flex items-center">
+                                        <div class="flex-1 min-w-0 ms-4">
+                                            <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+                                                Fecha de Check-out : {{ $reservation->check_out }}
+                                            </p>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="py-3 sm:py-4">
+                                    <div class="flex items-center">
+                                        <div class="flex-1 min-w-0 ms-4">
+                                            <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+                                                Cantidad de adultos : {{ $reservation->cant_adults }}
+                                            </p>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="py-3 sm:py-4">
+                                    <div class="flex items-center">
+                                        <div class="flex-1 min-w-0 ms-4">
+                                            <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+                                                Cantidad de niños : {{ $reservation->cant_infants }}
+                                            </p>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="py-3 sm:py-4">
+                                    <div class="flex items-center">
+                                        <div class="flex-1 min-w-0 ms-4">
+                                            <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+                                                Estado de pago :
+                                                {{ $reservation->status_payment === 1 ? 'Pagado' : 'Pendiente' }}
+                                            </p>
+                                        </div>
+                                    </div>
+                                </li>
+
+                            </ul>
+                        </div>
+                    </div>
+                @endforeach
+            @endif
         </div>
     </div>
+
+    <script>
+        document.getElementById('searchReservation').addEventListener('input', function() {
+            let filter = this.value.toLowerCase();
+            let elements = document.querySelectorAll('.reservation-container');
+
+            elements.forEach(function(element) {
+                let reservationNumber = element.querySelector('#numberReservation').textContent
+                .toLowerCase();
+                if (reservationNumber.includes(filter)) {
+                    element.style.display = 'block';
+                } else {
+                    element.style.display = 'none';
+                }
+            });
+        });
+    </script>
+
 @endsection

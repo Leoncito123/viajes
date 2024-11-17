@@ -1,4 +1,5 @@
 <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    @props(['coments', 'id_hotel'])
     <div class="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-md overflow-x-auto">
         @php
             $averageRating = $coments->isEmpty() ? 0 : round($coments->avg('stars'), 1);
@@ -75,6 +76,44 @@
                     </div>
                 @endfor
             </div>
+
+            {{-- Formulario de comentario --}}
+
+            <form action="{{ route('comentarios.store', ['id' => $id_hotel, 'id_user' => Auth::id()]) }}" method="POST">
+                @csrf
+                <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
+                    <div>
+                        <label for="name" class="block text-sm font-medium text-gray-700 dark:text-gray-400">Titulo</label>
+                        <input type="text" name="name" id="name" autocomplete="name" required
+                            class="block w-full px-3 py-2 mt-1 text-gray-900 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                    </div>
+                    <div>
+                        <label for="stars" class="block text-sm font-medium text-gray-700 dark:text-gray-400">Estrellas</label>
+                        <select name="stars" id="stars" autocomplete="stars" required
+                            class="block w-full px-3 py-2 mt-1 text-gray-900 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                            <option value="1">1 estrella</option>
+                            <option value="2">2 estrellas</option>
+                            <option value="3">3 estrellas</option>
+                            <option value="4">4 estrellas</option>
+                            <option value="5">5 estrellas</option>
+                        </select>
+                    </div>
+                    <div class="sm:col-span-2">
+                        <label for="description"
+                            class="block text-sm font-medium text-gray-700 dark:text-gray-400">Comentario</label>
+                        <textarea id="description" name="description" rows="4" required
+                            class="block w-full px-3 py-2 mt-1 text-gray-900 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:focus: ring-blue-500 dark:focus:border-blue-500"></textarea>
+                    </div>
+                </div>
+
+                <div class="mt-6">
+                    <button type="submit"
+                        class="inline-flex justify-center w-full px-4 py-2 text-sm font-medium text-white bg-blue-600 border border-transparent rounded-md shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:text-sm">
+                        Enviar
+                    </button>
+                </div>
+            </form>
+
             @foreach ($coments as $comentario)
                 <article>
                     <div class="flex items-center mb-4">

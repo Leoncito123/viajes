@@ -4,6 +4,22 @@
             {{ __('Hotel') }} {{ $hotel->name }}
         </h2>
     </x-slot>
+    @if(session('success'))
+        <div class="bg-green-100 border-l-4 border-green-500 text-green-700 p-4" role="alert">
+            <p class="font-bold">Gracias por tu comentario</p>
+            <p>{{ session('success') }}</p>
+        </div>
+    @endif
+
+    {{-- Mostrar errores --}}
+    @if($errors->any())
+        <div class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4" role="alert">
+            <p class="font-bold">Error</p>
+            @foreach($errors->all() as $error)
+                <p>{{ $error }}</p>
+            @endforeach
+        </div>
+    @endif
 
     <div class="relative w-full max-w-7xl">
         <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
@@ -121,7 +137,7 @@
                 </div>
                 {{-- Comentarios --}}
                 <h1 class="text-xl font-bold text-gray-800 dark:text-gray-200">Comentarios</h1>
-                <x-leo.hoteles.comentarios :coments="$hotel->opinions" />
+                <x-leo.hoteles.comentarios :id_hotel="$hotel->id" :coments="$hotel->opinions"  />
             </div>
         </div>
 </x-app-layout>

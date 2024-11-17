@@ -13,9 +13,8 @@ return new class extends Migration
   {
     Schema::create('reservations', function (Blueprint $table) {
       $table->id();
-      $table->time('check_in');
-      $table->time('check_out');
-      $table->float('cant_kinds');
+      $table->date('check_in');
+      $table->date('check_out');
       $table->float('cant_adults');
       $table->float('cant_infants');
       $table->boolean('status_payment');

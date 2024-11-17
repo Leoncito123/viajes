@@ -26,7 +26,6 @@ class ReservationController extends Controller
             'check_out' => 'required',
             'cant_adults' => 'required',
             'cant_infants' => 'required',
-            'cant_kinds' => 'required',
             'status_payment' => 'required',
             'id_room' => 'required',
             'name' => 'required',
@@ -36,6 +35,19 @@ class ReservationController extends Controller
             'phone' => 'required',
             'id_gender' => 'required'
         ]);
+        
+        $room = Room::with('type_room')->find($request->id_room);
+        $peoples = $request->cant_adults + $request->cant_infants;
+
+        if($request->check_in > $request->check_out){
+            return redirect()->back()->with('message', 'La fecha de entrada no puede ser mayor a la fecha de salida');
+        }if($request->check_in < date('Y-m-d')){
+            return redirect()->back()->with('message', 'La fecha de entrada no puede ser menor a la fecha actual');
+        }if($request->check_out < date('Y-m-d')){
+            return redirect()->back()->with('message', 'La fecha de salida no puede ser menor a la fecha actual');
+        }if($peoples > $room->type_room->max_people){
+            return redirect()->back()->with('message', 'El número de personas supera la capacidad de la habitación');
+        }
 
         $userReservation = UserReservation::create([
             'name' => $request->name,
@@ -51,7 +63,6 @@ class ReservationController extends Controller
             'check_out' => $request->check_out,
             'cant_adults' => $request->cant_adults,
             'cant_infants' => $request->cant_infants,
-            'cant_kinds' => $request->cant_kinds,
             'status_payment' => $request->status_payment,
             'id_room' => $request->id_room,
             'id_user_reservation' => $userReservation->id

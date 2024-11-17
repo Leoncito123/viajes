@@ -11,6 +11,8 @@
         </div>
     @endif
 
+
+
     {{-- Mostrar errores --}}
     @if ($errors->any())
         <div class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4" role="alert">
@@ -66,6 +68,20 @@
                     @endforeach
                 </div>
 
+                @if (session('message'))
+                    <div class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4" id="alertReservation">
+                        <p class="font-bold">Error</p>
+                        <p>{{ session('message') }}</p>
+                    </div>
+                    <script>
+                        setTimeout(() => {
+                            document.getElementById('alertReservation').scrollIntoView({
+                                behavior: 'smooth'
+                            });
+                        }, );
+                    </script>
+                @endif
+
                 <!-- Selección dinámica de habitaciones -->
                 <h2 class="text-xl font-bold text-gray-800 dark:text-gray-200">Selecciona una habitación</h2>
                 <div id="rooms-container" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
@@ -79,6 +95,11 @@
                                 </p>
                                 <p class="text-sm text-gray-600 dark:text-gray-400">Precio:
                                     ${{ $room->type_room ? $room->type_room->price ?? 'N/A' : 'Sin información' }}</p>
+                                <p class="text-sm text-gray-600 dark:text-gray-400">Descripcion de la habitacion:
+                                    {{ $room->type_room ? $room->type_room->description ?? 'N/A' : 'Sin información' }}
+                                </p>
+                                <p class="text-sm text-gray-600 dark:text-gray-400">Tipo de habitacion:
+                                    {{ $room->type_room ? $room->type_room->name ?? 'N/A' : 'Sin información' }}</p>
                                 <button type="button" id="select-room-{{ $room->id }}"
                                     class="mt-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
                                     onclick="selectRoom({{ $room->id }})">
@@ -103,8 +124,8 @@
                                 <div class="flex items-center">
                                     <button type="button" id="decrement-adults"
                                         class="bg-gray-200 dark:bg-gray-700 p-2 rounded-l-lg text-gray-700 dark:text-gray-300">-</button>
-                                    <input type="number" id="cant_adults" name="cant_adults" value="1"
-                                        min="0"
+                                    <input type="number" id="cant_adults" name="cant_adults"
+                                        value="{{ old('cant_adults') ?? 0 }}" min="0"
                                         class="w-16 text-center bg-gray-100 dark:bg-gray-600 border-gray-300 dark:border-gray-500 rounded-none text-gray-900 dark:text-gray-200">
                                     <button type="button" id="increment-adults"
                                         class="bg-gray-200 dark:bg-gray-700 p-2 rounded-r-lg text-gray-700 dark:text-gray-300">+</button>
@@ -118,8 +139,8 @@
                                 <div class="flex items-center">
                                     <button type="button" id="decrement-kids"
                                         class="bg-gray-200 dark:bg-gray-700 p-2 rounded-l-lg text-gray-700 dark:text-gray-300">-</button>
-                                    <input type="number" id="cant_infants" name="cant_infants" value="0"
-                                        min="0"
+                                    <input type="number" id="cant_infants" name="cant_infants"
+                                        value="{{ old('cant_infants') ?? 0 }}" min="0"
                                         class="w-16 text-center bg-gray-100 dark:bg-gray-600 border-gray-300 dark:border-gray-500 rounded-none text-gray-900 dark:text-gray-200">
                                     <button type="button" id="increment-kids"
                                         class="bg-gray-200 dark:bg-gray-700 p-2 rounded-r-lg text-gray-700 dark:text-gray-300">+</button>
@@ -131,34 +152,23 @@
                                     class="w-full mt-1 p-2 bg-gray-100 dark:bg-gray-600 border-gray-300 dark:border-gray-500 rounded-md text-gray-900 dark:text-gray-200">
                             </div>
 
-                            <div class="flex items-center gap-4">
-                                <label for="cant_kinds" class="text-sm font-medium text-gray-900 dark:text-gray-200">
-                                    Cant_kinds:
-                                </label>
-                                <div class="flex items-center">
-                                    <input type="number" id="cant_kinds" name="cant_kinds" value="0"
-                                        min="0"
-                                        class="w-16 text-center bg-gray-100 dark:bg-gray-600 border-gray-300 dark:border-gray-500 rounded-none text-gray-900 dark:text-gray-200">
-                                </div>
-                            </div>
-
                             <!-- Fechas -->
                             <div>
                                 <label for="check_in"
                                     class="block text-sm font-medium text-gray-900 dark:text-gray-200">Fecha de
                                     Check-in:</label>
-                                <input type="date" id="check_in" name="check_in"
+                                <input type="date" id="check_in" name="check_in" value="{{ old('check_in') }}"
                                     class="w-full mt-1 p-2 bg-gray-100 dark:bg-gray-600 border-gray-300 dark:border-gray-500 rounded-md text-gray-900 dark:text-gray-200">
                             </div>
                             <div>
-                                <label for="check_out"
+                                <label for="check_out" value="{{ old('check_out') }}"
                                     class="block text-sm font-medium text-gray-900 dark:text-gray-200">Fecha de
                                     Check-out:</label>
                                 <input type="date" id="check_out" name="check_out"
                                     class="w-full mt-1 p-2 bg-gray-100 dark:bg-gray-600 border-gray-300 dark:border-gray-500 rounded-md text-gray-900 dark:text-gray-200">
                             </div>
                             <!-- Campo oculto para ID de habitación -->
-                            <input type="hidden" id="id_room" name="id_room" value="">
+                            <input type="hidden" id="id_room" name="id_room" value="{{ old('id_room') }}">
 
                             <!-- Botón de reservar para alguien más -->
                             <div class="flex justify-end">
@@ -320,5 +330,13 @@
                     room.appendChild(selectButton);
                 });
             }
+
+            // Ejecutar cuando carga la página
+            document.addEventListener('DOMContentLoaded', function() {
+                const oldRoomId = "{{ old('id_room') }}";
+                if (oldRoomId) {
+                    selectRoom(oldRoomId);
+                }
+            });
         </script>
 </x-app-layout>

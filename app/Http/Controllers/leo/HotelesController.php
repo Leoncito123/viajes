@@ -5,6 +5,7 @@ namespace App\Http\Controllers\leo;
 use App\Http\Controllers\Controller;
 use App\Models\Destiny;
 use App\Models\Hotel;
+use App\Models\Opinion;
 use App\Models\Picture;
 use App\Models\Room;
 use App\Models\Service;
@@ -106,6 +107,26 @@ class HotelesController extends Controller
     $hotel = Hotel::with('destiny', 'pictures', 'services', 'rooms.type_room', 'opinions')->find($id);
 
     return view('vistasLeo.Hoteles.infohotel', compact('hotel'));
+  }
+
+  public function saveOpinion(Request $request, $id,$id_user)
+  {
+    $request->validate([
+      'name' => 'required|string',
+      'description' => 'required|string',
+      'stars' => 'required|numeric',
+    ]);
+
+    $hotel = Hotel::find($id);
+    $opinion = Opinion::create([
+      'name' => $request->name,
+      'description' => $request->description,
+      'stars' => $request->stars,
+      'id_hotel' => $hotel->id,
+      'id_user' => $id_user,
+    ]);
+
+    return back()->with('success', 'Opinión guardada correctamente');
   }
   /**
    * Show the form for editing the specified resource.

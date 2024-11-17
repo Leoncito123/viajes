@@ -49,6 +49,7 @@ Route::middleware(['auth', 'verified', 'role:admin'])->group(function () {
 Route::middleware(['auth', 'verified'])->group(function () {
   Route::get('/hoteles', [HotelesController::class, 'show'])->name('hoteles.index');
   Route::get('/hoteles/{id}', [HotelesController::class, 'showHotel'])->name('hoteles.show');
+  Route::post('/hoteles/coment/{id}/{id_user}', [HotelesController::class, 'saveOpinion'])->name('comentarios.store');
 });
 
 

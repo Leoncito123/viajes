@@ -8,6 +8,7 @@ use App\Models\Classe;
 use App\Models\Age;
 use App\Models\Airplane;
 use App\Models\Seat;
+use App\Models\Destiny;
 
 class AdminVuelosController extends Controller
 {
@@ -17,12 +18,14 @@ class AdminVuelosController extends Controller
         $classes = Classe::all();
         $ages = Age::all();
         $airplanes = Airplane::with('airline', 'seats')->get();
+        $destinies = Destiny::all();
 
         return view('vuelos.adminVuelos', [
             'airlines'=>$airlines,
             'classes'=>$classes,
             'ages'=>$ages,
-            'airplanes'=>$airplanes
+            'airplanes'=>$airplanes,
+            'destinies'=>$destinies
         ]);
     }
 
@@ -126,9 +129,30 @@ class AdminVuelosController extends Controller
             'id_airplane' => 'required|exists:airplanes,id'
         ]);
 
-        Seat::create([
-            'name'=>$validateData['name'],
-            'id_airplane'=>$validateData['id_airplane']
+        $seatsNumber = (integer)$validateData['name'];
+
+        for ($i=0; $i < $seatsNumber; $i++){
+            Seat::create([
+                'name'=>(string)$i,
+                'id_airplane'=>$validateData['id_airplane']
+            ]);
+        }
+
+        return back();
+    }
+
+    public function destinyStore(Request $request)
+    {
+        $validateData = $request->validate([
+            'nombre' => 'required',
+            'latitude' => 'required',
+            'longitude' => 'required',
+        ]);
+
+        Destiny::create([
+            'name' => $validateData['nombre'],
+            'latitude' => $validateData['latitude'],
+            'longitude' => $validateData['longitude'],
         ]);
 
         return back();

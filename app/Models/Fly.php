@@ -17,4 +17,9 @@ class Fly extends Model
         'id_airplane',
         'id_destinies'
     ];
+
+    public function seats()
+    {
+        return $this -> hasMany(Seat::class);
+    }
 }

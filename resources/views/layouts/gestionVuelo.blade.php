@@ -1,5 +1,9 @@
 
+<link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css" />
+<script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
 
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
 <!-- drawer init and toggle -->
 <div>
     <!-- Botón para abrir el drawer -->
@@ -177,7 +181,11 @@
                 </div>
 
                 <div class="flex py-2">
-                    <button class="p-2 rounded-lg bg-blue-500 text-white">Crear</button>
+                    @include('vuelos.admiVuelosComponents.createDestiny')
+
+
+
+
                 </div>
                 <div>
                     <div class="relative overflow-x-auto">

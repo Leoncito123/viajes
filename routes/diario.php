@@ -13,7 +13,7 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/volar', [VuelosController::class, 'main'])->name('vuelos.main');
     Route::get('/vuelos', [VuelosController::class, 'index'])->name('vuelos.index');
-    Route::get('/vuelos/show', [VuelosController::class, 'show'])->name('vuelos.show');
+    Route::get('/vuelos/{id_fly}/show', [VuelosController::class, 'show'])->name('vuelos.show');
     Route::post('/vuelos/reservation', [VuelosController::class, 'reservationStore'])->name('reservation.store');
     Route::get('/vuelos/detail', [VuelosController::class, 'reservationDetail'])->name('vuelos.detail');
     Route::post('/canasta', [VuelosController::class, 'reservationShop'])->name('vuelo.canasta');
@@ -42,6 +42,9 @@ Route::middleware('auth')->group(function () {
 
     //Rutas asientos
     Route::post('/seats/store', [AdminVuelosController::class, 'seatStore'])->name('seats.store');
+
+    //Rutas Destinos
+    Route::post('/destiny/store', [AdminVuelosController::class, 'destinyStore'])->name('destiny.store');
 });
 
 require __DIR__.'/auth.php';

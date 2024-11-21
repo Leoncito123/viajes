@@ -14,6 +14,10 @@ class Type_room extends Model
     'description',
     'price',
     'max_people',
-    'status'
   ];
+
+  public function rooms()
+  {
+    return $this->hasMany(Room::class, 'id_type_rooms');
+  }
 }

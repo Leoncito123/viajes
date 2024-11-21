@@ -11,6 +11,6 @@ class PassengerFly extends Model
 
     protected $fillable = [
         'id_passenger',
-        'if_fly'
+        'id_fly'
     ];
 }

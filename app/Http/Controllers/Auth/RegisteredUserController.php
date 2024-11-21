@@ -35,8 +35,16 @@ class RegisteredUserController extends Controller
       'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:' . User::class],
       'phone' => ['required', 'string', 'max:255'],
       'birthdate' => ['required', 'date', 'max:255'],
+      'photo' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
       'password' => ['required', 'confirmed', Rules\Password::defaults()],
     ]);
+
+    $photo = $request->file('photo');
+
+    if ($photo) {
+      $path = $photo->store('image_profile', 'public');
+    }
+
 
     $user = User::create([
       'name' => $request->name,
@@ -45,6 +53,7 @@ class RegisteredUserController extends Controller
       'phone' => $request->phone,
       'birthdate' => $request->birthdate,
       'password' => Hash::make($request->password),
+      'profile_photo_path' => $path,
     ]);
 
     $user->assignRole('user');

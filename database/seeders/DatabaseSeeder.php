@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Gender;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -17,8 +18,14 @@ class DatabaseSeeder extends Seeder
    */
   public function run(): void
   {
+    //Roles
     $adminRole = Role::firstOrCreate(['name' => 'admin']);
     $userRole = Role::firstOrCreate(['name' => 'user']);
+    //Generos
+    $genderM = Gender::firstOrCreate(['name' => 'Masculino']);
+    $genderF = Gender::firstOrCreate(['name' => 'Femenino']);
+    $genderI = Gender::firstOrCreate(['name' => 'Indefinido']);
+    $genderO = Gender::firstOrCreate(['name' => 'Otro']);
 
     $admin = User::create([
       'name' => "Admin",
@@ -29,8 +36,6 @@ class DatabaseSeeder extends Seeder
       'email_verified_at' => '2021-01-01',
       'password' => Hash::make('123456789'),
     ]);
-
-    // Asignar el rol
     $admin->assignRole($adminRole);
   }
 }

@@ -13,7 +13,7 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/volar', [VuelosController::class, 'main'])->name('vuelos.main');
     Route::get('/vuelos', [VuelosController::class, 'index'])->name('vuelos.index');
-    Route::get('/vuelos/show', [VuelosController::class, 'show'])->name('vuelos.show');
+    Route::get('/vuelos/{id_fly}/show', [VuelosController::class, 'show'])->name('vuelos.show');
     Route::post('/vuelos/reservation', [VuelosController::class, 'reservationStore'])->name('reservation.store');
     Route::get('/vuelos/detail', [VuelosController::class, 'reservationDetail'])->name('vuelos.detail');
     Route::post('/canasta', [VuelosController::class, 'reservationShop'])->name('vuelo.canasta');
@@ -27,6 +27,24 @@ Route::middleware('auth')->group(function () {
     //Routes PAY
     Route::get('/pay', [PayController::class, 'index'])->name('pay');
     Route::post('/payment', [PayController::class, 'pay'])->name('payment');
+
+    //Rutas Aerolineas
+    Route::post('/aerolinea/store', [AdminVuelosController::class, 'storeAirlane'])->name('airline.store');
+
+    //Rutas Clases
+    Route::post('/clase/store', [AdminVuelosController::class, 'storeClass'])->name('class.store');
+
+    //Rutas Ages
+    Route::post('/ages/store', [AdminVuelosController::class, 'storeAge'])->name('ages.store');
+
+    //Rutas Aviones
+    Route::post('/airplane/store', [AdminVuelosController::class, 'aiplaneStore'])->name('airplane.store');
+
+    //Rutas asientos
+    Route::post('/seats/store', [AdminVuelosController::class, 'seatStore'])->name('seats.store');
+
+    //Rutas Destinos
+    Route::post('/destiny/store', [AdminVuelosController::class, 'destinyStore'])->name('destiny.store');
 });
 
 require __DIR__.'/auth.php';

@@ -16,148 +16,13 @@
                                     <p class="text-2xl font-semibold">Lugares Disponibles (Reservados en <span class="text-red-700">rojo</span>).</p>
                                 </div>
                                 <div class="grid grid-cols-4 gap-8 w-full lg:w-1/2 mx-auto text-center border border-indigo-500 dark:border-gray-600 rounded-lg p-6">
-
-                                    <div class=" items-center border rounded-lg border-gray-400 hover:bg-indigo-500 bg-red-600 dark:border-gray-600 hover:border-white">
+                                    @foreach ($seats as $seat)
+                                    <div class=" items-center border rounded-lg border-gray-400 hover:bg-indigo-500 bg-white dark:border-gray-600 hover:border-white">
                                         <a href="" class="text-black dark:text-gray-800">
-                                            <img src="../img/asiento.png" class="w-" alt="">1
+                                            <img src="{{asset('img/asiento.png')}}" class="w-20" alt="">{{$seat}}
                                         </a>
                                     </div>
-                                    <div class=" items-center border rounded-lg border-gray-400 text-center justify-center w-full hover:bg-indigo-500 bg-white hover:border-white">
-                                        <a href="" class="text-center items-center justify-center w-fulltext-black dark:text-gray-800">
-                                            <img src="../img/asiento.png" class="w-" alt="">
-                                            2
-                                        </a>
-                                    </div>
-                                    <div class=" items-center border rounded-lg border-gray-400 text-center hover:bg-indigo-500 bg-white hover:border-white">
-                                        <a href="" class="text-black dark:text-gray-800">
-                                            <img src="../img/asiento.png" class="w-" alt="">3
-                                        </a>
-                                    </div>
-                                    <div class=" items-center border rounded-lg border-gray-400 text-center hover:bg-indigo-500 bg-red-600 dark:border-gray-600 hover:border-white">
-                                        <a href="" class="text-black dark:text-gray-800">
-                                            <img src="../img/asiento.png" class="w-" alt="">4
-                                        </a>
-                                    </div>
-                                    <div class=" items-center border rounded-lg border-gray-400 text-center hover:bg-indigo-500 bg-red-600 dark:border-gray-600 hover:border-white">
-                                        <a href="" class="text-black dark:text-gray-800">
-                                            <img src="../img/asiento.png" class="w-" alt="">5
-                                        </a>
-                                    </div>
-                                    <div class=" items-center border rounded-lg border-gray-400 text-center hover:bg-indigo-500 bg-red-600 dark:border-gray-600 hover:border-white">
-                                        <a href="" class="text-black dark:text-gray-800">
-                                            <img src="../img/asiento.png" class="w-" alt="">6
-                                        </a>
-                                    </div>
-                                    <div class=" items-center border rounded-lg border-gray-400 text-center hover:bg-indigo-500 bg-white hover:border-white">
-                                        <a href="" class="text-black dark:text-gray-800">
-                                            <img src="../img/asiento.png" class="w-" alt="">7
-                                        </a>
-                                    </div>
-                                    <div class=" items-center border rounded-lg border-gray-400 text-center hover:bg-indigo-500 bg-white hover:border-white">
-                                        <a href="" class="text-black dark:text-gray-800">
-                                            <img src="../img/asiento.png" class="w-" alt="">8
-                                        </a>
-                                    </div>
-                                    <div class=" items-center border rounded-lg border-gray-400 text-center hover:bg-indigo-500 bg-red-600 dark:border-gray-600 hover:border-white">
-                                        <a href="" class="text-black dark:text-gray-800">
-                                            <img src="../img/asiento.png" class="w-" alt="">9
-                                        </a>
-                                    </div>
-                                    <div class=" items-center border rounded-lg border-gray-400 text-center hover:bg-indigo-500 bg-white hover:border-white">
-                                        <a href="" class="text-black dark:text-gray-800">
-                                            <img src="../img/asiento.png" class="w-" alt="">10
-                                        </a>
-                                    </div>
-                                    <div class=" items-center border rounded-lg border-gray-400 text-center hover:bg-indigo-500 bg-white hover:border-white">
-                                        <a href="" class="text-black dark:text-gray-800">
-                                            <img src="../img/asiento.png" class="w-" alt="">11
-                                        </a>
-                                    </div>
-                                    <div class=" items-center border rounded-lg border-gray-400 text-center hover:bg-indigo-500 bg-red-600 dark:border-gray-600 hover:border-white">
-                                        <a href="" class="text-black dark:text-gray-800">
-                                            <img src="../img/asiento.png" class="w-" alt="">12
-                                        </a>
-                                    </div>
-                                    <div class=" items-center border rounded-lg border-gray-400 text-center hover:bg-indigo-500 bg-red-600 dark:border-gray-600 hover:border-white">
-                                        <a href="" class="text-black dark:text-gray-800">
-                                            <img src="../img/asiento.png" class="w-" alt="">13
-                                        </a>
-                                    </div>
-                                    <div class=" items-center border rounded-lg border-gray-400 text-center hover:bg-indigo-500 bg-white hover:border-white">
-                                        <a href="" class="text-black dark:text-gray-800">
-                                            <img src="../img/asiento.png" class="w-" alt="">14
-                                        </a>
-                                    </div>
-                                    <div class=" items-center border rounded-lg border-gray-400 text-center hover:bg-indigo-500 bg-red-600 dark:border-gray-600 hover:border-white">
-                                        <a href="" class="text-black dark:text-gray-800">
-                                            <img src="../img/asiento.png" class="w-" alt="">15
-                                        </a>
-                                    </div>
-                                    <div class=" items-center border rounded-lg border-gray-400 text-center hover:bg-indigo-500 bg-white hover:border-white">
-                                        <a href="" class="text-black dark:text-gray-800">
-                                            <img src="../img/asiento.png" class="w-" alt="">16
-                                        </a>
-                                    </div>
-                                    <div class=" items-center border rounded-lg border-gray-400 text-center hover:bg-indigo-500 bg-white hover:border-white">
-                                        <a href="" class="text-black dark:text-gray-800">
-                                            <img src="../img/asiento.png" class="w-" alt="">17
-                                        </a>
-                                    </div>
-                                    <div class=" items-center border rounded-lg border-gray-400 text-center hover:bg-indigo-500 bg-red-600 dark:border-gray-600 hover:border-white">
-                                        <a href="" class="text-black dark:text-gray-800">
-                                            <img src="../img/asiento.png" class="w-" alt="">18
-                                        </a>
-                                    </div>
-                                    <div class=" items-center border rounded-lg border-gray-400 text-center hover:bg-indigo-500 bg-red-600 dark:border-gray-600 hover:border-white">
-                                        <a href="" class="text-black dark:text-gray-800">
-                                            <img src="../img/asiento.png" class="w-" alt="">19
-                                        </a>
-                                    </div>
-                                    <div class=" items-center border rounded-lg border-gray-400 text-center hover:bg-indigo-500 bg-white hover:border-white">
-                                        <a href="" class="text-black dark:text-gray-800">
-                                            <img src="../img/asiento.png" class="w-" alt="">20
-                                        </a>
-                                    </div>
-                                    <div class=" items-center border rounded-lg border-gray-400 text-center hover:bg-indigo-500 bg-red-600 dark:border-gray-600 hover:border-white">
-                                        <a href="" class="text-black dark:text-gray-800">
-                                            <img src="../img/asiento.png" class="w-" alt="">21
-                                        </a>
-                                    </div>
-                                    <div class=" items-center border rounded-lg border-gray-400 text-center hover:bg-indigo-500 bg-red-600 dark:border-gray-600 hover:border-white">
-                                        <a href="" class="text-black dark:text-gray-800">
-                                            <img src="../img/asiento.png" class="w-" alt="">22
-                                        </a>
-                                    </div>
-                                    <div class=" items-center border rounded-lg border-gray-400 text-center hover:bg-indigo-500 bg-white hover:border-white">
-                                        <a href="" class="text-black dark:text-gray-800">
-                                            <img src="../img/asiento.png" class="w-" alt="">23
-                                        </a>
-                                    </div>
-                                    <div class=" items-center border rounded-lg border-gray-400 text-center hover:bg-indigo-500 bg-white hover:border-white">
-                                        <a href="" class="text-black dark:text-gray-800">
-                                            <img src="../img/asiento.png" class="w-" alt="">24
-                                        </a>
-                                    </div>
-                                    <div class=" items-center border rounded-lg border-gray-400 text-center hover:bg-indigo-500 bg-white hover:border-white">
-                                        <a href="" class="text-black dark:text-gray-800">
-                                            <img src="../img/asiento.png" class="w-" alt="">25
-                                        </a>
-                                    </div>
-                                    <div class=" items-center border rounded-lg border-gray-400 text-center hover:bg-indigo-500 bg-white hover:border-white">
-                                        <a href="" class="text-black dark:text-gray-800">
-                                            <img src="../img/asiento.png" class="w-" alt="">26
-                                        </a>
-                                    </div>
-                                    <div class=" items-center border rounded-lg border-gray-400 text-center hover:bg-indigo-500 bg-white hover:border-white">
-                                        <a href="" class="text-black dark:text-gray-800">
-                                            <img src="../img/asiento.png" class="w-" alt="">27
-                                        </a>
-                                    </div>
-                                    <div class=" items-center border rounded-lg border-gray-400 text-center hover:bg-indigo-500 bg-red-600 dark:border-gray-600 hover:border-white">
-                                        <a href="" class="text-black dark:text-gray-800">
-                                            <img src="../img/asiento.png" class="w-" alt="">28
-                                        </a>
-                                    </div>
+                                    @endforeach
 
                                 </div>
                             </div>
@@ -188,8 +53,9 @@
                                                 <label for="id_gender">Genero</label>
                                                 <select name="id_gender" id="id_gender" class="w-full  rounded-full text-black border-indigo-500">
                                                     <option value="">Selecciona una opción</option>
-                                                    <option value="1">Masculino</option>
-                                                    <option value="2">Femenino</option>
+                                                    @foreach ($genders as $gender)
+                                                        <option value="{{$gender->id}}">{{$gender->name}}</option>
+                                                    @endforeach
                                                 </select>
                                                 <small>{{$errors->first('id_gender')}}</small>
                                             </div>
@@ -197,21 +63,9 @@
                                                 <label for="id_seat">Asiento</label>
                                                 <select name="id_seat" id="id_seat" class="w-full  rounded-full text-black border-indigo-500">
                                                     <option value="">Selecciona una opción</option>
-                                                    <option value="2">2</option>
-                                                    <option value="3">3</option>
-                                                    <option value="7">7</option>
-                                                    <option value="8">8</option>
-                                                    <option value="10">10</option>
-                                                    <option value="11">11</option>
-                                                    <option value="14">14</option>
-                                                    <option value="16">16</option>
-                                                    <option value="17">17</option>
-                                                    <option value="20">20</option>
-                                                    <option value="23">23</option>
-                                                    <option value="24">24</option>
-                                                    <option value="25">25</option>
-                                                    <option value="26">26</option>
-                                                    <option value="27">27</option>
+                                                    @foreach ($seats as $seat)
+                                                        <option value="2">{{$seat}}</option>
+                                                    @endforeach
                                                 </select>
                                                 <small>{{$errors->first('id_seat')}}</small>
                                             </div>

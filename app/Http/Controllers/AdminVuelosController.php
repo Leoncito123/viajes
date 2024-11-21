@@ -9,6 +9,7 @@ use App\Models\Age;
 use App\Models\Airplane;
 use App\Models\Seat;
 use App\Models\Destiny;
+use App\Models\Fly;
 
 class AdminVuelosController extends Controller
 {
@@ -19,13 +20,15 @@ class AdminVuelosController extends Controller
         $ages = Age::all();
         $airplanes = Airplane::with('airline', 'seats')->get();
         $destinies = Destiny::all();
+        $flies = Fly::with('airplane', 'destiny')->get();
 
         return view('vuelos.adminVuelos', [
             'airlines'=>$airlines,
             'classes'=>$classes,
             'ages'=>$ages,
             'airplanes'=>$airplanes,
-            'destinies'=>$destinies
+            'destinies'=>$destinies,
+            'flies'=>$flies
         ]);
     }
 
@@ -153,6 +156,28 @@ class AdminVuelosController extends Controller
             'name' => $validateData['nombre'],
             'latitude' => $validateData['latitude'],
             'longitude' => $validateData['longitude'],
+        ]);
+
+        return back();
+    }
+
+    public function flyStore(Request $request)
+    {
+        $validateData = $request->validate([
+            'id_airplane' => 'required|string',
+            'id_destiny' => 'required|string',
+            'depature_date' => 'required',
+            'arrival_date' => 'required',
+            'fly_number' => 'required',
+            'fly_duration' => 'required',
+        ]); 
+        Fly::create([
+            'id_airplane' => $validateData['id_airplane'],
+            'id_destinies' => $validateData['id_destiny'],
+            'depature_date' => $validateData['depature_date'],
+            'arrival_date' => $validateData['arrival_date'],
+            'fly_number' => $validateData['fly_number'],
+            'fly_duration' => $validateData['fly_duration'],
         ]);
 
         return back();

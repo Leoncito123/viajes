@@ -22,4 +22,12 @@ class Fly extends Model
     {
         return $this -> hasMany(Seat::class);
     }
+
+    public function airplane(){
+        return $this->belongsTo(Airplane::class,'id_airplane','id');
+    }
+
+    public function destiny(){
+        return $this->belongsTo(Destiny::class,'id_destinies','id');
+    }
 }

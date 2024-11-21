@@ -21,7 +21,7 @@ Route::middleware('auth')->group(function () {
 
 
     Route::get('/adminVuelos', [AdminVuelosController::class, 'index'])->name('vuelos.adminVuelos');
-    Route::post('adminVuelos/vuelo/store', [AdminVuelosController::class, 'storeVuelo'])->name('vuelo.store');
+    Route::post('adminVuelos/vuelo/store', [AdminVuelosController::class, 'flyStore'])->name('vuelo.store');
     Route::post('/costoAsignament', [AdminVuelosController::class, 'costoAsignament'])->name('costo.asignament');
 
     //Routes PAY

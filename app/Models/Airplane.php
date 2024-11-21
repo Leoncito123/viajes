@@ -24,4 +24,8 @@ use Illuminate\Database\Eloquent\Model;
         return $this->hasMany(Seat::class, 'id_airplane', 'id');
     }
 
+    public function flys(){
+        return $this->hasMany(fly::class);
+    }
+
 }

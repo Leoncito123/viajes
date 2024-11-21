@@ -13,7 +13,7 @@
     <div id="dropdown5" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700">
         <div id="map" class="h-96 w-full rounded-lg shadow-lg border border-gray-300 bg-gray-100 dark:bg-gray-800 dark:border-gray-700"></div>
 
-        <form action="{{route('destiny.store')}}" method="POST" class="py-6 p-4">
+        <form action="{{route('destiny.store')}}" method="POST" class="py-6 p-4 dark:text-black">
             @csrf
             <div>
                 <label for="nombre" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">

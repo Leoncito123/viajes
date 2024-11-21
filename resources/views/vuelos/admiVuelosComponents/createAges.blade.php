@@ -6,7 +6,7 @@
 
     <!-- Dropdown menu -->
     <div id="dropdown3" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-1/2 dark:bg-gray-700">
-        <form action="{{route('ages.store')}}" method="POST" class="py-6 ">
+        <form action="{{route('ages.store')}}" method="POST" class="py-6 dark:text-black">
             @csrf
             <div class="mb-4 w-full px-4">
                 <label for="name" class="text-md">Edad</label>

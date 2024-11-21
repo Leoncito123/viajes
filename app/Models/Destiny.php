@@ -14,4 +14,8 @@ class Destiny extends Model
     'longitude',
     'latitude',
   ];
+
+  public function flys(){
+    return $this->hasMany(Fly::class);
+  }
 }

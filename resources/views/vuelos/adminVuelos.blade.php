@@ -57,39 +57,39 @@
                                                     <div class="p-4 border-b-2 border-indigo-500">
                                                        <p class="font-semibold text-xl"> Crear Vuelo</p>
                                                     </div>
-                                                    <form action="{{route('vuelo.store')}}" method="POST" class="p-4 w-full">
+                                                    <form action="{{route('vuelo.store')}}" method="POST" class="p-4 w-full dark:text-black">
                                                         @csrf
                                                         <div class="mb-4">
-                                                            <label for="avion" class="text-md">Avion</label>
-                                                            <select name="avion" id="avion" class="w-full rounded-lg border-indigo-500" id="">
+                                                            <label for="id_airplane" class="text-md">Avion</label>
+                                                            <select name="id_airplane" id="id_airplane" class="w-full rounded-lg border-indigo-500" id="">
                                                                 @foreach ($airplanes as $airplane)
                                                                     <option value="{{$airplane->id}}">{{$airplane->name}}</option>
                                                                 @endforeach
                                                             </select>
                                                         </div>
                                                        <div class="mb-4">
-                                                            <label for="destino" class="text-md">Destino</label>
-                                                            <select name="destino" id="destino" class="w-full rounded-lg border-indigo-500" id="">
+                                                            <label for="id_destiny" class="text-md">Destino</label>
+                                                            <select name="id_destiny" id="id_destiny" class="w-full rounded-lg border-indigo-500" id="">
                                                                 @foreach ($destinies as $destiny)
                                                                     <option value="{{$destiny->id}}">{{$destiny->name}}</option>
                                                                 @endforeach
                                                             </select>
                                                        </div>
                                                         <div class="mb-4">
-                                                            <label for="salida" class="text-md">Fecha de salida</label>
-                                                            <input type="text" name="salida" id="salida" class="w-full rounded-lg border-indigo-500">
+                                                            <label for="depature_date" class="text-md">Fecha de salida</label>
+                                                            <input type="date" name="depature_date" id="depature_date" class="w-full rounded-lg border-indigo-500">
                                                         </div>
                                                         <div class="mb-4">
-                                                            <label for="llegada" class="text-md">Fecha de Llegada</label>
-                                                            <input type="text" name="llegada" id="llegada" class="w-full rounded-lg border-indigo-500">
+                                                            <label for="arrival_date" class="text-md">Fecha de Llegada</label>
+                                                            <input type="date" name="arrival_date" id="arrival_date" class="w-full rounded-lg border-indigo-500">
                                                         </div>
                                                         <div class="mb-4">
-                                                            <label for="NumVuelo" class="text-md">Numero de Vuelo</label>
-                                                            <input type="text" name="NumVuelo" id="NumVuelo" class="w-full rounded-lg border-indigo-500">
+                                                            <label for="fly_number" class="text-md">Numero de Vuelo</label>
+                                                            <input type="text" name="fly_number" id="fly_number" class="w-full rounded-lg border-indigo-500">
                                                         </div>
                                                         <div class="mb-4">
-                                                            <label for="tiempoVuelo" class="text-md">Duración del Vuelo</label>
-                                                            <input type="text" name="tiempoVuelo" id="tiempoVuelo" class="w-full rounded-lg border-indigo-500">
+                                                            <label for="fly_duration" class="text-md">Duración del Vuelo</label>
+                                                            <input type="text" name="fly_duration" id="fly_duration" class="w-full rounded-lg border-indigo-500">
                                                         </div>
                                                         <div>
                                                             <button type="submit" class="p-2 bg-indigo-500 dark:bg-blue-500 text-white rounded-lg">Crear Vuelo</button>
@@ -135,24 +135,25 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
+                                                    @foreach($flies as $fly)
                                                     <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                                                         <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                                            Avion 1
+                                                            {{$fly->airplane->name}}
                                                         </th>
                                                         <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                                            La Paz, Baja California
+                                                            {{$fly->destiny->name}}
                                                         </th>
                                                         <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                                            05/06/2024
+                                                            {{$fly->depature_date}}
                                                         </th>
                                                         <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                                            05/06/2024
+                                                            {{$fly->arrival_date}}
                                                         </th>
                                                         <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                                            12354
+                                                            {{$fly->fly_number}}
                                                         </th>
                                                         <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                                            2:00 hrs
+                                                            {{$fly->fly_duration}}
                                                         </th>
                                                         <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                                             @include('layouts.vuelos.costoModal')
@@ -165,67 +166,7 @@
                                                             <button class="p-2 rounded-lg font-semibold text-white bg-red-500">Eliminar</button>
                                                         </td>
                                                     </tr>
-                                                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                                                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                                            Avion 1
-                                                        </th>
-                                                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                                            La Paz, Baja California
-                                                        </th>
-                                                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                                            05/06/2024
-                                                        </th>
-                                                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                                            05/06/2024
-                                                        </th>
-                                                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                                            12354
-                                                        </th>
-                                                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                                            2:00 hrs
-                                                        </th>
-                                                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                                            @include('layouts.vuelos.costoModal')
-                                                        </th>
-                                                        <td class="px-6 py-4">
-                                                            <button class="p-2 rounded-lg font-semibold text-white bg-blue-500">Asignar</button>
-                                                        </td>
-                                                        <td class="px-6 py-4">
-                                                            <button class="p-2 rounded-lg font-semibold text-white bg-blue-500">Editar</button>
-                                                            <button class="p-2 rounded-lg font-semibold text-white bg-red-500">Eliminar</button>
-                                                        </td>
-                                                    </tr>
-
-                                                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                                                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                                            Avion 1
-                                                        </th>
-                                                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                                            La Paz, Baja California
-                                                        </th>
-                                                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                                            05/06/2024
-                                                        </th>
-                                                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                                            05/06/2024
-                                                        </th>
-                                                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                                            12354
-                                                        </th>
-                                                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                                            2:00 hrs
-                                                        </th>
-                                                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                                            @include('layouts.vuelos.costoModal')
-                                                        </th>
-                                                        <td class="px-6 py-4">
-                                                            <button class="p-2 rounded-lg font-semibold text-white bg-blue-500">Asignar</button>
-                                                        </td>
-                                                        <td class="px-6 py-4">
-                                                            <button class="p-2 rounded-lg font-semibold text-white bg-blue-500">Editar</button>
-                                                            <button class="p-2 rounded-lg font-semibold text-white bg-red-500">Eliminar</button>
-                                                        </td>
-                                                    </tr>
+                                                    @endforeach
                                                 </tbody>
                                             </table>
                                         </div>

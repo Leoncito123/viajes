@@ -1,5 +1,9 @@
 
+<link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css" />
+<script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
 
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
 <!-- drawer init and toggle -->
 <div>
     <!-- Botón para abrir el drawer -->
@@ -42,7 +46,7 @@
                 </div>
 
                 <div class="flex py-2">
-                    <button class="p-2 rounded-lg bg-blue-500 text-white">Crear</button>
+                    @include('vuelos.admiVuelosComponents.createAerolinea')
                 </div>
                 <div>
                     <div class="relative overflow-x-auto">
@@ -53,51 +57,28 @@
                                         Nombre
                                     </th>
                                     <th scope="col" class="px-6 py-3">
-                                        Acciones
+                                        Ubicación
                                     </th>
                                     <th scope="col" class="px-6 py-3">
-                                        Ver Info
+                                        Acciones
                                     </th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                        Viva Aerobus
-                                    </th>
-                                    <td class="px-6 py-4">
-                                        <button class="p-2 rounded-lg font-semibold text-white bg-blue-500">Editar</button>
-                                        <button class="p-2 rounded-lg font-semibold text-white bg-red-500">Eliminar</button>
-                                    </td>
-                                    <td class="px-6 py-4">
-                                        <a class="border-b-2" href="">Ver Información</a>
-                                    </td>
-                                </tr>
-                                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                        Aeromexico
-                                    </th>
-                                    <td class="px-6 py-4">
-                                        <button class="p-2 rounded-lg font-semibold text-white bg-blue-500">Editar</button>
-                                        <button class="p-2 rounded-lg font-semibold text-white bg-red-500">Eliminar</button>
-                                    </td>
-                                    <td class="px-6 py-4">
-                                        <a class="border-b-2" href="">Ver Información</a>
-                                    </td>
-                                </tr>
-
-                                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                        Volaris
-                                    </th>
-                                    <td class="px-6 py-4">
-                                        <button class="p-2 rounded-lg font-semibold text-white bg-blue-500">Editar</button>
-                                        <button class="p-2 rounded-lg font-semibold text-white bg-red-500">Eliminar</button>
-                                    </td>
-                                    <td class="px-6 py-4">
-                                        <a class="border-b-2" href="">Ver Información</a>
-                                    </td>
-                                </tr>
+                                @foreach ($airlines as $airline)
+                                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                            {{$airline->name}}
+                                        </th>
+                                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                            {{$airline->ubication}}
+                                        </th>
+                                        <td class="px-6 py-4">
+                                            <button class="p-2 rounded-lg font-semibold text-white bg-blue-500">Editar</button>
+                                            <button class="p-2 rounded-lg font-semibold text-white bg-red-500">Eliminar</button>
+                                        </td>
+                                    </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -110,7 +91,7 @@
                 </div>
 
                 <div class="flex py-2">
-                    <button class="p-2 rounded-lg bg-blue-500 text-white">Crear</button>
+                    @include('vuelos.admiVuelosComponents.createClass')
                 </div>
                 <div>
                     <div class="relative overflow-x-auto">
@@ -123,49 +104,20 @@
                                     <th scope="col" class="px-6 py-3">
                                         Acciones
                                     </th>
-                                    <th scope="col" class="px-6 py-3">
-                                        Ver Info
-                                    </th>
                                 </tr>
                             </thead>
                             <tbody>
+                                @foreach ($classes as $class)
                                 <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                                     <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                        VIP
+                                        {{$class->type}}
                                     </th>
                                     <td class="px-6 py-4">
                                         <button class="p-2 rounded-lg font-semibold text-white bg-blue-500">Editar</button>
                                         <button class="p-2 rounded-lg font-semibold text-white bg-red-500">Eliminar</button>
                                     </td>
-                                    <td class="px-6 py-4">
-                                        <a class="border-b-2" href="">Ver Información</a>
-                                    </td>
                                 </tr>
-                                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                        Ejecutivo
-                                    </th>
-                                    <td class="px-6 py-4">
-                                        <button class="p-2 rounded-lg font-semibold text-white bg-blue-500">Editar</button>
-                                        <button class="p-2 rounded-lg font-semibold text-white bg-red-500">Eliminar</button>
-                                    </td>
-                                    <td class="px-6 py-4">
-                                        <a class="border-b-2" href="">Ver Información</a>
-                                    </td>
-                                </tr>
-
-                                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                        Normal
-                                    </th>
-                                    <td class="px-6 py-4">
-                                        <button class="p-2 rounded-lg font-semibold text-white bg-blue-500">Editar</button>
-                                        <button class="p-2 rounded-lg font-semibold text-white bg-red-500">Eliminar</button>
-                                    </td>
-                                    <td class="px-6 py-4">
-                                        <a class="border-b-2" href="">Ver Información</a>
-                                    </td>
-                                </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -177,10 +129,11 @@
                     <p class="text-lg font-semibold">Gestion de Edades</p>
                 </div>
                 <div class="flex py-2">
-                    <button class="p-2 rounded-lg bg-blue-500 text-white">Crear</button>
+                    @include('vuelos.admiVuelosComponents.createAges')
                 </div>
                 <div>
                     <div class="relative overflow-x-auto">
+
                         <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                             <thead class="text-xs text-gray-700 uppercase bg-indigo-500 text-white dark:bg-gray-700 dark:text-gray-400">
                                 <tr>
@@ -199,52 +152,23 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                @foreach ($ages as $age)
                                 <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                                     <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                        Infante
+                                        {{$age->name}}
                                     </th>
                                     <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                        0
+                                        {{$age->max_number}}
                                     </th>
                                     <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                        12
+                                        {{$age->min_number}}
                                     </th>
                                     <td class="px-6 py-4">
                                         <button class="p-2 rounded-lg font-semibold text-white bg-blue-500">Editar</button>
                                         <button class="p-2 rounded-lg font-semibold text-white bg-red-500">Eliminar</button>
                                     </td>
                                 </tr>
-                                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                        Adulto
-                                    </th>
-                                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                        12
-                                    </th>
-                                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                        50
-                                    </th>
-                                    <td class="px-6 py-4">
-                                        <button class="p-2 rounded-lg font-semibold text-white bg-blue-500">Editar</button>
-                                        <button class="p-2 rounded-lg font-semibold text-white bg-red-500">Eliminar</button>
-                                    </td>
-                                </tr>
-
-                                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                        Tercera Edad
-                                    </th>
-                                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                        50
-                                    </th>
-                                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                        100
-                                    </th>
-                                    <td class="px-6 py-4">
-                                        <button class="p-2 rounded-lg font-semibold text-white bg-blue-500">Editar</button>
-                                        <button class="p-2 rounded-lg font-semibold text-white bg-red-500">Eliminar</button>
-                                    </td>
-                                </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -257,7 +181,11 @@
                 </div>
 
                 <div class="flex py-2">
-                    <button class="p-2 rounded-lg bg-blue-500 text-white">Crear</button>
+                    @include('vuelos.admiVuelosComponents.createDestiny')
+
+
+
+
                 </div>
                 <div>
                     <div class="relative overflow-x-auto">
@@ -330,7 +258,7 @@
         </div>
 
         <div class="flex py-2">
-            <button class="p-2 rounded-lg bg-blue-500 text-white">Crear</button>
+            @include('vuelos.admiVuelosComponents.createAirplane')
         </div>
         <div>
             <div class="relative overflow-x-auto">
@@ -344,60 +272,42 @@
                                 Aerolinea
                             </th>
                             <th scope="col" class="px-6 py-3">
-                                Acciones
+                                Cantidad de asientos
                             </th>
                             <th scope="col" class="px-6 py-3">
-                                Ver Info
+                                Asignar Asientos
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Acciones
                             </th>
                         </tr>
                     </thead>
+                    {{-- @php
+                        dd($airplanes);
+                    @endphp --}}
                     <tbody>
-                        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                Avion 1
-                            </th>
-                            <td class="px-6 py-4">
-                                <a class="border-b-2" href="">Viva aerobus</a>
-                            </td>
-                            <td class="px-6 py-4">
-                                <button class="p-2 rounded-lg font-semibold text-white bg-blue-500">Editar</button>
-                                <button class="p-2 rounded-lg font-semibold text-white bg-red-500">Eliminar</button>
-                            </td>
-                            <td class="px-6 py-4">
-                                <a class="border-b-2" href="">Ver Información</a>
-                            </td>
-                        </tr>
-                        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                Avion 2
-                            </th>
-                            <td class="px-6 py-4">
-                                <a class="border-b-2" href="">Viva aerobus</a>
-                            </td>
-                            <td class="px-6 py-4">
-                                <button class="p-2 rounded-lg font-semibold text-white bg-blue-500">Editar</button>
-                                <button class="p-2 rounded-lg font-semibold text-white bg-red-500">Eliminar</button>
-                            </td>
-                            <td class="px-6 py-4">
-                                <a class="border-b-2" href="">Ver Información</a>
-                            </td>
-                        </tr>
-
-                        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                Avion 3
-                            </th>
-                            <td class="px-6 py-4">
-                                <a class="border-b-2" href="">Viva aerobus</a>
-                            </td>
-                            <td class="px-6 py-4">
-                                <button class="p-2 rounded-lg font-semibold text-white bg-blue-500">Editar</button>
-                                <button class="p-2 rounded-lg font-semibold text-white bg-red-500">Eliminar</button>
-                            </td>
-                            <td class="px-6 py-4">
-                                <a class="border-b-2" href="">Ver Información</a>
-                            </td>
-                        </tr>
+                        @foreach ($airplanes as $airplane)
+                            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                    {{$airplane->name}}
+                                </th>
+                                <td class="px-6 py-4">
+                                    {{$airplane->airline->name}}
+                                </td>
+                                    <td class="px-6 py-4">
+                                        @foreach($airplane->seats as $seat)
+                                            {{$seat->name}}
+                                        @endforeach
+                                    </td>
+                                <td class="px-6 py-4">
+                                    @include('vuelos.admiVuelosComponents.createSeats')
+                                </td>
+                                <td class="px-6 py-4">
+                                    <button class="p-2 rounded-lg font-semibold text-white bg-blue-500">Editar</button>
+                                    <button class="p-2 rounded-lg font-semibold text-white bg-red-500">Eliminar</button>
+                                </td>
+                            </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>

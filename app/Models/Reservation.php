@@ -12,7 +12,6 @@ class Reservation extends Model
   protected $fillable = [
     'check_in',
     'check_out',
-    'cant_kinds',
     'cant_adults',
     'cant_infants',
     'status_payment',

@@ -1,5 +1,9 @@
 @extends('vistasLeo.Admin.index')
+<link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css" />
+<script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
 
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
 @section('content')
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
@@ -58,17 +62,17 @@
                                                         <div class="mb-4">
                                                             <label for="avion" class="text-md">Avion</label>
                                                             <select name="avion" id="avion" class="w-full rounded-lg border-indigo-500" id="">
-                                                                <option value="1">Avion 1</option>
-                                                                <option value="2">Avion 2</option>
-                                                                <option value="3">Avion 3</option>
+                                                                @foreach ($airplanes as $airplane)
+                                                                    <option value="{{$airplane->id}}">{{$airplane->name}}</option>
+                                                                @endforeach
                                                             </select>
                                                         </div>
                                                        <div class="mb-4">
                                                             <label for="destino" class="text-md">Destino</label>
                                                             <select name="destino" id="destino" class="w-full rounded-lg border-indigo-500" id="">
-                                                                <option value="1">Monterrey</option>
-                                                                <option value="2">Guadalajara</option>
-                                                                <option value="3">CD. de México</option>
+                                                                @foreach ($destinies as $destiny)
+                                                                    <option value="{{$destiny->id}}">{{$destiny->name}}</option>
+                                                                @endforeach
                                                             </select>
                                                        </div>
                                                         <div class="mb-4">
@@ -236,4 +240,5 @@
             </div>
         </div>
     </div>
+
 @endsection

@@ -61,6 +61,9 @@
                                 Clasificación
                             </th>
                             <th scope="col" class="px-6 py-3">
+                                Descripción
+                            </th>
+                            <th scope="col" class="px-6 py-3">
                                 Distancia al centro
                             </th>
                             <th scope="col" class="px-6 py-3">
@@ -70,7 +73,13 @@
                                 Número de habitaciones
                             </th>
                             <th scope="col" class="px-6 py-3">
+                                Promedio de estrellas por los usuarios
+                            </th>
+                            <th scope="col" class="px-6 py-3">
                                 Políticas
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Condiciones de servicio
                             </th>
                             <th scope="col" class="px-6 py-3 text-center">
                                 Acciones
@@ -115,6 +124,9 @@
                                     </th>
                                     <th scope="row"
                                         class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                        {{ $hotel->description }}
+                                    <th scope="row"
+                                        class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                         {{ $hotel->town_center_distance }} km
                                     </th>
                                     <th scope="row"
@@ -135,9 +147,20 @@
                                     </th>
                                     <th scope="row"
                                         class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                        {{$hotel->average_stars}}
+                                    </th>
+                                    <th scope="row"
+                                        class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                         <a class="text-blue-600 hover:text-blue-700"
                                             href="{{ route('admin.hoteles.politicas', $hotel->id) }}">
                                             Ver políticas
+                                        </a>
+                                    </th>
+                                    <th scope="row"
+                                        class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                        <a class="text-blue-600 hover:text-blue-700"
+                                            href="{{ route('admin.hoteles.conditions', $hotel->id) }}">
+                                            Ver Condiciones
                                         </a>
                                     </th>
 

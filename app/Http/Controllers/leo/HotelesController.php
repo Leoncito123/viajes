@@ -21,9 +21,14 @@ class HotelesController extends Controller
      */
     public function index()
     {
-        $hoteles = Hotel::with('destiny', 'pictures', 'rooms')->get();
+        $hoteles = Hotel::with('destiny', 'pictures', 'rooms', 'opinions')->get();
         $servicios = Service::all();
         $type_rooms = Type_room::all();
+    
+        foreach ($hoteles as $hotel) {
+            $hotel->average_stars = $hotel->opinions()->avg('stars');
+        }
+    
         return view('vistasLeo.Admin.hoteles', compact('hoteles', 'servicios', 'type_rooms'));
     }
 
@@ -45,6 +50,7 @@ class HotelesController extends Controller
         $request->validate([
             'name' => 'required',
             'name_hotel' => 'required',
+            'description_hotel' => 'required',
             'phone' => 'required|numeric',
             'stars' => 'required|numeric',
             'town_center_distance' => 'required|numeric',
@@ -66,6 +72,7 @@ class HotelesController extends Controller
         $hotel = Hotel::create([
             'name' => $request->name,
             'phone' => $request->phone,
+            'description' => $request->description_hotel,
             'stars' => $request->stars,
             'town_center_distance' => $request->town_center_distance,
             'id_destiny' => $destiny->id,
@@ -96,11 +103,58 @@ class HotelesController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show()
+    public function show(Request $request)
     {
-        $hoteles = Hotel::with('destiny', 'pictures', 'rooms')->get();
-
-        return view('vistasLeo.Hoteles.index', compact('hoteles'));
+        $query = Hotel::with(['destiny', 'pictures', 'rooms.type_room', 'services']);
+    
+        if ($request->filled('destination')) {
+            $query->whereHas('destiny', function ($q) use ($request) {
+                $q->where('name', 'like', '%' . $request->destination . '%');
+            });
+        }
+    
+        if ($request->filled('services')) {
+            $query->whereHas('services', function ($q) use ($request) {
+                $q->whereIn('services.id', $request->services);
+            });
+        }
+    
+        if ($request->filled('checkin') && $request->filled('checkout')) {
+            $query->whereDoesntHave('rooms.reservations', function ($q) use ($request) {
+                $q->where(function ($subQuery) use ($request) {
+                    $subQuery->whereBetween('check_in', [$request->checkin, $request->checkout])
+                        ->orWhereBetween('check_out', [$request->checkin, $request->checkout])
+                        ->orWhere(function ($q) use ($request) {
+                            $q->where('check_in', '<=', $request->checkin)
+                                ->where('check_out', '>=', $request->checkout);
+                        });
+                });
+            });
+        }
+    
+        if ($request->filled('rooms') && $request->filled('guests')) {
+            $query->whereHas('rooms.type_room', function ($q) use ($request) {
+                $q->where('max_people', '>=', $request->guests);
+            });
+        }
+    
+        if ($request->filled('stars')) {
+            $query->whereIn('stars', $request->stars);
+        }
+    
+        if ($request->filled('min_price') && $request->filled('max_price')) {
+            $query->whereHas('rooms.type_room', function ($q) use ($request) {
+                $q->whereBetween('price', [$request->min_price, $request->max_price]);
+            });
+        }
+    
+        if ($request->filled('max_distance')) {
+            $query->where('town_center_distance', '<=', $request->max_distance);
+        }
+    
+        $hoteles = $query->get();
+        $services = Service::all();
+        return view('vistasLeo.Hoteles.index', compact('hoteles', 'services'));
     }
 
     public function showHotel($id)
@@ -148,6 +202,7 @@ class HotelesController extends Controller
     {
         $request->validate([
             'name' => 'required',
+            'description_hotel' => 'required',
             'name_hotel' => 'required',
             'phone' => 'required|numeric',
             'stars' => 'required|numeric',
@@ -165,6 +220,7 @@ class HotelesController extends Controller
             'name' => $request->name,
             'phone' => $request->phone,
             'stars' => $request->stars,
+            'description' => $request->description_hotel,
             'town_center_distance' => $request->town_center_distance,
         ]);
 
@@ -226,6 +282,22 @@ class HotelesController extends Controller
         $hotel->save();
 
         return redirect()->route('admin.hoteles')->with('success', 'Políticas de cancelación guardadas correctamente');
+    }
+    public function conditions($id){
+        $conditions = Hotel::find($id)->conditions;
+        return view('vistasLeo.Admin.conditions', compact('id', 'conditions'));
+    }
+
+    public function conditionsStore(Request $request, $id)
+    {
+        $request->validate([
+            'conditions' => 'required|string',
+        ]);
+        $hotel = Hotel::find($id);
+        $hotel->conditions = $request->conditions;
+        $hotel->save();
+
+        return redirect()->route('admin.hoteles')->with('success', 'Condiciones guardadas correctamente');
     }
 
     public function deleteImage($id)

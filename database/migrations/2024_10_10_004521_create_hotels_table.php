@@ -14,10 +14,12 @@ return new class extends Migration
     Schema::create('hotels', function (Blueprint $table) {
       $table->id();
       $table->string('name');
+      $table->longText('description')->nullable();
       $table->float('phone',  20, 2);
       $table->float('stars', 8, 2);
       $table->longText('town_center_distance');
       $table->longText('politics')->nullable();
+      $table->longText('conditions')->nullable();
       $table->foreignId('id_destiny')->constrained('destinies')->onDelete('cascade');
       $table->timestamps();
     });

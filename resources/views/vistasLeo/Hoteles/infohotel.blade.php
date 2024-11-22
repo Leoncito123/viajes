@@ -51,22 +51,26 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
                         </svg>
                     </button>
+
+                    {{-- Descripcion --}}
+                    <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
+                        <p class="text-lg font text-gray-900 dark:text-gray-200">{{ $hotel->description }}</p>
+                    </div>
+                    <h1 class="text-xl font-bold text-gray-800 dark:text-gray-200">Servicios</h1>
+                    <div class="flex flex-wrap gap-2">
+                        @foreach ($hotel->services as $service)
+                            <span class="px-3 py-1 bg-gray-200 rounded-lg dark:bg-gray-800 text-sm dark:text-gray-300">
+                                {{ $service->name }}: {{ $service->description }}
+                            </span>
+                        @endforeach
+                    </div>
                 </div>
                 {{-- Mapa --}}
                 <div class="h-96 rounded-lg" id="map">
                     <x-leo.hoteles.hotel-mapa longitude='{{ $hotel->destiny->longitude }}'
                         latitude='{{ $hotel->destiny->latitude }}' />
                 </div>
-
-                <!-- Servicios -->
-                <h1 class="text-xl font-bold text-gray-800 dark:text-gray-200">Servicios</h1>
-                <div class="flex flex-wrap gap-2">
-                    @foreach ($hotel->services as $service)
-                        <span class="px-3 py-1 bg-gray-200 rounded-lg dark:bg-gray-800 text-sm dark:text-gray-300">
-                            {{ $service->name }}: {{ $service->description }}
-                        </span>
-                    @endforeach
-                </div>
+                {{-- Reservacion --}}
 
                 @if (session('message'))
                     <div class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4" id="alertReservation">
@@ -81,7 +85,8 @@
                         }, );
                     </script>
                 @endif
-
+                
+                <h1 class="text-5xl text-center font-bold text-gray-800 dark:text-gray-200">Reservación</h1>
                 <!-- Selección dinámica de habitaciones -->
                 <h2 class="text-xl font-bold text-gray-800 dark:text-gray-200">Selecciona una habitación</h2>
                 <div id="rooms-container" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">

@@ -26,6 +26,7 @@ Route::middleware(['auth', 'verified', 'role:admin'])->group(function () {
     Route::post('admin/hoteles/type_rooms/create', [Type_RoomsController::class, 'store'])->name('admin.hoteles.type_rooms.create'); //Tipo de habitaciones
 
     //Rutas para editar
+    Route::post('admin/hoteles/edit/conditions/{id}', [HotelesController::class, 'conditionsStore'])->name('admin.hoteles.conditions.store');
     Route::post('admin/hoteles/edit/politicas/{id}', [HotelesController::class, 'politicasStore'])->name('admin.hoteles.politicas.store');
     Route::post('admin/hoteles/edit/{id}', [HotelesController::class, 'update'])->name('admin.hoteles.update');
     Route::post('admin/servicios/edit/{id}', [ServicesController::class, 'update'])->name('admin.servicios.update');
@@ -43,6 +44,7 @@ Route::middleware(['auth', 'verified', 'role:admin'])->group(function () {
     Route::get('admin/hoteles', [HotelesController::class, 'index'])->name('admin.hoteles');
     Route::view('admin/viajes', 'vistasLeo.Admin.vuelos')->name('admin.viajes');
     Route::get('admin/hoteles/politicas/{id}', [HotelesController::class, 'politicas'])->name('admin.hoteles.politicas');
+    Route::get('admin/hoteles/conditions/{id}',[HotelesController::class, 'conditions'])->name('admin.hoteles.conditions');
 });
 
 //Rutas para las vistas de usuario
@@ -51,6 +53,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/hoteles/{id}', [HotelesController::class, 'showHotel'])->name('hoteles.show');
     Route::post('/hoteles/reservation', [ReservationController::class, 'store'])->name('reservation.hotel.store');
     Route::post('/hoteles/coment/{id}/{id_user}', [HotelesController::class, 'saveOpinion'])->name('comentarios.store');
+    Route::post('/profile/2fa',[ProfileController::class, 'autenticationgoogle'])->name('google2fa');
+
 });
 
 

@@ -182,4 +182,20 @@ class AdminVuelosController extends Controller
 
         return back();
     }
+
+    public function costoStore(Request $request)
+    {
+        $validateData = $request->validate([
+            'cost' => 'required',
+            'id_class' => 'required',
+            'id_fly' => 'required'
+        ]);
+
+        cost::create([
+            'cost' => $validateData['cost'],
+            'id_class' => $validateData['id_class'],
+            'id_fly' => $validateData['id_fly']
+        ]);
+        return back();
+    }
 }

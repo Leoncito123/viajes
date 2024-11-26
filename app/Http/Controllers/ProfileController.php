@@ -9,58 +9,78 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
-
+use PragmaRX\Google2FA\Google2FA;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class ProfileController extends Controller
 {
-  /**
-   * Display the user's profile form.
-   */
-  public function edit(Request $request): View
-  {
-    return view('profile.edit', [
-      'user' => $request->user(),
-    ]);
-  }
-
-  /**
-   * Update the user's profile information.
-   */
-  public function update(ProfileUpdateRequest $request): RedirectResponse
-  {
-    if ($request->hasFile('profile_photo_path')) {
-
-      if ($request->user()->prifile_photo_path) {
-        Storage::disk('public')->delete($request->user()->profile_photo_path);
-      }
-
-      $image = $request->file('profile_photo_path')->store('image_profile', 'public');
-      $request->user()->profile_photo_path = $image;
+    public function edit(Request $request): View
+    {
+        return view('profile.edit', [
+            'user' => $request->user(),
+        ]);
     }
-    $request->user()->save();
+
+    public function update(ProfileUpdateRequest $request): RedirectResponse
+    {
+        if ($request->hasFile('profile_photo_path')) {
+            if ($request->user()->profile_photo_path) {
+                Storage::disk('public')->delete($request->user()->profile_photo_path);
+            }
+
+            $image = $request->file('profile_photo_path')->store('image_profile', 'public');
+            $request->user()->profile_photo_path = $image;
+        }
+
+        $request->user()->save();
+
+        return Redirect::route('profile.edit')->with('status', 'profile-updated');
+    }
+
+    public function destroy(Request $request): RedirectResponse
+    {
+        $request->validateWithBag('userDeletion', [
+            'password' => ['required', 'current_password'],
+        ]);
+
+        $user = $request->user();
+        Auth::logout();
+        $user->delete();
+
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return Redirect::to('/');
+    }
+
+    private function custom_generate_qrcode_url($qrCodeUrl): string
+    {
+        return 'data:image/png;base64,' . base64_encode(
+            QrCode::format('png')->size(400)->errorCorrection('H')->generate($qrCodeUrl)
+        );
+    }
 
 
-    return Redirect::route('profile.edit')->with('status', 'profile-updated');
-  }
+    public function autenticationgoogle(): RedirectResponse
+    {
+        $user = Auth::user();
 
-  /**
-   * Delete the user's account.
-   */
-  public function destroy(Request $request): RedirectResponse
-  {
-    $request->validateWithBag('userDeletion', [
-      'password' => ['required', 'current_password'],
-    ]);
+        $google2fa = app(Google2FA::class);
 
-    $user = $request->user();
+        if (!$user->two_factor_secret) {
+            $user->two_factor_secret = $google2fa->generateSecretKey();
+            $user->save();
+        }
 
-    Auth::logout();
+        $qrCodeUrl = $google2fa->getQRCodeUrl(
+            config('app.name'),
+            $user->email,
+            $user->two_factor_secret
+        );
+        
+        $qrcode_image = $this->custom_generate_qrcode_url($qrCodeUrl);
 
-    $user->delete();
+        return redirect()->back()->with('google2fa_url', $qrcode_image);
+    }
 
-    $request->session()->invalidate();
-    $request->session()->regenerateToken();
-
-    return Redirect::to('/');
-  }
 }

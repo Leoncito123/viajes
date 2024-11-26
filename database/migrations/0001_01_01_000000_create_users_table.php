@@ -21,6 +21,7 @@ return new class extends Migration
       $table->timestamp('email_verified_at')->nullable();
       $table->string('password');
       $table->longText('profile_photo_path')->nullable();
+      $table->longText('two_factor_secret')->nullable();
       $table->rememberToken();
       $table->timestamps();
     });

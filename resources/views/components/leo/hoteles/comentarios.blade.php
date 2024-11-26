@@ -23,9 +23,8 @@
             <div class="flex items-center justify-center">
                 <p class="text-gray-400 dark:text-gray-600">No hay comentarios</p>
             </div>
-        @else
+        @endif
             {{-- Seccion de cantidad de votos --}}
-
             <div class="py-5 pb-5">
 
                 <div class="flex items-center mb-2">
@@ -142,6 +141,5 @@
                     <p class="mb-2 text-gray-500 dark:text-gray-400">{{ $comentario->description }}</p>
                 </article>
             @endforeach
-        @endif
     </div>
 </div>

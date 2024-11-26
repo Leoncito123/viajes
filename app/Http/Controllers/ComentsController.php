@@ -12,6 +12,8 @@ class ComentsController extends Controller
   {
     $coments = Opinion::where('id_hotel', $id)->with('user', 'hotel')->get();
 
-    return view('vistasLeo.Admin.Hoteles.coments.index', compact('coments'));
+    $promedio= Opinion::where('id_hotel', $id)->avg('stars');
+
+    return view('vistasLeo.Admin.Hoteles.coments.index', compact('coments', 'promedio'));
   }
 }

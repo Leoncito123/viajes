@@ -30,4 +30,9 @@ class Fly extends Model
     public function destiny(){
         return $this->belongsTo(Destiny::class,'id_destinies','id');
     }
+
+    public function flycosts()
+    {
+        return $this->hasMany(FlyCost::class, 'id_fly', 'id');
+    }
 }

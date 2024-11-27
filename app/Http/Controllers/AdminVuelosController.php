@@ -10,6 +10,7 @@ use App\Models\Airplane;
 use App\Models\Seat;
 use App\Models\Destiny;
 use App\Models\Fly;
+use App\Models\FlyCost;
 
 class AdminVuelosController extends Controller
 {
@@ -21,6 +22,7 @@ class AdminVuelosController extends Controller
         $airplanes = Airplane::with('airline', 'seats')->get();
         $destinies = Destiny::all();
         $flies = Fly::with('airplane', 'destiny')->get();
+        $fliesCost = FlyCost::with('fly', 'classe')->get();
 
         return view('vuelos.adminVuelos', [
             'airlines'=>$airlines,
@@ -28,7 +30,8 @@ class AdminVuelosController extends Controller
             'ages'=>$ages,
             'airplanes'=>$airplanes,
             'destinies'=>$destinies,
-            'flies'=>$flies
+            'flies'=>$flies,
+            'fliesCost'=>$fliesCost
         ]);
     }
 
@@ -54,8 +57,13 @@ class AdminVuelosController extends Controller
         $validateData=$request->validate([
             'precio' => 'required',
             'clase' => 'required',
+            'id_fly' => 'required'
         ]);
-
+        FlyCost::create([
+        'cost' => $validatedData['precio'],
+        'id_class' => $validatedData['clase'],
+        'id_fly' => $validatedData['id_fly'],
+        ]);
         session()->flash('costo');
 
         return to_route('vuelos.adminVuelos');
@@ -196,6 +204,18 @@ class AdminVuelosController extends Controller
             'id_class' => $validateData['id_class'],
             'id_fly' => $validateData['id_fly']
         ]);
+        return back();
+    }
+
+    public function escalaStore(Request $request){
+        $validateData = $request->validate([
+            'type' => 'required',
+        ]);
+
+        Scale::create([
+            'type' => $validateData['type'],
+        ]);
+
         return back();
     }
 }

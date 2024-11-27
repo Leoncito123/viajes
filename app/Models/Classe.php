@@ -12,4 +12,9 @@ class Classe extends Model
     protected $fillable = [
         'type'
     ];
+
+    public function flycosts()
+    {
+        return $this->hasMany(FlyCost::class, 'id_class', 'id');
+    }
 }

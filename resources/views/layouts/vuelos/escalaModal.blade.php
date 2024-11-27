@@ -1,7 +1,7 @@
 <div class="flex mt-2">
     <!-- Modal toggle -->
     <button data-modal-target="default-modal2" data-modal-toggle="default-modal2" class=" block text-white bg-indigo-500 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">
-        Asignar Costo
+        Asignar Escala
     </button>
 
     <!-- Main modal -->
@@ -9,29 +9,22 @@
         <div class="relative p-4 w-full max-w-2xl max-h-full">
             <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
                 <div class="p-4 border-b-2 border-indigo-500">
-                <p class="font-semibold text-xl"> Asignar Precio</p>
+                <p class="font-semibold text-xl"> Asignar Escalas</p>
                 </div>
-                <form action="{{route('costo.asignament')}}" method="POST" class="py-6 ">
+                <form action="" method="POST" class="py-6 ">
                     @csrf
                     <div class="mb-4 w-full px-4">
-                        <label for="precio" class="text-md">Precio</label>
+                        <label for="escala" class="text-md">Escala</label>
                         <div>
-                            <input type="text" name="precio" id="precio" class="w-full rounded-lg border-indigo-500">
-                        </div>
-                    </div>
-
-                    <div class="mb-4 w-full px-4">
-                        <label for="clase" class="text-md">Clase</label>
-                        <div>
-                            <select name="clase" id="clase" class="w-full rounded-lg border-indigo-500" id="">
-                        @foreach ($classes as $class)
-                            <option value="{{ $class->id }}">{{ $class->type }}</option>
+                            <select name="escala" id="escala" class="w-full rounded-lg border-indigo-500" id="">
+                        @foreach ($escalas as $escala)
+                            <option value="{{ $escala->id }}">{{ $escala->type }}</option>
                         @endforeach
                             </select>
                         </div>
                     </div>
                     <div class="px-4">
-                        <button type="submit" class="p-2 bg-indigo-500 dark:bg-blue-500 text-white rounded-lg">Asignar Costo</button>
+                        <button type="submit" class="p-2 bg-indigo-500 dark:bg-blue-500 text-white rounded-lg">Asignar escala</button>
                     </div>
                 </form>
             </div>

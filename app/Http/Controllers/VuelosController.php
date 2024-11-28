@@ -188,9 +188,20 @@ class VuelosController extends Controller
         // Mensaje de éxito
         session()->flash('reservacion', 'Reservación realizada con éxito.');
 
+        $costoTotal = 0;
+
+            foreach($compras as $compra)
+            {
+                // Obtener el costo del vuelo (el primer costo relacionado)
+                $costoVuelo = $compra->passenger_flies->fly->flyCosts->first()->cost;
+               // Acumular el costo del vuelo en el costo total
+                $costoTotal += $costoVuelo;
+            }
+
+
 
         // Redirigir a la vista de detalles del vuelo con los registros completos
-        return view('carritoCompras.canasta', compact('compras'));
+        return view('carritoCompras.canasta', compact('compras', 'costoTotal'));
     }
 
     public function reservationShop(Request $request)

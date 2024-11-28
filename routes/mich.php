@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\controladorMich;
+use App\Http\Controllers\AdminVuelosController;
 
 //rutas con controlador
 
@@ -14,12 +15,7 @@ Route::middleware(['auth', 'verified', 'role:admin'])->group(function () {
     Route::get('/mich/inicioAdmin', [controladorMich::class, 'inicioAdmin'])->name('rutainicioAdmin');
 });
 
-//pruebas rutas sin controlador
-// Route::get('/mich/reservaciones', function () {
-//     return view('mich.reservaciones'); 
-// });
-// Route::get('/mich/inicioAdmin', function () {
-//     return view('mich.inicioAdmin');
-// });
+Route::post('/escalaAsignament', [AdminVuelosController::class, 'escalaAsignament'])->name('escala.asignament');
+
 
 require __DIR__.'/auth.php';

@@ -11,6 +11,7 @@ use App\Models\Seat;
 use App\Models\Destiny;
 use App\Models\Fly;
 use App\Models\FlyCost;
+use App\Models\Scale;
 
 class AdminVuelosController extends Controller
 {
@@ -23,6 +24,7 @@ class AdminVuelosController extends Controller
         $destinies = Destiny::all();
         $flies = Fly::with('airplane', 'destiny')->get();
         $fliesCost = FlyCost::with('fly', 'classe')->get();
+        $scale = Scale::with('name', 'id_fly')->get();
 
         return view('vuelos.adminVuelos', [
             'airlines'=>$airlines,
@@ -31,7 +33,8 @@ class AdminVuelosController extends Controller
             'airplanes'=>$airplanes,
             'destinies'=>$destinies,
             'flies'=>$flies,
-            'fliesCost'=>$fliesCost
+            'fliesCost'=>$fliesCost,
+            'scale'=>$scale
         ]);
     }
 
@@ -68,6 +71,22 @@ class AdminVuelosController extends Controller
 
         return to_route('vuelos.adminVuelos');
     }
+
+    public function escalaAsignament(Request $request)
+    {
+        $validateData=$request->validate([
+            'name' => 'required',
+            'id_fly' => 'required'
+        ]);
+        FlyScale::create([
+        'name' => $validatedData['name'],
+        'id_fly' => $validatedData['id_fly'],
+        ]);
+        session()->flash('escala');
+
+        return to_route('vuelos.adminVuelos');
+    }
+
 
     public function storeAirlane(Request $request)
     {
@@ -209,13 +228,37 @@ class AdminVuelosController extends Controller
 
     public function escalaStore(Request $request){
         $validateData = $request->validate([
-            'type' => 'required',
+            'name' => 'required',
         ]);
 
         Scale::create([
-            'type' => $validateData['type'],
+            'name' => $validateData['name'],
         ]);
 
         return back();
     }
+
+    public function editVuelo (Request $request, $id)
+    {
+        $validateData = $request->validate([
+            'id_airplane' => 'required',
+            'id_destiny' => 'required',
+            'depature_date' => 'required',
+            'arrival_date' => 'required',
+            'fly_number' => 'required',
+            'fly_duration' => 'required',
+        ]);
+
+        $flies->id_destiny = $validateData['id_destiny'];
+        $flies->id_airplane = $validateData['id_airplane'];
+        $flies->depature_date = $validateData['depature_date'];
+        $flies->arrival_date = $validateData['arrival_date'];
+        $flies->fly_number = $validateData['fly_number'];
+        $flies->fly_duration = $validateData['fly_duration'];
+        $flies->save();
+
+
+        return back()->session('success', 'El vuelo ha sido actualizado exitosamente.');
+    }
+
 }

@@ -5,18 +5,19 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Age extends Model
+class Paid extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'name',
-        'max_number',
-        'min_number'
+        'id_buy',
+        'status',
+        'cantidad',
+        'buyer'
     ];
 
-    public function passengers()
+    public function buy()
     {
-        return $this->hasMany(Passenger::class);
+        return $this->belongsTo(Buy::class, 'id_buy', 'id');
     }
 }

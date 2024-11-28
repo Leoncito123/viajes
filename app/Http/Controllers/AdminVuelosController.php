@@ -77,6 +77,23 @@ class AdminVuelosController extends Controller
         return back();
     }
 
+    public function updateAirline(Request $request, $id_airline)
+    {
+        $validateData = $request->validate([
+            'name' => 'required|string',
+            'ubication' => 'required|string',
+        ]);
+
+        $airline = Airline::findOrFail($id_airline);
+
+        $airline->update([
+            'name'=>$validateData['name'],
+            'ubication'=>$validateData['ubication']
+        ]);
+
+        return back();
+    }
+
     public function storeClass(Request $request)
     {
         $validateData=$request->validate([

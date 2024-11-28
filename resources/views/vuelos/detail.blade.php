@@ -10,51 +10,39 @@
             <div class="bg-white  dark:bg-gray-800 shadow-sm sm:rounded-lg">
                 <div class="p-6 w-full text-gray-900 dark:text-gray-100">
                     <div>
-                        <p class="p-2 font-semibold text-xl bg-indigo-500 text-white rounded-lg">Destalles de Mi Vuelo</p>
+                        <p class="p-2 font-semibold text-xl bg-indigo-500 text-white rounded-lg">Información de los pasajeros.</p>
                     </div>
                     <div class="mt-4">
-                         <div class="grid md:grid-cols-3 gap-8">
-                            <div class="border border-indigo-500 rounded-lg">
-                                <div>
-                                    <div class="p-6">
-                                        <p class="text-xl font-semibold">Tu asiento:</p>
+                        <div>
+                            @foreach ($createdPassengers as $passenger)
+                                <div class="border mb-3 border-indigo-500 rounded-lg p-6">
+                                    <div class="border-b-2 border-indigo-500 mb-2">
+                                        <p class="text-xl font-semibold">Verifica tu información:</p>
                                     </div>
-                                    <div class="w-full items-center text-center flex justify-center">
-                                        <img src="{{asset('img/asiento2.png')}}" class="justify-center text-center" alt="">
+                                    <div class="mt-2">
+                                        <p><span class="font-semibold text-lg mb-2">Nombre:</span> {{ $passenger->name }}</p>
+                                        <p><span class="font-semibold text-lg mb-2">Apellido:</span> {{ $passenger->last_names }}</p>
+                                        <p><span class="font-semibold text-lg mb-2">Phone:</span> {{ $passenger->phone }}</p>
+                                        <p><span class="font-semibold text-lg mb-2">Asiento:</span> {{ $passenger->seat->name }}</p>
+                                        <p><span class="font-semibold text-lg mb-2">Clase:</span> {{ $passenger->classe->type }}</p>
+                                        <p><span class="font-semibold text-lg mb-2">Edad:</span> {{ $passenger->age->name }}</p>
                                     </div>
-                                    <div class="flex text-center justify-center mt-4">
-                                        <p class="font-semibold text-2xl text-indigo-500 mb-2 justify-center text-center">{{ $user->input('id_seat') }}</p>
-                                    </div>
                                 </div>
-                            </div>
-                            <div class="border border-indigo-500 rounded-lg p-6">
-                                <div class="border-b-2 border-indigo-500 py-2">
-                                    <p class="text-xl font-semibold">Información de tu vuelo:</p>
-                                </div>
-                            </div>
-                            <div class="border border-indigo-500 rounded-lg p-6">
-                                <div class="border-b-2 border-indigo-500 py-2">
-                                    <p class="text-xl font-semibold">Verifica tu información:</p>
-                                </div>
-                                <div class="mt-2">
-                                    <p><span class="font-semibold text-lg mb-2">Nombre:</span> {{ $user->input('name') }}</p>
-                                    <p><span class="font-semibold text-lg mb-2">Apellido:</span> {{ $user->input('last_name') }}</p>
-                                    <p><span class="font-semibold text-lg mb-2">Teléfono:</span> {{ $user->input('phone') }}</p>
-                                    <p><span class="font-semibold text-lg mb-2">Género:</span> {{ $user->input('id_gender') }}</p>
-                                    <p><span class="font-semibold text-lg mb-2">Asiento:</span> {{ $user->input('id_seat') }}</p>
-                                    <p><span class="font-semibold text-lg mb-2">Clase:</span> {{ $user->input('id_class') }}</p>
-                                    <p><span class="font-semibold text-lg mb-2">Edad:</span> {{ $user->input('id_ages') }}</p>
-                                </div>
-                            </div>
+                            @endforeach
                          </div>
                     </div>
 
                     <div class="mt-6">
-                        <form action="{{route('vuelo.canasta')}}" method="POST">
+                        <form action="{{ route('vuelo.canasta') }}" method="POST">
                             @csrf
-                            <input type="text" value="1" id="compra" name="compra" class="hidden">
-                            <button type="submit" class="p-2 border w-full rounded-lg font-semibold bg-indigo-500 text-white text-xl">Confirmar Reservación del Vuelo</button>
+                            @foreach ($createdPassengers as $passenger)
+                                <input value="{{ $passenger->id }}" name="id_passenger_fly[]" class="">
+                            @endforeach
+                            <button type="submit" class="p-2 border w-full rounded-lg font-semibold bg-indigo-500 text-white text-xl">
+                                Confirmar Reservación del Vuelo
+                            </button>
                         </form>
+
                     </div>
                 </div>
             </div>

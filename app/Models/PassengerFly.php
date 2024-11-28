@@ -11,6 +11,21 @@ class PassengerFly extends Model
 
     protected $fillable = [
         'id_passenger',
-        'id_fly'
+        'if_fly'
     ];
+
+    public function fly()
+    {
+        return $this->belongsTo(Fly::class, 'if_fly', 'id');
+    }
+
+    public function passenger()
+    {
+        return $this->belongsTo(Passenger::class);
+    }
+
+    public function buy()
+    {
+        return $this->hasMany(Buy::class);
+    }
 }

@@ -66,19 +66,87 @@
                             </thead>
                             <tbody>
                                 @foreach ($airlines as $airline)
-                                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                            {{$airline->name}}
-                                        </th>
-                                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                            {{$airline->ubication}}
-                                        </th>
-                                        <td class="px-6 py-4">
-                                            <button class="p-2 rounded-lg font-semibold text-white bg-blue-500">Editar</button>
-                                            <button class="p-2 rounded-lg font-semibold text-white bg-red-500">Eliminar</button>
-                                        </td>
-                                    </tr>
+                                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                        {{$airline->name}}
+                                    </th>
+                                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                        {{$airline->ubication}}
+                                    </th>
+                                    <td class="px-6 py-4">
+                                        <!-- Dropdown -->
+                                        <div class="relative">
+                                            <button id="dropdownButton-{{ $airline->id }}"
+                                                    data-dropdown-toggle="dropdown-{{ $airline->id }}"
+                                                    class="text-white bg-indigo-500 hover:bg-indigo-600 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center"
+                                                    type="button">
+                                                Crear Aerolínea
+                                                <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
+                                                </svg>
+                                            </button>
+
+                                            <!-- Dropdown menu -->
+                                            <div id="dropdown-{{ $airline->id }}" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-1/2 dark:bg-gray-700 absolute">
+                                                <form action="{{ route('airline.update', $airline->id) }}" method="POST" class="py-6">
+                                                    @csrf
+                                                    @method('PUT')
+                                                    <div class="mb-4 w-full px-4">
+                                                        <label for="name-{{ $airline->id }}" class="text-md">Nombre de la aerolínea</label>
+                                                        <div>
+                                                            <input type="text" name="name" id="name-{{ $airline->id }}" value="{{ old('name', $airline->name) }}" class="w-full rounded-lg border-indigo-500">
+                                                        </div>
+                                                    </div>
+                                                    <div class="mb-4 w-full px-4">
+                                                        <label for="ubication-{{ $airline->id }}" class="text-md">Ubicación</label>
+                                                        <div>
+                                                            <input type="text" name="ubication" id="ubication-{{ $airline->id }}" value="{{ old('ubication', $airline->ubication) }}" class="w-full rounded-lg border-indigo-500">
+                                                        </div>
+                                                    </div>
+                                                    <div class="px-4">
+                                                        <button type="submit" class="p-2 bg-indigo-500 dark:bg-blue-500 text-white rounded-lg">Actualizar</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                        <button class="p-2 rounded-lg font-semibold text-white bg-red-500">Eliminar</button>
+                                    </td>
+                                </tr>
                                 @endforeach
+
+                                <script>
+                                    document.addEventListener("DOMContentLoaded", function () {
+                                        // Seleccionar todos los botones y dropdowns
+                                        const dropdownButtons = document.querySelectorAll("[data-dropdown-toggle]");
+
+                                        dropdownButtons.forEach(button => {
+                                            button.addEventListener("click", function () {
+                                                const dropdownId = button.getAttribute("data-dropdown-toggle");
+                                                const dropdown = document.getElementById(dropdownId);
+
+                                                // Alternar visibilidad del dropdown
+                                                if (dropdown.classList.contains("hidden")) {
+                                                    dropdown.classList.remove("hidden");
+                                                } else {
+                                                    dropdown.classList.add("hidden");
+                                                }
+                                            });
+                                        });
+
+                                        // Cerrar dropdown si se hace clic fuera
+                                        document.addEventListener("click", function (event) {
+                                            dropdownButtons.forEach(button => {
+                                                const dropdownId = button.getAttribute("data-dropdown-toggle");
+                                                const dropdown = document.getElementById(dropdownId);
+
+                                                if (!button.contains(event.target) && !dropdown.contains(event.target)) {
+                                                    dropdown.classList.add("hidden");
+                                                }
+                                            });
+                                        });
+                                    });
+                                </script>
+
                             </tbody>
                         </table>
                     </div>
@@ -182,9 +250,6 @@
 
                 <div class="flex py-2">
                     @include('vuelos.admiVuelosComponents.createDestiny')
-
-
-
 
                 </div>
                 <div>

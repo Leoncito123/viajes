@@ -28,4 +28,9 @@ class Reservation extends Model
   {
     return $this->belongsTo(User_Reservation::class, 'id_user_reservation');
   }
+
+  public function buy()
+  {
+      return $this->belongsTo(Buy::class);
+  }
 }

@@ -6,23 +6,28 @@
 
     <!-- Dropdown menu -->
     <div id="dropdown" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-1/2 dark:bg-gray-700">
-        <form action="{{route('airline.store')}}" method="POST" class="py-6 ">
+        <form action="{{ route('airline.update', $airline->id) }}" method="POST" class="py-6 ">
             @csrf
+            @method('PUT')  <!-- Esto indica que el formulario debe ser tratado como una actualización -->
+
             <div class="mb-4 w-full px-4">
-                <label for="name" class="text-md">Nombre de la aerolinea</label>
+                <label for="name" class="text-md">Nombre de la aerolínea</label>
                 <div>
-                    <input type="text" name="name" id="name" class="w-full rounded-lg border-indigo-500">
+                    <input type="text" name="name" id="name" value="{{ old('name', $airline->name) }}" class="w-full rounded-lg border-indigo-500">
                 </div>
             </div>
+
             <div class="mb-4 w-full px-4">
                 <label for="ubication" class="text-md">Ubicación</label>
                 <div>
-                    <input type="text" name="ubication" id="ubication" class="w-full rounded-lg border-indigo-500">
+                    <input type="text" name="ubication" id="ubication" value="{{ old('ubication', $airline->ubication) }}" class="w-full rounded-lg border-indigo-500">
                 </div>
             </div>
+
             <div class="px-4">
-                <button type="submit" class="p-2 bg-indigo-500 dark:bg-blue-500 text-white rounded-lg">Crear</button>
+                <button type="submit" class="p-2 bg-indigo-500 dark:bg-blue-500 text-white rounded-lg">Actualizar</button>
             </div>
         </form>
+
 
     </div>

@@ -20,6 +20,27 @@ class Fly extends Model
 
     public function seats()
     {
-        return $this -> hasMany(Seat::class);
+        return $this->hasManyThrough(Seat::class, Airplane::class, 'id', 'id_airplane', 'id_airplane', 'id');
+    }
+
+    public function airplane()
+{
+    return $this->belongsTo(Airplane::class, 'id_airplane', 'id');
+}
+
+
+    public function destinies()
+    {
+        return $this->belongsTo(Destiny::class, 'id_destinies', 'id');
+    }
+
+    public function passenger_flies()
+    {
+        return $this->hasMany(PassengerFly::class);
+    }
+
+    public function flyCosts()
+    {
+        return $this->hasMany(FlyCost::class, 'id_fly', 'id');
     }
 }

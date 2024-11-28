@@ -12,4 +12,14 @@ class Classe extends Model
     protected $fillable = [
         'type'
     ];
+
+    public function passengers()
+    {
+        return $this->hasMany(Passenger::class);
+    }
+
+    public function flyCosts()
+    {
+        return $this->hasMany(FlyCost::class);
+    }
 }

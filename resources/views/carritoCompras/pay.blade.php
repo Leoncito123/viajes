@@ -7,7 +7,7 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <div class="py-">
-        <div class="max-w-8xl h-full">
+        <div class="max-w-10xl h-full">
             @if (session('pagado'))
                 <script>
                     Swal.fire({
@@ -34,7 +34,7 @@
                                     </div>
                                 </div>
                                 <div class="mt-4">
-                                    <p class="ml-4 font-semibold  text-4xl">MXN $1,500<span class="text-sm">.00</span></p>
+                                    <p class="ml-4 font-semibold  text-4xl">MXN ${{$costoTotal}}<span class="text-sm">.00</span></p>
                                 </div>
                             </div>
                         </div>
@@ -48,10 +48,10 @@
                                     <div>
 
                                         <div class="mb-4">
-                                            <label for="cardName" class="block text-sm font-medium text-gray-700 dark:text-white">
+                                            <label for="buyer" class="block text-sm font-medium text-gray-700 dark:text-white">
                                                 Nombre en Tarjeta
                                             </label>
-                                            <input type="text" id="cardName" name="cardName" placeholder="Ingresa Nombre de la Tarjeta"  class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-red-500 focus:border-red-500">
+                                            <input type="text" id="buyer" name="buyer" placeholder="Ingresa Nombre de la Tarjeta"  class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-red-500 focus:border-red-500">
                                         <small>{{$errors->first('cardName')}}</small>
                                         </div>
                                     </div>

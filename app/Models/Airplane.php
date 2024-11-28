@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-    class Airplane extends Model
+class Airplane extends Model
 {
     use HasFactory;
 
@@ -22,6 +22,11 @@ use Illuminate\Database\Eloquent\Model;
     public function seats()
     {
         return $this->hasMany(Seat::class, 'id_airplane', 'id');
+    }
+
+    public function fly()
+    {
+        return $this->hasMany(Fly::class, 'id_fly', 'id');
     }
 
 }

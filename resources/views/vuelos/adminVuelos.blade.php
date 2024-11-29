@@ -31,6 +31,15 @@
                     });
                 </script>
             @endif
+            @if (session('error'))
+                <script>
+                    Swal.fire({
+                        title: "¡Error!",
+                        text: "¡Ha ocurrido un error!",
+                        icon: "error"
+                    });
+                </script>
+            @endif
             <div class="bg-white  dark:bg-gray-800 shadow-sm sm:rounded-lg">
                 <div class=" py-4  w-full text-gray-900 dark:text-gray-100">
                     <div class="px-4">
@@ -91,6 +100,24 @@
                                                             <label for="fly_duration" class="text-md">Duración del Vuelo</label>
                                                             <input type="text" name="fly_duration" id="fly_duration" class="w-full rounded-lg border-indigo-500">
                                                         </div>
+                                                        <div class="mb-4" id="dynamicInputsContainer">
+                                                        <label for="costs" class="text-md">Asignar costos por clase</label>
+                                                        <div class="flex items-center gap-2 mb-2">
+                                                            <input type="number" name="costs[]" class="w-1/2 rounded-lg border-indigo-500" placeholder="Costo" required>
+                                                            <input type="text" name="classes[]" class="w-1/2 rounded-lg border-indigo-500" placeholder="Clase" required>
+                                                            <button type="button" class="bg-green-500 text-white p-2 rounded-lg" id="addInput">Añadir</button>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="mb-4">
+                                                        <label for="id_scale" class="text-md">Escalas</label>
+                                                        <select name="id_scale" id="id_scale" class="w-full rounded-lg border-indigo-500">
+                                                            @foreach ($scales as $scale)
+                                                                <option value="{{ $scale->id }}">{{ $scale->name }}</option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+
                                                         <div>
                                                             <button type="submit" class="p-2 bg-indigo-500 dark:bg-blue-500 text-white rounded-lg">Crear Vuelo</button>
                                                         </div>
@@ -98,7 +125,6 @@
                                                 </div>
                                             </div>
                                         </div>
-
                                     </div>
                                     <div class="mt-4">
                                         <div class="relative overflow-x-auto">
@@ -155,6 +181,7 @@
                                                         <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                                             {{$fly->fly_duration}}
                                                         </th>
+
                                                         <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                                             @include('layouts.vuelos.costoModal')
                                                         </th>
@@ -181,5 +208,42 @@
             </div>
         </div>
     </div>
+
+    <script>
+    document.getElementById('addInput').addEventListener('click', () => {
+        const container = document.getElementById('dynamicInputsContainer');
+        const newInputGroup = document.createElement('div');
+        newInputGroup.classList.add('flex', 'items-center', 'gap-2', 'mb-2');
+        
+        const costInput = document.createElement('input');
+        costInput.type = 'number';
+        costInput.name = 'costs[]';
+        costInput.classList.add('w-1/2', 'rounded-lg', 'border-indigo-500');
+        costInput.placeholder = 'Costo';
+        costInput.required = true;
+
+        const classInput = document.createElement('input');
+        classInput.type = 'text';
+        classInput.name = 'classes[]';
+        classInput.classList.add('w-1/2', 'rounded-lg', 'border-indigo-500');
+        classInput.placeholder = 'Clase';
+        classInput.required = true;
+
+        const removeButton = document.createElement('button');
+        removeButton.type = 'button';
+        removeButton.textContent = 'Eliminar';
+        removeButton.classList.add('bg-red-500', 'text-white', 'p-2', 'rounded-lg');
+        removeButton.addEventListener('click', () => {
+            container.removeChild(newInputGroup);
+        });
+
+        newInputGroup.appendChild(costInput);
+        newInputGroup.appendChild(classInput);
+        newInputGroup.appendChild(removeButton);
+
+        container.appendChild(newInputGroup);
+    });
+</script>
+
 
 @endsection

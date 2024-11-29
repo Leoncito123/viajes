@@ -104,7 +104,11 @@
                                                         <label for="costs" class="text-md">Asignar costos por clase</label>
                                                         <div class="flex items-center gap-2 mb-2">
                                                             <input type="number" name="costs[]" class="w-1/2 rounded-lg border-indigo-500" placeholder="Costo" required>
-                                                            <input type="text" name="classes[]" class="w-1/2 rounded-lg border-indigo-500" placeholder="Clase" required>
+                                                            <select type="text" name="classes[]" class="w-1/2 rounded-lg border-indigo-500" placeholder="Clase" required>
+                                                            @foreach ($classes as $class)
+                                                                <option value="{{ $class->id }}">{{ $class->type }}</option>
+                                                            @endforeach
+                                                            </select>
                                                             <button type="button" class="bg-green-500 text-white p-2 rounded-lg" id="addInput">Añadir</button>
                                                         </div>
                                                     </div>
@@ -112,8 +116,8 @@
                                                     <div class="mb-4">
                                                         <label for="id_scale" class="text-md">Escalas</label>
                                                         <select name="id_scale" id="id_scale" class="w-full rounded-lg border-indigo-500">
-                                                            @foreach ($scales as $scale)
-                                                                <option value="{{ $scale->id }}">{{ $scale->name }}</option>
+                                                            @foreach ($destinies as $desteny)
+                                                                <option value="{{ $desteny->id }}">{{ $desteny->name }}</option>
                                                             @endforeach
                                                         </select>
                                                     </div>

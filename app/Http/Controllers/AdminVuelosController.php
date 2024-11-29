@@ -22,9 +22,8 @@ class AdminVuelosController extends Controller
         $ages = Age::all();
         $airplanes = Airplane::with('airline', 'seats')->get();
         $destinies = Destiny::all();
-        $flies = Fly::with('airplane', 'destiny', 'flycosts.classe')->get();
+        $flies = Fly::with('airplane', 'destiny', 'flycosts.classe', 'scales')->get();
         $fliesCost = FlyCost::with('fly', 'classe')->get();
-        $scale = Scale::with('name', 'id_fly')->get();
 
         return view('vuelos.adminVuelos', [
             'airlines' => $airlines,
@@ -34,7 +33,6 @@ class AdminVuelosController extends Controller
             'destinies' => $destinies,
             'flies' => $flies,
             'fliesCost' => $fliesCost,
-            'scale' => $scale
         ]);
     }
 

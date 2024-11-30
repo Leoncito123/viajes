@@ -23,8 +23,9 @@ Route::middleware('auth')->group(function () {
     Route::delete('/compras/{buy_id}', [PayController::class, 'deleteCarrito'])->name('delete.buy');
 
     Route::get('/adminVuelos', [AdminVuelosController::class, 'index'])->name('vuelos.adminVuelos');
-    Route::post('adminVuelos/vuelo/store', [AdminVuelosController::class, 'storeVuelo'])->name('vuelo.store');
-    Route::post('/costoAsignament', [AdminVuelosController::class, 'costoAsignament'])->name('costo.asignament');
+    Route::post('adminVuelos/vuelo/store', [AdminVuelosController::class, 'flyStore'])->name('vuelo.store');
+
+    Route::post('/costoAsignament', [AdminVuelosController::class, 'costoStore'])->name('costo.vuelo');
 
     //Routes Reservation
     Route::post('/addCanasta', [FlyReservationController::class, 'addCarrito'])->name('vuelo.canasta');
@@ -53,4 +54,4 @@ Route::middleware('auth')->group(function () {
     Route::post('/destiny/store', [AdminVuelosController::class, 'destinyStore'])->name('destiny.store');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

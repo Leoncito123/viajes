@@ -11,6 +11,17 @@ class Scale extends Model
 
     protected $fillable = [
         'name',
-        'id_fly'
+        'id_fly',
+        'id_destiny'
     ];
+
+    public function fly()
+    {
+        return $this->belongsTo(Fly::class, 'id_fly', 'id');
+    }
+
+    public function destiny()
+    {
+        return $this->belongsTo(Destiny::class, 'id_destiny', 'id');
+    }
 }

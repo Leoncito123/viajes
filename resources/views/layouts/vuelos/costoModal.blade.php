@@ -9,24 +9,25 @@
         <div class="relative p-4 w-full max-w-2xl max-h-full">
             <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
                 <div class="p-4 border-b-2 border-indigo-500">
-                   <p class="font-semibold text-xl"> Asignar Precio</p>
+                <p class="font-semibold text-xl"> Asignar Precio</p>
                 </div>
-                <form action="{{route('costo.asignament')}}" method="POST" class="py-6 ">
+                <form action="{{route('costo.vuelo')}}" method="POST" class="py-6 ">
                     @csrf
                     <div class="mb-4 w-full px-4">
-                        <label for="precio" class="text-md">Precio</label>
-                        <div>
-                            <input type="text" name="precio" id="precio" class="w-full rounded-lg border-indigo-500">
-                        </div>
+                        <input type="text" name="id_fly" value="{{$fly->id}}" hidden>
+                        <label for="cost" class="text-md">Precio</label>
+                        {{-- <div>
+                            <input type="text" name="cost" id="cost" class="w-full rounded-lg border-indigo-500" value="{{$fly->flycosts->first()->cost ? $fly->flycosts->first()->cost : '0' }}">
+                        </div> --}}
                     </div>
 
                     <div class="mb-4 w-full px-4">
-                        <label for="clase" class="text-md">Clase</label>
+                        <label for="id_class" class="text-md">Clase</label>
                         <div>
-                            <select name="clase" id="clase" class="w-full rounded-lg border-indigo-500" id="">
-                                <option value="1">VIP</option>
-                                <option value="2">Ejecutivo</option>
-                                <option value="3">Normal</option>
+                            <select name="id_class" id="id_class" class="w-full rounded-lg border-indigo-500" id="">
+                        @foreach ($classes as $class)
+                            <option value="{{ $class->id }}">{{ $class->type }}</option>
+                        @endforeach
                             </select>
                         </div>
                     </div>

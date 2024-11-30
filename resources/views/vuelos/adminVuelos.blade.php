@@ -31,6 +31,15 @@
                     });
                 </script>
             @endif
+            @if (session('error'))
+                <script>
+                    Swal.fire({
+                        title: "¡Error!",
+                        text: "¡Ha ocurrido un error!",
+                        icon: "error"
+                    });
+                </script>
+            @endif
             <div class="bg-white  dark:bg-gray-800 shadow-sm sm:rounded-lg">
                 <div class=" py-4  w-full text-gray-900 dark:text-gray-100">
                     <div class="px-4">
@@ -57,40 +66,70 @@
                                                     <div class="p-4 border-b-2 border-indigo-500">
                                                        <p class="font-semibold text-xl"> Crear Vuelo</p>
                                                     </div>
-                                                    <form action="{{route('vuelo.store')}}" method="POST" class="p-4 w-full">
+                                                    <form action="{{route('vuelo.store')}}" method="POST" class="p-4 w-full dark:text-black">
                                                         @csrf
                                                         <div class="mb-4">
-                                                            <label for="avion" class="text-md">Avion</label>
-                                                            <select name="avion" id="avion" class="w-full rounded-lg border-indigo-500" id="">
+                                                            <label for="id_airplane" class="text-md">Avion</label>
+                                                            <select name="id_airplane" id="id_airplane" class="w-full rounded-lg border-indigo-500" id="">
                                                                 @foreach ($airplanes as $airplane)
                                                                     <option value="{{$airplane->id}}">{{$airplane->name}}</option>
                                                                 @endforeach
                                                             </select>
                                                         </div>
-                                                       <div class="mb-4">
-                                                            <label for="destino" class="text-md">Destino</label>
-                                                            <select name="destino" id="destino" class="w-full rounded-lg border-indigo-500" id="">
+                                                        <div class="mb-4">
+                                                            <label for="id_destiny" class="text-md">Destino</label>
+                                                            <select name="id_destiny" id="id_destiny" class="w-full rounded-lg border-indigo-500" id="">
                                                                 @foreach ($destinies as $destiny)
                                                                     <option value="{{$destiny->id}}">{{$destiny->name}}</option>
                                                                 @endforeach
                                                             </select>
-                                                       </div>
-                                                        <div class="mb-4">
-                                                            <label for="salida" class="text-md">Fecha de salida</label>
-                                                            <input type="text" name="salida" id="salida" class="w-full rounded-lg border-indigo-500">
                                                         </div>
                                                         <div class="mb-4">
-                                                            <label for="llegada" class="text-md">Fecha de Llegada</label>
-                                                            <input type="text" name="llegada" id="llegada" class="w-full rounded-lg border-indigo-500">
+                                                            <label for="depature_date" class="text-md">Fecha de salida</label>
+                                                            <input type="date" name="depature_date" id="depature_date" class="w-full rounded-lg border-indigo-500">
                                                         </div>
                                                         <div class="mb-4">
-                                                            <label for="NumVuelo" class="text-md">Numero de Vuelo</label>
-                                                            <input type="text" name="NumVuelo" id="NumVuelo" class="w-full rounded-lg border-indigo-500">
+                                                            <label for="arrival_date" class="text-md">Fecha de Llegada</label>
+                                                            <input type="date" name="arrival_date" id="arrival_date" class="w-full rounded-lg border-indigo-500">
                                                         </div>
                                                         <div class="mb-4">
-                                                            <label for="tiempoVuelo" class="text-md">Duración del Vuelo</label>
-                                                            <input type="text" name="tiempoVuelo" id="tiempoVuelo" class="w-full rounded-lg border-indigo-500">
+                                                            <label for="fly_number" class="text-md">Numero de Vuelo</label>
+                                                            <input type="text" name="fly_number" id="fly_number" class="w-full rounded-lg border-indigo-500">
                                                         </div>
+                                                        <div class="mb-4">
+                                                            <label for="fly_duration" class="text-md">Duración del Vuelo</label>
+                                                            <input type="text" name="fly_duration" id="fly_duration" class="w-full rounded-lg border-indigo-500">
+                                                        </div>
+
+                                                        <div class="mb-4">
+                                                            <label for="costs" class="text-md block mb-2">Asignar costos por clase</label>
+                                                            <div id="cost-class-container">
+                                                                <div class="flex items-center gap-2 mb-2">
+                                                                    <input type="number" name="costs[]" class="w-1/2 rounded-lg border-indigo-500" placeholder="Costo" required>
+                                                                    <select name="classes[]" class="w-1/2 rounded-lg border-indigo-500" required>
+                                                                        @foreach ($classes as $class)
+                                                                            <option value="{{ $class->id }}">{{ $class->type }}</option>
+                                                                        @endforeach
+                                                                    </select>
+                                                                    <button type="button" class="bg-green-500 text-white px-4 py-2 rounded-lg" id="addInputCost">Añadir</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+
+                                                    <div class="mb-4" id="dynamicScalesContainer">
+                                                        <label for="scales" class="text-md">Asignar escalas</label>
+                                                        <div class="flex items-center gap-2 mb-2">
+                                                            <select name="scales[]" class="w-full rounded-lg border-indigo-500" required>
+                                                                @foreach ($destinies as $destiny)
+                                                                    <option value="{{ $destiny->id }}">{{ $destiny->name }}</option>
+                                                                @endforeach
+                                                            </select>
+                                                            <button type="button" class="bg-green-500 text-white p-2 rounded-lg" id="addScale">Añadir</button>
+                                                        </div>
+                                                    </div>
+
+
                                                         <div>
                                                             <button type="submit" class="p-2 bg-indigo-500 dark:bg-blue-500 text-white rounded-lg">Crear Vuelo</button>
                                                         </div>
@@ -98,7 +137,6 @@
                                                 </div>
                                             </div>
                                         </div>
-
                                     </div>
                                     <div class="mt-4">
                                         <div class="relative overflow-x-auto">
@@ -124,7 +162,7 @@
                                                             Duración del Vuelo
                                                         </th>
                                                         <th scope="col" class="px-6 py-3">
-                                                            Costo Del Vuelo
+                                                            Costo por clase del vuelo
                                                         </th>
                                                         <th scope="col" class="px-6 py-3">
                                                             Escalas
@@ -135,97 +173,38 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
+                                                    @foreach($flies as $fly)
                                                     <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                                                         <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                                            Avion 1
+                                                            {{$fly->airplane->name}}
                                                         </th>
                                                         <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                                            La Paz, Baja California
+                                                            {{$fly->destiny->name}}
                                                         </th>
                                                         <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                                            05/06/2024
+                                                            {{$fly->depature_date}}
                                                         </th>
                                                         <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                                            05/06/2024
+                                                            {{$fly->arrival_date}}
                                                         </th>
                                                         <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                                            12354
+                                                            {{$fly->fly_number}}
                                                         </th>
                                                         <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                                            2:00 hrs
+                                                            {{$fly->fly_duration}}
                                                         </th>
                                                         <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                                            @include('layouts.vuelos.costoModal')
+                                                            {{$fly->cost}}
                                                         </th>
-                                                        <td class="px-6 py-4">
-                                                            <button class="p-2 rounded-lg font-semibold text-white bg-blue-500">Asignar</button>
-                                                        </td>
+                                                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                                        </th>
+                                                        {{$fly->scales}}
                                                         <td class="px-6 py-4">
                                                             <button class="p-2 rounded-lg font-semibold text-white bg-blue-500">Editar</button>
                                                             <button class="p-2 rounded-lg font-semibold text-white bg-red-500">Eliminar</button>
                                                         </td>
                                                     </tr>
-                                                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                                                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                                            Avion 1
-                                                        </th>
-                                                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                                            La Paz, Baja California
-                                                        </th>
-                                                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                                            05/06/2024
-                                                        </th>
-                                                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                                            05/06/2024
-                                                        </th>
-                                                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                                            12354
-                                                        </th>
-                                                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                                            2:00 hrs
-                                                        </th>
-                                                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                                            @include('layouts.vuelos.costoModal')
-                                                        </th>
-                                                        <td class="px-6 py-4">
-                                                            <button class="p-2 rounded-lg font-semibold text-white bg-blue-500">Asignar</button>
-                                                        </td>
-                                                        <td class="px-6 py-4">
-                                                            <button class="p-2 rounded-lg font-semibold text-white bg-blue-500">Editar</button>
-                                                            <button class="p-2 rounded-lg font-semibold text-white bg-red-500">Eliminar</button>
-                                                        </td>
-                                                    </tr>
-
-                                                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                                                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                                            Avion 1
-                                                        </th>
-                                                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                                            La Paz, Baja California
-                                                        </th>
-                                                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                                            05/06/2024
-                                                        </th>
-                                                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                                            05/06/2024
-                                                        </th>
-                                                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                                            12354
-                                                        </th>
-                                                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                                            2:00 hrs
-                                                        </th>
-                                                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                                            @include('layouts.vuelos.costoModal')
-                                                        </th>
-                                                        <td class="px-6 py-4">
-                                                            <button class="p-2 rounded-lg font-semibold text-white bg-blue-500">Asignar</button>
-                                                        </td>
-                                                        <td class="px-6 py-4">
-                                                            <button class="p-2 rounded-lg font-semibold text-white bg-blue-500">Editar</button>
-                                                            <button class="p-2 rounded-lg font-semibold text-white bg-red-500">Eliminar</button>
-                                                        </td>
-                                                    </tr>
+                                                    @endforeach
                                                 </tbody>
                                             </table>
                                         </div>
@@ -240,5 +219,81 @@
             </div>
         </div>
     </div>
+
+    <script>
+        //scrip para agregar costos y las clases 
+    document.getElementById('addInputCost').addEventListener('click', function () {
+    const container = document.getElementById('cost-class-container');
+
+    const row = document.createElement('div');
+    row.className = 'flex items-center gap-2 mb-2';
+
+    //input para costo
+    const costInput = document.createElement('input');
+    costInput.type = 'number';
+    costInput.name = 'costs[]';
+    costInput.className = 'w-1/2 rounded-lg border-indigo-500';
+    costInput.placeholder = 'Costo';
+    costInput.required = true;
+
+    //select para clase
+    const classSelect = document.createElement('select');
+    classSelect.name = 'classes[]';
+    classSelect.className = 'w-1/2 rounded-lg border-indigo-500';
+    classSelect.required = true;
+
+    @foreach ($classes as $class)
+        const option{{ $class->id }} = document.createElement('option');
+        option{{ $class->id }}.value = '{{ $class->id }}';
+        option{{ $class->id }}.textContent = '{{ $class->type }}';
+        classSelect.appendChild(option{{ $class->id }});
+    @endforeach
+
+    const removeButton = document.createElement('button');
+    removeButton.type = 'button';
+    removeButton.className = 'bg-red-500 text-white px-4 py-2 rounded-lg';
+    removeButton.textContent = 'Eliminar';
+
+    removeButton.addEventListener('click', function () {
+        row.remove();
+    });
+
+    row.appendChild(costInput);
+    row.appendChild(classSelect);
+    row.appendChild(removeButton);
+
+    container.appendChild(row);
+});
+
+
+//Inicia el script para lo de agregar escalas
+    document.addEventListener('DOMContentLoaded', function () {
+        const scalesContainer = document.getElementById('dynamicScalesContainer');
+        const addScaleButton = document.getElementById('addScale');
+
+        addScaleButton.addEventListener('click', function () {
+            const newScaleRow = document.createElement('div');
+            newScaleRow.classList.add('flex', 'items-center', 'gap-2', 'mb-2');
+
+            newScaleRow.innerHTML = `
+                <select name="scales[]" class="w-full rounded-lg border-indigo-500" required>
+                    @foreach ($destinies as $destiny)
+                        <option value="{{ $destiny->id }}">{{ $destiny->name }}</option>
+                    @endforeach
+                </select>
+                <button type="button" class="bg-red-500 text-white p-2 rounded-lg removeScale">Eliminar</button>
+            `;
+
+            scalesContainer.appendChild(newScaleRow);
+
+            // aqui seria el eliminar
+            newScaleRow.querySelector('.removeScale').addEventListener('click', function () {
+                scalesContainer.removeChild(newScaleRow);
+            });
+        });
+    });
+</script>
+
+
 
 @endsection

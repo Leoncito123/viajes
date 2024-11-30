@@ -22,4 +22,5 @@ class Classe extends Model
     {
         return $this->hasMany(FlyCost::class);
     }
+
 }

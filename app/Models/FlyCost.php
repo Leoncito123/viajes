@@ -14,6 +14,11 @@ class FlyCost extends Model
         'id_fly',
         'id_class'
     ];
+    
+    public function flycosts()
+    {
+        return $this->belongsTo(Seat::class);
+    }
 
     public function fly()
     {

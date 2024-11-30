@@ -20,4 +20,9 @@ class Destiny extends Model
     return $this->hasMany(Fly::class, 'id_fly');
   }
 
+
+  public function scales()
+  {
+    return $this->hasMany(Scale::class);
+  }
 }

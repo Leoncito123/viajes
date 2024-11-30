@@ -76,14 +76,14 @@
                                                                 @endforeach
                                                             </select>
                                                         </div>
-                                                       <div class="mb-4">
+                                                        <div class="mb-4">
                                                             <label for="id_destiny" class="text-md">Destino</label>
                                                             <select name="id_destiny" id="id_destiny" class="w-full rounded-lg border-indigo-500" id="">
                                                                 @foreach ($destinies as $destiny)
                                                                     <option value="{{$destiny->id}}">{{$destiny->name}}</option>
                                                                 @endforeach
                                                             </select>
-                                                       </div>
+                                                        </div>
                                                         <div class="mb-4">
                                                             <label for="depature_date" class="text-md">Fecha de salida</label>
                                                             <input type="date" name="depature_date" id="depature_date" class="w-full rounded-lg border-indigo-500">
@@ -100,27 +100,35 @@
                                                             <label for="fly_duration" class="text-md">Duración del Vuelo</label>
                                                             <input type="text" name="fly_duration" id="fly_duration" class="w-full rounded-lg border-indigo-500">
                                                         </div>
-                                                        <div class="mb-4" id="dynamicInputsContainer">
-                                                        <label for="costs" class="text-md">Asignar costos por clase</label>
+
+                                                        <div class="mb-4">
+                                                            <label for="costs" class="text-md block mb-2">Asignar costos por clase</label>
+                                                            <div id="cost-class-container">
+                                                                <div class="flex items-center gap-2 mb-2">
+                                                                    <input type="number" name="costs[]" class="w-1/2 rounded-lg border-indigo-500" placeholder="Costo" required>
+                                                                    <select name="classes[]" class="w-1/2 rounded-lg border-indigo-500" required>
+                                                                        @foreach ($classes as $class)
+                                                                            <option value="{{ $class->id }}">{{ $class->type }}</option>
+                                                                        @endforeach
+                                                                    </select>
+                                                                    <button type="button" class="bg-green-500 text-white px-4 py-2 rounded-lg" id="addInputCost">Añadir</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+
+                                                    <div class="mb-4" id="dynamicScalesContainer">
+                                                        <label for="scales" class="text-md">Asignar escalas</label>
                                                         <div class="flex items-center gap-2 mb-2">
-                                                            <input type="number" name="costs[]" class="w-1/2 rounded-lg border-indigo-500" placeholder="Costo" required>
-                                                            <select type="text" name="classes[]" class="w-1/2 rounded-lg border-indigo-500" placeholder="Clase" required>
-                                                            @foreach ($classes as $class)
-                                                                <option value="{{ $class->id }}">{{ $class->type }}</option>
-                                                            @endforeach
+                                                            <select name="scales[]" class="w-full rounded-lg border-indigo-500" required>
+                                                                @foreach ($destinies as $destiny)
+                                                                    <option value="{{ $destiny->id }}">{{ $destiny->name }}</option>
+                                                                @endforeach
                                                             </select>
-                                                            <button type="button" class="bg-green-500 text-white p-2 rounded-lg" id="addInput">Añadir</button>
+                                                            <button type="button" class="bg-green-500 text-white p-2 rounded-lg" id="addScale">Añadir</button>
                                                         </div>
                                                     </div>
 
-                                                    <div class="mb-4">
-                                                        <label for="id_scale" class="text-md">Escalas</label>
-                                                        <select name="id_scale" id="id_scale" class="w-full rounded-lg border-indigo-500">
-                                                            @foreach ($destinies as $desteny)
-                                                                <option value="{{ $desteny->id }}">{{ $desteny->name }}</option>
-                                                            @endforeach
-                                                        </select>
-                                                    </div>
 
                                                         <div>
                                                             <button type="submit" class="p-2 bg-indigo-500 dark:bg-blue-500 text-white rounded-lg">Crear Vuelo</button>
@@ -154,7 +162,7 @@
                                                             Duración del Vuelo
                                                         </th>
                                                         <th scope="col" class="px-6 py-3">
-                                                            Costo Del Vuelo
+                                                            Costo por clase del vuelo
                                                         </th>
                                                         <th scope="col" class="px-6 py-3">
                                                             Escalas
@@ -185,13 +193,12 @@
                                                         <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                                             {{$fly->fly_duration}}
                                                         </th>
-
                                                         <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                                            @include('layouts.vuelos.costoModal')
+                                                            {{$fly->cost}}
                                                         </th>
-                                                        <td class="px-6 py-4">
-                                                            <button class="p-2 rounded-lg font-semibold text-white bg-blue-500">Asignar</button>
-                                                        </td>
+                                                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                                        </th>
+                                                        {{$fly->scales}}
                                                         <td class="px-6 py-4">
                                                             <button class="p-2 rounded-lg font-semibold text-white bg-blue-500">Editar</button>
                                                             <button class="p-2 rounded-lg font-semibold text-white bg-red-500">Eliminar</button>
@@ -214,40 +221,79 @@
     </div>
 
     <script>
-    document.getElementById('addInput').addEventListener('click', () => {
-        const container = document.getElementById('dynamicInputsContainer');
-        const newInputGroup = document.createElement('div');
-        newInputGroup.classList.add('flex', 'items-center', 'gap-2', 'mb-2');
-        
-        const costInput = document.createElement('input');
-        costInput.type = 'number';
-        costInput.name = 'costs[]';
-        costInput.classList.add('w-1/2', 'rounded-lg', 'border-indigo-500');
-        costInput.placeholder = 'Costo';
-        costInput.required = true;
+        //scrip para agregar costos y las clases 
+    document.getElementById('addInputCost').addEventListener('click', function () {
+    const container = document.getElementById('cost-class-container');
 
-        const classInput = document.createElement('input');
-        classInput.type = 'text';
-        classInput.name = 'classes[]';
-        classInput.classList.add('w-1/2', 'rounded-lg', 'border-indigo-500');
-        classInput.placeholder = 'Clase';
-        classInput.required = true;
+    const row = document.createElement('div');
+    row.className = 'flex items-center gap-2 mb-2';
 
-        const removeButton = document.createElement('button');
-        removeButton.type = 'button';
-        removeButton.textContent = 'Eliminar';
-        removeButton.classList.add('bg-red-500', 'text-white', 'p-2', 'rounded-lg');
-        removeButton.addEventListener('click', () => {
-            container.removeChild(newInputGroup);
+    //input para costo
+    const costInput = document.createElement('input');
+    costInput.type = 'number';
+    costInput.name = 'costs[]';
+    costInput.className = 'w-1/2 rounded-lg border-indigo-500';
+    costInput.placeholder = 'Costo';
+    costInput.required = true;
+
+    //select para clase
+    const classSelect = document.createElement('select');
+    classSelect.name = 'classes[]';
+    classSelect.className = 'w-1/2 rounded-lg border-indigo-500';
+    classSelect.required = true;
+
+    @foreach ($classes as $class)
+        const option{{ $class->id }} = document.createElement('option');
+        option{{ $class->id }}.value = '{{ $class->id }}';
+        option{{ $class->id }}.textContent = '{{ $class->type }}';
+        classSelect.appendChild(option{{ $class->id }});
+    @endforeach
+
+    const removeButton = document.createElement('button');
+    removeButton.type = 'button';
+    removeButton.className = 'bg-red-500 text-white px-4 py-2 rounded-lg';
+    removeButton.textContent = 'Eliminar';
+
+    removeButton.addEventListener('click', function () {
+        row.remove();
+    });
+
+    row.appendChild(costInput);
+    row.appendChild(classSelect);
+    row.appendChild(removeButton);
+
+    container.appendChild(row);
+});
+
+
+//Inicia el script para lo de agregar escalas
+    document.addEventListener('DOMContentLoaded', function () {
+        const scalesContainer = document.getElementById('dynamicScalesContainer');
+        const addScaleButton = document.getElementById('addScale');
+
+        addScaleButton.addEventListener('click', function () {
+            const newScaleRow = document.createElement('div');
+            newScaleRow.classList.add('flex', 'items-center', 'gap-2', 'mb-2');
+
+            newScaleRow.innerHTML = `
+                <select name="scales[]" class="w-full rounded-lg border-indigo-500" required>
+                    @foreach ($destinies as $destiny)
+                        <option value="{{ $destiny->id }}">{{ $destiny->name }}</option>
+                    @endforeach
+                </select>
+                <button type="button" class="bg-red-500 text-white p-2 rounded-lg removeScale">Eliminar</button>
+            `;
+
+            scalesContainer.appendChild(newScaleRow);
+
+            // aqui seria el eliminar
+            newScaleRow.querySelector('.removeScale').addEventListener('click', function () {
+                scalesContainer.removeChild(newScaleRow);
+            });
         });
-
-        newInputGroup.appendChild(costInput);
-        newInputGroup.appendChild(classInput);
-        newInputGroup.appendChild(removeButton);
-
-        container.appendChild(newInputGroup);
     });
 </script>
+
 
 
 @endsection

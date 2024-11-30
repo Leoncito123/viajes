@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::create('scales', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
             $table->foreignId('id_fly')->constrained('flies');
             $table->foreignId('id_destiny')->constrained('destinies');
             $table->timestamps();

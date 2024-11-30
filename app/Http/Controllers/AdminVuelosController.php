@@ -13,6 +13,8 @@ use App\Models\Fly;
 use App\Models\FlyCost;
 use App\Models\Scale;
 
+
+
 class AdminVuelosController extends Controller
 {
     public function index()
@@ -116,8 +118,8 @@ class AdminVuelosController extends Controller
         $airline = Airline::findOrFail($id_airline);
 
         $airline->update([
-            'name'=>$validateData['name'],
-            'ubication'=>$validateData['ubication']
+            'name' => $validateData['name'],
+            'ubication' => $validateData['ubication']
         ]);
 
         return back();
@@ -205,24 +207,53 @@ class AdminVuelosController extends Controller
 
     public function flyStore(Request $request)
     {
-        $validateData = $request->validate([
-            'id_airplane' => 'required|string',
-            'id_destiny' => 'required|string',
-            'depature_date' => 'required',
-            'arrival_date' => 'required',
-            'fly_number' => 'required',
-            'fly_duration' => 'required',
-        ]);
-        Fly::create([
-            'id_airplane' => $validateData['id_airplane'],
-            'id_destinies' => $validateData['id_destiny'],
-            'depature_date' => $validateData['depature_date'],
-            'arrival_date' => $validateData['arrival_date'],
-            'fly_number' => $validateData['fly_number'],
-            'fly_duration' => $validateData['fly_duration'],
-        ]);
+        try {
+            $validateData = $request->validate([
+                'id_airplane' => 'required|string',
+                'id_destiny' => 'required|string',
+                'depature_date' => 'required|date',
+                'arrival_date' => 'required|date',
+                'fly_number' => 'required|string',
+                'fly_duration' => 'required|string',
+                'classes' => 'required|array',
+                'classes.*' => 'required|string',
+                'scales' => 'required|array',
+                'scales.*' => 'required|string',
+                'costs' => 'required|array',
+                'costs.*' => 'required|numeric',
+            ]);
 
-        return back();
+            Fly::create([
+                'id_airplane' => $validateData['id_airplane'],
+                'id_destinies' => $validateData['id_destiny'],
+                'depature_date' => $validateData['depature_date'],
+                'arrival_date' => $validateData['arrival_date'],
+                'fly_number' => $validateData['fly_number'],
+                'fly_duration' => $validateData['fly_duration'],
+            ]);
+
+            $fly = Fly::latest()->first();
+
+            foreach ($validateData['classes'] as $index => $value) {
+                FlyCost::create([
+                    'cost' => $validateData['costs'][$index],
+                    'id_class' => $value,
+                    'id_fly' => $fly->id,
+                ]);
+            }
+
+            foreach ($validateData['scales'] as $scale) {
+                Scale::create([
+                    'id_fly' => $fly->id,
+                    'id_destiny' => $scale,
+                ]);
+            }
+
+            return redirect()->route('vuelos.adminVuelos');
+        } catch (\Exception $e) {
+            \Log::error('Error en flyStore: ' . $e->getMessage());
+            return redirect()->back()->with('error', 'Ocurrió un error al guardar el vuelo.');
+        }
     }
 
     public function costoStore(Request $request)
@@ -257,29 +288,84 @@ class AdminVuelosController extends Controller
 
     public function editFly($id)
     {
-        $fly = Fly::find($id)->get();
+        $airlines = Airline::all();
+        $classes = Classe::all();
+        $ages = Age::all();
+        $airplanes = Airplane::with('airline', 'seats')->get();
+        $destinies = Destiny::all();
+        $fly = Fly::with('airplane', 'destiny', 'flycosts.classe', 'scales')->find($id);
+
+        if (!$fly) {
+            return redirect()->route('vuelos.adminVuelos')->with('error', 'Vuelo no encontrado.');
+        }
+
+        return view('vuelos.editVuelos', compact('airlines', 'classes', 'ages', 'airplanes', 'destinies', 'fly'));
     }
 
     public function updateVuelo(Request $request, $id)
     {
+
         $validateData = $request->validate([
-            'id_airplane' => 'required',
-            'id_destiny' => 'required',
-            'depature_date' => 'required',
-            'arrival_date' => 'required',
-            'fly_number' => 'required',
-            'fly_duration' => 'required',
+            'id_airplane' => 'required|string',
+            'id_destiny' => 'required|string',
+            'depature_date' => 'required|date',
+            'arrival_date' => 'required|date',
+            'fly_number' => 'required|string',
+            'fly_duration' => 'required|string',
+            'classes' => 'required|array',
+            'classes.*' => 'required|string',
+            'scales' => 'required|array',
+            'scales.*' => 'required|string',
+            'costs' => 'required|array',
+            'costs.*' => 'required|numeric',
         ]);
-        $flies = Fly::find($id);
-        $flies->id_destiny = $validateData['id_destiny'];
-        $flies->id_airplane = $validateData['id_airplane'];
-        $flies->depature_date = $validateData['depature_date'];
-        $flies->arrival_date = $validateData['arrival_date'];
-        $flies->fly_number = $validateData['fly_number'];
-        $flies->fly_duration = $validateData['fly_duration'];
-        $flies->save();
 
+        $fly = Fly::find($id);
 
-        return back()->session('success', 'El vuelo ha sido actualizado exitosamente.');
+        if (!$fly) {
+            return redirect()->route('vuelos.adminVuelos')->with('error', 'Vuelo no encontrado.');
+        }
+
+        $fly->update([
+            'id_airplane' => $validateData['id_airplane'],
+            'id_destinies' => $validateData['id_destiny'],
+            'depature_date' => $validateData['depature_date'],
+            'arrival_date' => $validateData['arrival_date'],
+            'fly_number' => $validateData['fly_number'],
+            'fly_duration' => $validateData['fly_duration'],
+        ]);
+
+        $fly->flycosts()->delete();
+        foreach ($validateData['classes'] as $index => $value) {
+            FlyCost::create([
+                'cost' => $validateData['costs'][$index],
+                'id_class' => $value,
+                'id_fly' => $fly->id,
+            ]);
+        }
+
+        $fly->scales()->delete();
+        foreach ($validateData['scales'] as $scale) {
+            Scale::create([
+                'id_fly' => $fly->id,
+                'id_destiny' => $scale,
+            ]);
+        }
+
+        return redirect()->route('vuelos.adminVuelos')->with('success', 'Vuelo actualizado correctamente.');
+    }
+
+    public function deleteFly($id)
+    {
+        $fly = Fly::findOrFail($id);
+        
+        $fly->flycosts()->delete();
+        $fly->scales()->delete();
+        
+        $fly->delete();
+
+        return redirect()
+            ->route('vuelos.adminVuelos')
+            ->with('success', 'Vuelo eliminado correctamente.');
     }
 }

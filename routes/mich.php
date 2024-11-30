@@ -17,7 +17,9 @@ Route::middleware(['auth', 'verified', 'role:admin'])->group(function () {
 
 Route::post('/escalaAsignament', [AdminVuelosController::class, 'escalaAsignament'])->name('escala.asignament');
 
-Route::post('/editFly/{$id}', [AdminVuelosController::class, 'editFly'])->name('edit.fly');
+Route::get('/editFly/{id}', [AdminVuelosController::class, 'editFly'])->name('edit.vuelo');
+Route::put('/updateFly/{id}', [AdminVuelosController::class, 'updateVuelo'])->name('update.vuelo');
+Route::delete('/deleteFly/{id}', [AdminVuelosController::class, 'deleteFly'])->name('delete.vuelo');
 
 
 require __DIR__.'/auth.php';

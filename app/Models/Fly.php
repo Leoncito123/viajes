@@ -20,7 +20,7 @@ class Fly extends Model
 
     public function seats()
     {
-        return $this->hasMany(Seat::class);
+        return $this->hasMany(Seat::class, 'id_airplane', 'id');
     }
 
     public function airplane()

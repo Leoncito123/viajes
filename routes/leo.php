@@ -4,6 +4,7 @@ use App\Http\Controllers\ComentsController;
 use App\Http\Controllers\leo\HotelesController;
 use App\Http\Controllers\leo\ServicesController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ReportesController;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\RoomsController;
 use App\Http\Controllers\Type_RoomsController;
@@ -44,7 +45,10 @@ Route::middleware(['auth', 'verified', 'role:admin'])->group(function () {
     Route::get('admin/hoteles', [HotelesController::class, 'index'])->name('admin.hoteles');
     Route::view('admin/viajes', 'vistasLeo.Admin.vuelos')->name('admin.viajes');
     Route::get('admin/hoteles/politicas/{id}', [HotelesController::class, 'politicas'])->name('admin.hoteles.politicas');
-    Route::get('admin/hoteles/conditions/{id}',[HotelesController::class, 'conditions'])->name('admin.hoteles.conditions');
+    Route::get('admin/hoteles/conditions/{id}', [HotelesController::class, 'conditions'])->name('admin.hoteles.conditions');
+
+    //Reportes
+    Route::get('admin/reportes', [ReportesController::class, 'index'])->name('admin.reportes');
 });
 
 //Rutas para las vistas de usuario
@@ -53,8 +57,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/hoteles/{id}', [HotelesController::class, 'showHotel'])->name('hoteles.show');
     Route::post('/hoteles/reservation', [ReservationController::class, 'store'])->name('reservation.hotel.store');
     Route::post('/hoteles/coment/{id}/{id_user}', [HotelesController::class, 'saveOpinion'])->name('comentarios.store');
-    Route::post('/profile/2fa',[ProfileController::class, 'autenticationgoogle'])->name('google2fa');
-
+    Route::post('/profile/2fa', [ProfileController::class, 'autenticationgoogle'])->name('google2fa');
 });
 
 

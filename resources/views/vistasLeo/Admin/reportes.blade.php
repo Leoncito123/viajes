@@ -42,7 +42,77 @@
             </div>
         </div>
 
+        {{-- TABLA DE VUELOS --}}
+        <div class="flex items-center justify-center p-4 rounded-lg mt-10">
+            <h4 class="text-center text-xl font-bold text-gray-900 dark:text-white">Vuelos</h4>
+        </div>
+
+        <div class="overflow-x-auto mb-8">
+            <table id="fly-table" class="table-auto w-full bg-white shadow-md rounded-lg">
+                <thead class="bg-gray-800 text-white">
+                    <tr>
+                        <th class="px-4 py-2">Aerolina</th>
+                        <th class="px-4 py-2">Numero de vuelo</th>
+                        <th class="px-4 py-2">Fecha de Salida</th>
+                        <th class="px-4 py-2">Fecha de Llegada</th>
+                        <th class="px-4 py-2">Duración</th>
+                        <th class="px-4 py-2">Avión</th>
+                        <th class="px-4 py-2">Destino</th>
+                        <th class="px-4 py-2">Asientos</th>
+                        <th class="px-4 py-2">Asientos vendidos</th>
+                        <th class="px-4 py-2">Costos</th>
+                        <th class="px-4 py-2">Escalas</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($vuelos as $vuelo)
+                        <tr>
+                            <td class="border px-4 py-2">{{ $vuelo->airplane->airline->name }}</td>
+                            <td class="border px-4 py-2">{{ $vuelo->fly_number }}</td>
+                            <td class="border px-4 py-2">{{ $vuelo->depature_date }}</td>
+                            <td class="border px-4 py-2">{{ $vuelo->arrival_date }}</td>
+                            <td class="border px-4 py-2">{{ $vuelo->fly_duration }} horas</td>
+                            <td class="border px-4 py-2">{{ $vuelo->airplane->name }}</td>
+                            <td class="border px-4 py-2">{{ $vuelo->destiny->name }}</td>
+                            <td class="border px-4 py-2">
+                                @php
+                                    $totalSeats = $vuelo->seats->count();
+                                @endphp
+                                <p>Total de Asientos: {{ $totalSeats }}</p>
+                            </td>
+                            @php
+                                $totalPassengers = 0;
+                                foreach ($vuelo->seats as $seat) {
+                                    $totalPassengers += $seat->passengers->count();
+                                }
+                            @endphp
+                            <td class="border px-4 py-2">{{ $totalPassengers }}</td>
+
+                            <td class="border px-4 py-2">
+                                @foreach ($vuelo->flycosts as $cost)
+                                    {{ $cost->cost }} ({{ $cost->classe->type }})@if (!$loop->last)
+                                        ,
+                                    @endif
+                                @endforeach
+                            </td>
+                            <td class="border px-4 py-2">
+                                @foreach ($vuelo->scales as $scale)
+                                    {{ $scale->destiny->name }}@if (!$loop->last)
+                                        ,
+                                    @endif
+                                @endforeach
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+
         {{-- TABLA DE HOTELES --}}
+        <div class="flex items-center justify-center p-4 rounded-lg mt-10">
+            <h4 class="text-center text-xl font-bold text-gray-900 dark:text-white">Hoteles</h4>
+        </div>
+
         <div class="overflow-x-auto mb-8">
             <table id="hotel-table" class="table-auto w-full bg-white shadow-md rounded-lg">
                 <thead class="bg-gray-800 text-white">
@@ -77,11 +147,6 @@
                                 @php
                                     $totalRooms = $hotel->rooms->count();
                                 @endphp
-                                {{-- @foreach ($hotel->rooms as $room)
-                                    {{ $room->name }} ({{ $room->type_room->name }})@if (!$loop->last)
-                                        ,
-                                    @endif
-                                @endforeach --}}
                                 <p> Total de Habitaciones: {{ $totalRooms }}</p>
                             </td>
                         </tr>
@@ -90,73 +155,40 @@
             </table>
         </div>
 
-        {{-- TABLA DE VUELOS --}}
-        <div class="overflow-x-auto mb-8">
-            <table id="fly-table" class="table-auto w-full bg-white shadow-md rounded-lg">
-                <thead class="bg-gray-800 text-white">
-                    <tr>
-                        <th class="px-4 py-2">Aerolina</th>
-                        <th class="px-4 py-2">Numero de vuelo</th>
-                        <th class="px-4 py-2">Fecha de Salida</th>
-                        <th class="px-4 py-2">Fecha de Llegada</th>
-                        <th class="px-4 py-2">Duración</th>
-                        <th class="px-4 py-2">Avión</th>
-                        <th class="px-4 py-2">Destino</th>
-                        <th class="px-4 py-2">Asientos</th>
-                        <th class="px-4 py-2">Asientos vendidos</th>
-                        <th class="px-4 py-2">Costos</th>
-                        <th class="px-4 py-2">Escalas</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($vuelos as $vuelo)
+        {{-- TABLAS DE HABITACIONES POR HOTEL --}}
+        @foreach ($hoteles as $hotel)
+            <div class="flex items-center justify-center p-4 rounded-lg mt-10">
+                <h4 class="text-center text-xl font-bold text-gray-900 dark:text-white">Habitaciones del
+                    {{ $hotel->name }}</h4>
+            </div>
+
+            <div class="overflow-x-auto mb-8">
+                <table id="rooms-table-{{ $hotel->id }}" class="table-auto w-full bg-white shadow-md rounded-lg">
+                    <thead class="bg-gray-800 text-white">
                         <tr>
-                            <td class="border px-4 py-2">{{ $vuelo->airplane->airline->name }}</td>
-                            <td class="border px-4 py-2">{{ $vuelo->fly_number }}</td>
-                            <td class="border px-4 py-2">{{ $vuelo->depature_date }}</td>
-                            <td class="border px-4 py-2">{{ $vuelo->arrival_date }}</td>
-                            <td class="border px-4 py-2">{{ $vuelo->fly_duration }} horas</td>
-                            <td class="border px-4 py-2">{{ $vuelo->airplane->name }}</td>
-                            <td class="border px-4 py-2">{{ $vuelo->destiny->name }}</td>
-                            <td class="border px-4 py-2">
-                                @php
-                                    $totalSeats = $vuelo->seats->count();
-                                @endphp
-                                {{-- @foreach ($vuelo->seats as $seat)
-                                    {{ $seat->name }}@if (!$loop->last)
-                                        ,
-                                    @endif
-                                @endforeach --}}
-                                <p>Total de Asientos: {{ $totalSeats }}</p>
-                            </td>
-                            @php
-                                $totalPassengers = 0;
-                                foreach ($vuelo->seats as $seat) {
-                                    $totalPassengers += $seat->passengers->count();
-                                }
-                            @endphp
-                            <td class="border px-4 py-2">{{ $totalPassengers }}</td>
-
-                            <td class="border px-4 py-2">
-                                @foreach ($vuelo->flycosts as $cost)
-                                    {{ $cost->cost }} ({{ $cost->classe->type }})@if (!$loop->last)
-                                        ,
-                                    @endif
-                                @endforeach
-                            </td>
-                            <td class="border px-4 py-2">
-                                @foreach ($vuelo->scales as $scale)
-                                    {{ $scale->destiny->name }}@if (!$loop->last)
-                                        ,
-                                    @endif
-                                @endforeach
-                            </td>
+                            <th class="px-4 py-2">Nombre de la Habitación</th>
+                            <th class="px-4 py-2">Descripción</th>
+                            <th class="px-4 py-2">Estado</th>
+                            <th class="px-4 py-2">Tipo de Habitación</th>
+                            <th class="px-4 py-2">Precio</th>
+                            <th class="px-4 py-2">Capacidad Máxima</th>
                         </tr>
-                    @endforeach
-                </tbody>
-            </table>
-        </div>
-
+                    </thead>
+                    <tbody>
+                        @foreach ($hotel->rooms as $room)
+                            <tr>
+                                <td class="border px-4 py-2">{{ $room->name }}</td>
+                                <td class="border px-4 py-2">{{ $room->description }}</td>
+                                <td class="border px-4 py-2">{{ $room->status ? 'Ocupada' : 'Disponible' }}</td>
+                                <td class="border px-4 py-2">{{ $room->type_room->name }}</td>
+                                <td class="border px-4 py-2">$ {{ $room->type_room->price }}</td>
+                                <td class="border px-4 py-2">{{ $room->type_room->max_people }} personas</td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+        @endforeach
     </div>
 
     <script>
@@ -185,6 +217,15 @@
             const vuelosSheet = XLSX.utils.table_to_sheet(Tabla_vuelos);
             XLSX.utils.book_append_sheet(workbook, vuelosSheet, 'Vuelos');
 
+            // Convierte cada tabla de habitaciones a una hoja de trabajo y añádela al libro
+            @foreach ($hoteles as $hotel)
+                const roomsTable = document.getElementById("rooms-table-{{ $hotel->id }}");
+                if (roomsTable) {
+                    const roomsSheet = XLSX.utils.table_to_sheet(roomsTable);
+                    XLSX.utils.book_append_sheet(workbook, roomsSheet, 'Habitaciones {{ $hotel->name }}');
+                }
+            @endforeach
+
             // Exporta el libro de trabajo a un archivo Excel
             XLSX.writeFile(workbook, 'reportes_hoteles_vuelos.xlsx');
         }
@@ -205,6 +246,16 @@
                 html: '#fly-table',
                 startY: doc.lastAutoTable.finalY + 10
             });
+
+            @foreach ($hoteles as $hotel)
+                doc.addPage();
+                doc.text('Habitaciones del {{ $hotel->name }}', 20, 20);
+                doc.autoTable({
+                    html: '#rooms-table-{{ $hotel->id }}',
+                    startY: 30
+                });
+            @endforeach
+
             doc.save('reportes_hoteles_vuelos.pdf');
         }
 

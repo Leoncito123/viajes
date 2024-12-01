@@ -74,11 +74,15 @@
                                 @endforeach
                             </td>
                             <td class="border px-4 py-2">
-                                @foreach ($hotel->rooms as $room)
+                                @php
+                                    $totalRooms = $hotel->rooms->count();
+                                @endphp
+                                {{-- @foreach ($hotel->rooms as $room)
                                     {{ $room->name }} ({{ $room->type_room->name }})@if (!$loop->last)
                                         ,
                                     @endif
-                                @endforeach
+                                @endforeach --}}
+                                <p> Total de Habitaciones: {{ $totalRooms }}</p>
                             </td>
                         </tr>
                     @endforeach
@@ -91,7 +95,8 @@
             <table id="fly-table" class="table-auto w-full bg-white shadow-md rounded-lg">
                 <thead class="bg-gray-800 text-white">
                     <tr>
-                        <th class="px-4 py-2">Número de Vuelo</th>
+                        <th class="px-4 py-2">Aerolina</th>
+                        <th class="px-4 py-2">Numero de vuelo</th>
                         <th class="px-4 py-2">Fecha de Salida</th>
                         <th class="px-4 py-2">Fecha de Llegada</th>
                         <th class="px-4 py-2">Duración</th>
@@ -105,6 +110,7 @@
                 <tbody>
                     @foreach ($vuelos as $vuelo)
                         <tr>
+                            <td class="border px-4 py-2">{{ $vuelo->airplane->airline->name }}</td>
                             <td class="border px-4 py-2">{{ $vuelo->fly_number }}</td>
                             <td class="border px-4 py-2">{{ $vuelo->depature_date }}</td>
                             <td class="border px-4 py-2">{{ $vuelo->arrival_date }}</td>
@@ -112,11 +118,15 @@
                             <td class="border px-4 py-2">{{ $vuelo->airplane->name }}</td>
                             <td class="border px-4 py-2">{{ $vuelo->destiny->name }}</td>
                             <td class="border px-4 py-2">
-                                @foreach ($vuelo->seats as $seat)
+                                @php
+                                    $totalSeats = $vuelo->seats->count();
+                                @endphp
+                                {{-- @foreach ($vuelo->seats as $seat)
                                     {{ $seat->name }}@if (!$loop->last)
                                         ,
                                     @endif
-                                @endforeach
+                                @endforeach --}}
+                                <p>Total de Asientos: {{ $totalSeats }}</p>
                             </td>
                             <td class="border px-4 py-2">
                                 @foreach ($vuelo->flycosts as $cost)

@@ -21,7 +21,7 @@ class ReportesController extends Controller
     public function index()
     {
         $hoteles = Hotel::with('destiny', 'services', 'rooms', 'rooms.type_room', 'rooms.reservations')->get();
-        $vuelos = Fly::with('seats', 'airplane', 'destiny', 'flycosts', 'scales', 'flycosts.classe')->get();
+        $vuelos = Fly::with('seats', 'airplane', 'destiny', 'flycosts', 'scales', 'flycosts.classe', 'airplane.airline')->get();
         $usuarios = User::all();
         //dd($vuelos);
         return view('vistasLeo.Admin.reportes', compact('hoteles', 'vuelos', 'usuarios'));

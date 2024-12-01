@@ -304,21 +304,15 @@ class Values extends Seeder
             'max_people' => 4,
         ]);
 
-        Room::create([
-            'name' => 'Room 1',
-            'description' => 'Description 1',
-            'status' => 0,
-            'id_type_rooms' => 1,
-            'id_hotel' => $hotel1->id,
-        ]);
-
-        Room::create([
-            'name' => 'Room 2',
-            'description' => 'Description 2',
-            'status' => 1,
-            'id_type_rooms' => 2,
-            'id_hotel' => $hotel2->id,
-        ]);
+        for ($i = 1; $i <= 40; $i++) {
+            Room::create([
+                'name' => "Room $i",
+                'description' => "Description $i",
+                'status' => $i % 2,
+                'id_type_rooms' => ($i % 2) + 1,
+                'id_hotel' => $i <= 20 ? $hotel1->id : $hotel2->id,
+            ]);
+        }
 
         // Seed Reservations
         $reservation1 = Reservation::create([

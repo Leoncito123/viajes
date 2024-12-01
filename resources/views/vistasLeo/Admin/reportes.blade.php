@@ -103,6 +103,7 @@
                         <th class="px-4 py-2">Avión</th>
                         <th class="px-4 py-2">Destino</th>
                         <th class="px-4 py-2">Asientos</th>
+                        <th class="px-4 py-2">Asientos vendidos</th>
                         <th class="px-4 py-2">Costos</th>
                         <th class="px-4 py-2">Escalas</th>
                     </tr>
@@ -128,6 +129,14 @@
                                 @endforeach --}}
                                 <p>Total de Asientos: {{ $totalSeats }}</p>
                             </td>
+                            @php
+                                $totalPassengers = 0;
+                                foreach ($vuelo->seats as $seat) {
+                                    $totalPassengers += $seat->passengers->count();
+                                }
+                            @endphp
+                            <td class="border px-4 py-2">{{ $totalPassengers }}</td>
+
                             <td class="border px-4 py-2">
                                 @foreach ($vuelo->flycosts as $cost)
                                     {{ $cost->cost }} ({{ $cost->classe->type }})@if (!$loop->last)

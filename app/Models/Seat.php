@@ -21,6 +21,6 @@ class Seat extends Model
 
     public function passengers()
     {
-        return $this->hasMany(Passenger::class);
+        return $this->hasMany(Passenger::class, 'id_seat', 'id');
     }
 }

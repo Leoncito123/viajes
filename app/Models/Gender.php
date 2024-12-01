@@ -18,8 +18,11 @@ class Gender extends Model
         return $this->hasMany(Passenger::class);
     }
 
+<<<<<<< HEAD
     public function users()
     {
         return $this->hasMany(User::class);
     }
+=======
+>>>>>>> ed7b8807b58514c8e72ef8d0a6a648df3fabcf4f
 }

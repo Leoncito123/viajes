@@ -18,5 +18,8 @@ class Airline extends Model
     {
         return $this->hasMany(Airplane::class);
     }
+<<<<<<< HEAD
 
+=======
+>>>>>>> ed7b8807b58514c8e72ef8d0a6a648df3fabcf4f
 }

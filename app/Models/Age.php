@@ -19,5 +19,8 @@ class Age extends Model
     {
         return $this->hasMany(Passenger::class);
     }
+<<<<<<< HEAD
 
+=======
+>>>>>>> ed7b8807b58514c8e72ef8d0a6a648df3fabcf4f
 }

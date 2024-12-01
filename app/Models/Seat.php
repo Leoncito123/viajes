@@ -16,6 +16,15 @@ class Seat extends Model
 
     public function airplane()
     {
+<<<<<<< HEAD
         return $this->belongsTo(Airplane::class);
+=======
+        return $this->belongsTo(Airplane::class, 'id_airplane', 'id');
+    }
+
+    public function passengers()
+    {
+        return $this->hasMany(Passenger::class);
+>>>>>>> ed7b8807b58514c8e72ef8d0a6a648df3fabcf4f
     }
 }

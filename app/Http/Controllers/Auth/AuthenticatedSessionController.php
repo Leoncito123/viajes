@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
@@ -28,7 +27,15 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->intended(route('dashboard', absolute: false));
+        if ($request->user()->two_factor_secret) {
+            return redirect()->route('2fa.form');
+        }
+
+        if ($request->user()->hasRole('admin')) {
+            return redirect()->intended(route('rutainicioAdmin', absolute: false))->with('welcome', 'Bienvenido');
+        } else {
+            return redirect()->intended(route('dashboard', absolute: false))->with('welcome', 'Bienvenido');
+        }
     }
 
     /**

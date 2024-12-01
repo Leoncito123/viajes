@@ -49,6 +49,7 @@ Route::middleware(['auth', 'verified', 'role:admin'])->group(function () {
 
     //Reportes
     Route::get('admin/reportes', [ReportesController::class, 'index'])->name('admin.reportes');
+    Route::get('/reportes/filtrar', [ReportesController::class, 'filtrar'])->name('reportes.filtrar');
 });
 
 //Rutas para las vistas de usuario

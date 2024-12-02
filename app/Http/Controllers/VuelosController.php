@@ -31,52 +31,47 @@ class VuelosController extends Controller
     {
         // Validar los datos de entrada
         $validated = $request->validate([
-            'airline' => 'nullable|string|max:255', // Aerolínea opcional
-            'destination' => 'required|string|max:255', // Destino obligatorio
-            'depature_date' => 'required|date', // Fecha de salida obligatoria
-            'arrival_date' => 'nullable|date', // Fecha de llegada opcional
-            'fly_number' => 'nullable|numeric', // Número de vuelo opcional
-            'cant_pasajeros' => 'required|integer', // Cantidad de pasajeros opcional
+            'airline' => 'nullable|string|max:255',
+            'destination' => 'required|string|max:255',
+            'depature_date' => 'required|date',
+            'arrival_date' => 'nullable|date',
+            'fly_number' => 'nullable|numeric',
+            'cant_pasajeros' => 'required|integer',
         ]);
 
-        // Construir la consulta
+
         $flights = Fly::query();
 
-        // Filtrar por aerolínea si se proporciona
+
         if (!empty($validated['airline'])) {
             $flights->whereHas('airplane.airline', function ($query) use ($validated) {
                 $query->where('name', $validated['airline']);
             });
         }
 
-        // Filtrar por destino
-        $flights->whereHas('destinies', function ($query) use ($validated) {
+        $flights->whereHas('destiny', function ($query) use ($validated) {
             $query->where('name', $validated['destination']);
         });
 
-        // Filtrar por fecha de salida
+
         $flights->whereDate('depature_date', $validated['depature_date']);
 
-        // Filtrar por fecha de regreso si se proporciona
+
         if (!empty($validated['arrival_date'])) {
             $flights->whereDate('arrival_date', $validated['arrival_date']);
         }
 
-        // Filtrar por número de vuelo si se proporciona
+
         if (!empty($validated['fly_number'])) {
             $flights->where('fly_number', $validated['fly_number']);
         }
 
-        // Obtener los vuelos
         $flies = $flights->get();
 
-        // Agregar la cantidad de asientos disponibles para cada vuelo
         $flies->each(function ($fly) {
-            // Obtener la cantidad total de asientos relacionados al vuelo
             $fly->seat_count = $fly->airplane->seats->count();
         });
 
-        // Retornar la vista con los datos
         $airline = $validated['airline'] ?? null;
         $destiny = $validated['destination'];
         $date = $validated['depature_date'];
@@ -108,8 +103,10 @@ class VuelosController extends Controller
 
         $seats = $airplane->seats;
 
+        $seatsOcupados = $airplane->seats()->where('status', 0)->get();
 
-        return view('vuelos.show', compact('fly', 'airplane', 'seats', 'genders', 'ages', 'airplane', 'classes', 'cant_forms'));
+
+        return view('vuelos.show', compact('fly', 'airplane', 'seats', 'seatsOcupados', 'genders', 'ages', 'airplane', 'classes', 'cant_forms'));
     }
 
     public function reservationStore(Request $request)
@@ -154,54 +151,36 @@ class VuelosController extends Controller
             }
         });
 
-        // Recuperar todos los registros recién creados
-        $createdPassengers = Passenger::with(['seat', 'classe', 'age']) // Cargar relaciones necesarias
-            ->whereIn('id', $createdPassengerIds) // Filtrar por los IDs recién creados
+        $seatIds = $validatedData['id_seat']; // Obtener todos los ID de asientos
+        foreach ($seatIds as $seatId) {
+            // Actualizar el estado del asiento a 1 (ocupado)
+            $seat = Seat::find($seatId);
+            if ($seat) {
+                $seat->status = 1; // 1 representa que el asiento está ocupado
+                $seat->save(); // Guardar los cambios
+            }
+        }
+
+        $createdPassengers = Passenger::with(['seat', 'classe', 'age'])
+            ->whereIn('id', $createdPassengerIds)
             ->get();
 
         $id_user = Auth::id();
 
         foreach ($createdPassengers as $passenger) {
-            // Obtener el registro correspondiente en PassengerFly
             $passengerFly = PassengerFly::where('id_passenger', $passenger->id)
-                ->where('if_fly', $id_fly)  // Asegurarse de que esté relacionado con el vuelo correcto
+                ->where('if_fly', $id_fly)
                 ->first();
 
             if ($passengerFly) {
-                // Crear el registro de Buy utilizando el id de PassengerFly
                 Buy::create([
-                    'id_passenger_fly' => $passengerFly->id,  // Usar el id de PassengerFly
+                    'id_passenger_fly' => $passengerFly->id,
                     'id_user' => $id_user
                 ]);
-            } else {
-                // Aquí puedes manejar el caso si no se encuentra PassengerFly (aunque debería encontrarse)
-                // Podrías lanzar un error o hacer un log para depurar
             }
         }
 
-        $userId = auth()->id();
-        // Obtener las compras del usuario logueado con las relaciones necesarias
-        $compras = Buy::where('id_user', $userId)
-                      ->where('status', 0) // Filtrar por status 0
-                      ->with('passenger_flies.fly.flyCosts') // Cargar las relaciones necesarias
-                      ->get();
-        // Mensaje de éxito
-        session()->flash('reservacion', 'Reservación realizada con éxito.');
-
-        $costoTotal = 0;
-
-            foreach($compras as $compra)
-            {
-                // Obtener el costo del vuelo (el primer costo relacionado)
-                $costoVuelo = $compra->passenger_flies->fly->flyCosts->first()->cost;
-               // Acumular el costo del vuelo en el costo total
-                $costoTotal += $costoVuelo;
-            }
-
-
-
-        // Redirigir a la vista de detalles del vuelo con los registros completos
-        return view('carritoCompras.canasta', compact('compras', 'costoTotal'));
+        return to_route('compras');
     }
 
     public function reservationShop(Request $request)

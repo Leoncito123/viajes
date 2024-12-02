@@ -358,14 +358,50 @@ class AdminVuelosController extends Controller
     public function deleteFly($id)
     {
         $fly = Fly::findOrFail($id);
-        
+
         $fly->flycosts()->delete();
         $fly->scales()->delete();
-        
+
         $fly->delete();
 
         return redirect()
             ->route('vuelos.adminVuelos')
             ->with('success', 'Vuelo eliminado correctamente.');
+    }
+
+    public function deleteClass(Request $request, $id_class)
+    {
+        $class = Classe::findOrFail($id_class);
+
+        $class->delete();
+
+        return back();
+    }
+
+    public function airlineDelete(Request $request, $id_airline)
+    {
+        $airline = Airline::findOrFail($id_airline);
+
+        $airline->delete();
+
+        return back();
+    }
+
+    public function ageDelete(Request $request, $id_age)
+    {
+        $age = Age::findOrFail($id_age);
+
+        $age->delete();
+
+        return back();
+    }
+
+    public function destinyDelete(Request $request, $id_destiny)
+    {
+        $destino = Destiny::findOrFail($id_destiny);
+
+        $destino->delete();
+
+        return back();
     }
 }

@@ -19,7 +19,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/vuelos/reservation', [VuelosController::class, 'reservationStore'])->name('reservation.store');
     Route::get('/vuelos/detail', [VuelosController::class, 'reservationDetail'])->name('vuelos.detail');
 
-    Route::get('/compras', [PayController::class, 'canasta'])->name('compras');
+    Route::get('/compras', [PayController::class, 'canasta3'])->name('compras');
     Route::delete('/compras/{buy_id}', [PayController::class, 'deleteCarrito'])->name('delete.buy');
 
     Route::get('/adminVuelos', [AdminVuelosController::class, 'index'])->name('vuelos.adminVuelos');
@@ -32,17 +32,20 @@ Route::middleware('auth')->group(function () {
 
     //Routes PAY
     Route::get('/pay', [PayController::class, 'index'])->name('pay');
-    Route::post('/pagar', [FlyReservationController::class, 'pay'])->name('payment');
+    Route::post('/pagar', [PayController::class, 'pagar'])->name('payment');
 
     //Rutas Aerolineas
     Route::post('/aerolinea/store', [AdminVuelosController::class, 'storeAirlane'])->name('airline.store');
     Route::put('/airline/{id_airline}/update', [AdminVuelosController::class, 'updateAirline'])->name('airline.update');
+    Route::delete('/airline/{id_airline}/delete', [AdminVuelosController::class, 'airlineDelete'])->name('airline.delete');
 
     //Rutas Clases
     Route::post('/clase/store', [AdminVuelosController::class, 'storeClass'])->name('class.store');
+    Route::delete('/clase/{id_class}/delete', [AdminVuelosController::class, 'deleteClass'])->name('delete.class');
 
     //Rutas Ages
     Route::post('/ages/store', [AdminVuelosController::class, 'storeAge'])->name('ages.store');
+    Route::delete('/ages/{id_age}/delete', [AdminVuelosController::class, 'ageDelete'])->name('age.delete');
 
     //Rutas Aviones
     Route::post('/airplane/store', [AdminVuelosController::class, 'aiplaneStore'])->name('airplane.store');
@@ -52,6 +55,7 @@ Route::middleware('auth')->group(function () {
 
     //Rutas Destinos
     Route::post('/destiny/store', [AdminVuelosController::class, 'destinyStore'])->name('destiny.store');
+    Route::delete('/destiny/{id_destiny}/delete', [AdminVuelosController::class, 'destinyDelete'])->name('destiny.delete');
 });
 
 require __DIR__ . '/auth.php';

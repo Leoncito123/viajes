@@ -23,8 +23,9 @@ class Buy extends Model
 
     public function reservations()
     {
-        return $this->hasMany(Reservation::class, 'id_reservation', 'id');
+        return $this->hasMany(Reservation::class, 'id', 'id_reservation');
     }
+
 
     public function users()
     {

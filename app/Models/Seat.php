@@ -11,7 +11,8 @@ class Seat extends Model
 
     protected $fillable = [
         'name',
-        'id_airplane'
+        'id_airplane',
+        'status'
     ];
 
     public function airplane()

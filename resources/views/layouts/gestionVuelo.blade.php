@@ -74,42 +74,11 @@
                                         {{$airline->ubication}}
                                     </th>
                                     <td class="px-6 py-4">
-                                        <!-- Dropdown -->
-                                        <div class="relative">
-                                            <button id="dropdownButton-{{ $airline->id }}"
-                                                    data-dropdown-toggle="dropdown-{{ $airline->id }}"
-                                                    class="text-white bg-indigo-500 hover:bg-indigo-600 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center"
-                                                    type="button">
-                                                Crear Aerolínea
-                                                <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
-                                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
-                                                </svg>
-                                            </button>
-
-                                            <!-- Dropdown menu -->
-                                            <div id="dropdown-{{ $airline->id }}" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-1/2 dark:bg-gray-700 absolute">
-                                                <form action="{{ route('airline.update', $airline->id) }}" method="POST" class="py-6">
-                                                    @csrf
-                                                    @method('PUT')
-                                                    <div class="mb-4 w-full px-4">
-                                                        <label for="name-{{ $airline->id }}" class="text-md">Nombre de la aerolínea</label>
-                                                        <div>
-                                                            <input type="text" name="name" id="name-{{ $airline->id }}" value="{{ old('name', $airline->name) }}" class="w-full rounded-lg border-indigo-500">
-                                                        </div>
-                                                    </div>
-                                                    <div class="mb-4 w-full px-4">
-                                                        <label for="ubication-{{ $airline->id }}" class="text-md">Ubicación</label>
-                                                        <div>
-                                                            <input type="text" name="ubication" id="ubication-{{ $airline->id }}" value="{{ old('ubication', $airline->ubication) }}" class="w-full rounded-lg border-indigo-500">
-                                                        </div>
-                                                    </div>
-                                                    <div class="px-4">
-                                                        <button type="submit" class="p-2 bg-indigo-500 dark:bg-blue-500 text-white rounded-lg">Actualizar</button>
-                                                    </div>
-                                                </form>
-                                            </div>
-                                        </div>
-                                        <button class="p-2 rounded-lg font-semibold text-white bg-red-500">Eliminar</button>
+                                        <form action="{{route('airline.delete', ['id_airline'=>$airline->id])}}" method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button class="p-2 rounded-lg font-semibold text-white bg-red-500">Eliminar</button>
+                                        </form>
                                     </td>
                                 </tr>
                                 @endforeach
@@ -181,8 +150,11 @@
                                         {{$class->type}}
                                     </th>
                                     <td class="px-6 py-4">
-                                        <button class="p-2 rounded-lg font-semibold text-white bg-blue-500">Editar</button>
-                                        <button class="p-2 rounded-lg font-semibold text-white bg-red-500">Eliminar</button>
+                                        <form action="{{route('delete.class', ['id_class'=>$class->id])}}" method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button class="p-2 rounded-lg font-semibold text-white bg-red-500">Eliminar</button>
+                                        </form>
                                     </td>
                                 </tr>
                                 @endforeach
@@ -232,8 +204,11 @@
                                         {{$age->min_number}}
                                     </th>
                                     <td class="px-6 py-4">
-                                        <button class="p-2 rounded-lg font-semibold text-white bg-blue-500">Editar</button>
-                                        <button class="p-2 rounded-lg font-semibold text-white bg-red-500">Eliminar</button>
+                                        <form action="{{route('age.delete', ['id_age'=>$age->id])}}" method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button class="p-2 rounded-lg font-semibold text-white bg-red-500">Eliminar</button>
+                                        </form>
                                     </td>
                                 </tr>
                                 @endforeach
@@ -263,49 +238,23 @@
                                     <th scope="col" class="px-6 py-3">
                                         Acciones
                                     </th>
-                                    <th scope="col" class="px-6 py-3">
-                                        Ver Info
-                                    </th>
                                 </tr>
                             </thead>
                             <tbody>
+                                @foreach ($destinies as $destiny)
                                 <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                                     <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                        California
+                                        {{$destiny->name}}
                                     </th>
                                     <td class="px-6 py-4">
-                                        <button class="p-2 rounded-lg font-semibold text-white bg-blue-500">Editar</button>
-                                        <button class="p-2 rounded-lg font-semibold text-white bg-red-500">Eliminar</button>
-                                    </td>
-                                    <td class="px-6 py-4">
-                                        <a class="border-b-2" href="">Ver Información</a>
-                                    </td>
-                                </tr>
-                                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                        Monterrey, Nuevo Leon
-                                    </th>
-                                    <td class="px-6 py-4">
-                                        <button class="p-2 rounded-lg font-semibold text-white bg-blue-500">Editar</button>
-                                        <button class="p-2 rounded-lg font-semibold text-white bg-red-500">Eliminar</button>
-                                    </td>
-                                    <td class="px-6 py-4">
-                                        <a class="border-b-2" href="">Ver Información</a>
+                                        <form action="{{route('destiny.delete', ['id_destiny'=>$destiny->id])}}" method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button class="p-2 rounded-lg font-semibold text-white bg-red-500">Eliminar</button>
+                                        </form>
                                     </td>
                                 </tr>
-
-                                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                        La Paz, Baja California
-                                    </th>
-                                    <td class="px-6 py-4">
-                                        <button class="p-2 rounded-lg font-semibold text-white bg-blue-500">Editar</button>
-                                        <button class="p-2 rounded-lg font-semibold text-white bg-red-500">Eliminar</button>
-                                    </td>
-                                    <td class="px-6 py-4">
-                                        <a class="border-b-2" href="">Ver Información</a>
-                                    </td>
-                                </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -368,7 +317,6 @@
                                     @include('vuelos.admiVuelosComponents.createSeats')
                                 </td>
                                 <td class="px-6 py-4">
-                                    <button class="p-2 rounded-lg font-semibold text-white bg-blue-500">Editar</button>
                                     <button class="p-2 rounded-lg font-semibold text-white bg-red-500">Eliminar</button>
                                 </td>
                             </tr>
@@ -380,94 +328,6 @@
         </div>
     </div>
 
-    <div class="mt-4 w-full ">
-        <div class="border border-indigo-500 rounded-lg">
-            <div class="p-4">
-                <div>
-                    <p class="text-lg font-semibold">Gestion de Escalas</p>
-                </div>
-                <div>
-
-                <div class="flex mt-2">
-                    {{-- <!-- Modal toggle -->
-                    <button data-modal-target="default-modal3" data-modal-toggle="default-modal3" class=" block text-white bg-indigo-500 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">
-                        Crear Escala
-                    </button> --}}
-
-
-        <div class="flex py-2">
-            <button class="p-2 rounded-lg bg-blue-500 text-white">Crear</button>
-        </div>
-
-                    <!-- Main modal -->
-                    <div id="default-modal3" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
-                        <div class="relative p-4 w-full max-w-2xl max-h-full">
-                            <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
-                                <div class="p-4 border-b-2 border-indigo-500">
-                                   <p class="font-semibold text-xl"> Crear Escala</p>
-                                </div>
-                                <form action="" class="p-4 w-full">
-                                    <div class="mb-4">
-                                        <label for="" class="text-md">Escala</label>
-                                        <input type="text" class="w-full rounded-lg border-indigo-500">
-                                    </div>
-                                    <div>
-                                        <button type="submit" class="p-2 bg-indigo-500 dark:bg-blue-500 text-white rounded-lg">Crear Escala</button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-                </div>
-                <div>
-                    <table class="w-full mt-4 text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                        <thead class="text-xs text-gray-700 uppercase bg-indigo-500 text-white dark:bg-gray-700 dark:text-gray-400">
-                            <tr>
-                                <th scope="col" class="px-6 py-3">
-                                    Escala
-                                </th>
-                                <th scope="col" class="px-6 py-3">
-                                    Acciones
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                    Avion 1
-                                </th>
-                                <td class="px-6 py-4">
-                                    <button class="p-2 rounded-lg font-semibold text-white bg-blue-500">Editar</button>
-                                    <button class="p-2 rounded-lg font-semibold text-white bg-red-500">Eliminar</button>
-                                </td>
-                            </tr>
-                            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                    Avion 1
-                                </th>
-                                <td class="px-6 py-4">
-                                    <button class="p-2 rounded-lg font-semibold text-white bg-blue-500">Editar</button>
-                                    <button class="p-2 rounded-lg font-semibold text-white bg-red-500">Eliminar</button>
-                                </td>
-                            </tr>
-
-                            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                    Avion 1
-                                </th>
-                                <td class="px-6 py-4">
-                                    <button class="p-2 rounded-lg font-semibold text-white bg-blue-500">Editar</button>
-                                    <button class="p-2 rounded-lg font-semibold text-white bg-red-500">Eliminar</button>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
 </div>
     </div>
 </div>

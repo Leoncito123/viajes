@@ -17,11 +17,19 @@
                                 </div>
                                 <div class="grid grid-cols-4 gap-8 w-full lg:w-1/2 mx-auto text-center border border-indigo-500 dark:border-gray-600 rounded-lg p-6">
                                     @foreach ($seats as $seat)
-                                    <div class=" items-center border rounded-lg border-gray-400 hover:bg-indigo-500 bg-white dark:border-gray-600 hover:border-white">
-                                        <a href="" class="text-black dark:text-gray-800">
-                                            <img src="{{asset('img/asiento.png')}}" class="w-20" alt="">{{$seat->name}}
-                                        </a>
-                                    </div>
+                                        @if($seat->status == 1)
+                                            <div class=" items-center border rounded-lg border-gray-400 hover:bg-indigo-500 bg-red-500 dark:border-gray-600 hover:border-white">
+                                                <a href="" class="text-black dark:text-gray-800">
+                                                    <img src="{{asset('img/asiento.png')}}" class="w-20" alt="">{{$seat->name}}
+                                                </a>
+                                            </div>
+                                        @else
+                                        <div class=" items-center border rounded-lg border-gray-400 hover:bg-indigo-500 bg-white dark:border-gray-600 hover:border-white">
+                                            <a href="" class="text-black dark:text-gray-800">
+                                                <img src="{{asset('img/asiento.png')}}" class="w-20" alt="">{{$seat->name}}
+                                            </a>
+                                        </div>
+                                        @endif
                                     @endforeach
 
                                 </div>
@@ -67,7 +75,7 @@
                                                     <label for="id_seat">Asiento</label>
                                                     <select name="id_seat[]" id="id_seat" class="w-full rounded-full text-black border-indigo-500">
                                                         <option value="">Selecciona una opción</option>
-                                                        @foreach ($seats as $seat)
+                                                        @foreach ($seatsOcupados as $seat)
                                                             <option value="{{$seat->id}}">{{$seat->name}}</option>
                                                         @endforeach
                                                     </select>

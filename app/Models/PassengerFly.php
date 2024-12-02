@@ -21,7 +21,7 @@ class PassengerFly extends Model
 
     public function passenger()
     {
-        return $this->belongsTo(Passenger::class);
+        return $this->belongsTo(Passenger::class, 'id_passenger');
     }
 
     public function buy()

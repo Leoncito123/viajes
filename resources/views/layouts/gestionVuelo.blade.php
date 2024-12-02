@@ -291,9 +291,6 @@
                             <th scope="col" class="px-6 py-3">
                                 Asignar Asientos
                             </th>
-                            <th scope="col" class="px-6 py-3">
-                                Acciones
-                            </th>
                         </tr>
                     </thead>
                     {{-- @php
@@ -315,9 +312,6 @@
                                     </td>
                                 <td class="px-6 py-4">
                                     @include('vuelos.admiVuelosComponents.createSeats')
-                                </td>
-                                <td class="px-6 py-4">
-                                    <button class="p-2 rounded-lg font-semibold text-white bg-red-500">Eliminar</button>
                                 </td>
                             </tr>
                         @endforeach

@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Reservation;
-use App\Models\UserReservation;
+use App\Models\User_Reservation;
 use App\Models\Room;
 use App\Models\User;
-use Illuminate\Container\Attributes\Auth;
+use App\Models\Buy;
+// use Illuminate\Container\Attributes\Auth;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 class ReservationController extends Controller
@@ -35,7 +37,7 @@ class ReservationController extends Controller
             'phone' => 'required',
             'id_gender' => 'required'
         ]);
-        
+
         $room = Room::with('type_room')->find($request->id_room);
         $peoples = $request->cant_adults + $request->cant_infants;
 
@@ -49,7 +51,7 @@ class ReservationController extends Controller
             return redirect()->back()->with('message', 'El número de personas supera la capacidad de la habitación');
         }
 
-        $userReservation = UserReservation::create([
+        $userReservation = User_Reservation::create([
             'name' => $request->name,
             'last_names' => $request->last_names,
             'birthdate' => $request->birthdate,
@@ -68,9 +70,19 @@ class ReservationController extends Controller
             'id_user_reservation' => $userReservation->id
         ]);
 
+        $reservationId = $reservation->id;
+
         $room = Room::find($request->id_room);
         $room->status = 1;
         $room->save();
+
+        $id_user = Auth::id();
+        $roomId = $room;
+
+        Buy::create([
+            'id_reservation'=>$reservationId,
+            'id_user' => $id_user
+        ]);
 
 
         return redirect()->route('rutareservaciones')->with('message', 'Reservación realizada con éxito');
